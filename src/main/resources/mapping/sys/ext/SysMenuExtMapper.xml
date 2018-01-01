@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.goku.coreui.sys.mapper.ext.SysMenuExtMapper">
+    <select id="getModuleMenus" parameterType="java.lang.String" resultType="hashmap">
+        select m.* from sys_menu m
+            left join sys_module md on m.module_id=md.id
+            left join sys_user_auth sua on m.id=sua.menu_id
+        where md.id= #{ModuleId,jdbcType=VARCHAR}
+        and sua.user_id=#{UserId,jdbcType=VARCHAR}
+        union ALL
+        select m.* from sys_menu m
+            left join sys_module md on m.module_id=md.id
+            left join sys_role_auth sra on m.id=sra.menu_id
+            left join sys_user_role sur on sra.role_id=sur.role_id
+        where md.id= #{ModuleId,jdbcType=VARCHAR}
+        and sur.user_id=#{UserId,jdbcType=VARCHAR}
+    </select>
+</mapper>

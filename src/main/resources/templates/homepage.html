@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="shortcut icon" href="img/favicon.png"/>
+    <title>CoreUI Admin</title>
+    <!-- Icons -->
+    <link rel="stylesheet" type="text/css" href="/lib/font-awesome/css/font-awesome.min.css"></link>
+    <link rel="stylesheet" type="text/css" href="/lib/simple-line-icons/css/simple-line-icons.css"></link>
+    <!-- Main styles for this application -->
+    <link rel="stylesheet" type="text/css" href="/css/style.css"></link>
+    <link rel="stylesheet" type="text/css" href="/css/main.css"></link>
+</head>
+
+<body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
+
+<header class="app-header navbar">
+    <button class="navbar-toggler mobile-sidebar-toggler d-lg-none mr-auto" type="button">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#"></a>
+    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!--子系统模块  开始-->
+    <ul class="nav navbar-nav d-md-down-none">
+        <li class="nav-item px-3">
+            <a class="nav-link" href="#">系统模块</a>
+        </li>
+        <li class="nav-item px-3">
+            <a class="nav-link" href="#">OA模块</a>
+        </li>
+        <li class="nav-item px-3">
+            <a class="nav-link" href="#">WMS模块</a>
+        </li>
+        <li class="nav-item px-3">
+            <a class="nav-link" href="#">CRM模块</a>
+        </li>
+        <li class="dropdown nav-item px-3">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                其他模块
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu"  aria-labelledby="dropdownMenu">
+                <a class="dropdown-item"  href="#">ERP模块</a>
+                <a class="dropdown-item"  href="#">报表模块</a>
+            </ul>
+        </li>
+    </ul>
+    <!--子系统模块  结束-->
+
+    <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                <img src="img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com"></img>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <div class="dropdown-header text-center">
+                    <strong>账户</strong>
+                </div>
+                <a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i> 短信息</a>
+                <a class="dropdown-item" href="#"><i class="fa fa-comments"></i> 评论</a>
+                <div class="dropdown-header text-center">
+                    <strong>设置</strong>
+                </div>
+                <a class="dropdown-item" href="#"><i class="fa fa-user"></i> 个人信息</a>
+                <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> 系统设置</a>
+                <div class="divider"></div>
+                <a class="dropdown-item" href="#"><i class="fa fa-shield"></i> 系统锁屏</a>
+                <a class="dropdown-item" href="#"><i class="fa fa-lock"></i> 系统退出</a>
+            </div>
+        </li>
+    </ul>
+    <button class="navbar-toggler aside-menu-toggler" type="button">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+</header>
+
+<div class="app-body">
+
+    <div class="sidebar">
+
+        <!--子系统模块菜单  开始-->
+        <nav class="sidebar-nav">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" th:href="${indexPage}"><i class="icon-speedometer"></i> 首页 </a>
+                </li>
+                <li class="nav-title">
+                    系统模块
+                </li>
+                <li class="nav-item nav-dropdown">
+                    <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i> 系统管理</a>
+                    <ul class="nav-dropdown-items">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="icon-puzzle"></i> 权限管理</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="icon-calculator"></i> 字典管理</a>
+                </li>
+            </ul>
+        </nav>
+        <!--子系统模块菜单  结束-->
+
+        <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+    </div>
+
+    <!-- Main content -->
+    <main class="main">
+
+        <!-- 面包屑 开始-->
+        <ol class="breadcrumb" id="breadcrumb-view"></ol>
+        <!-- 面包屑 结束-->
+
+        <div class="container-fluid">
+            <div id="ui-view"></div>
+        </div>
+    </main>
+
+    <!--系统提示 开始-->
+    <aside class="aside-menu">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#timeline" role="tab"><i class="icon-list"></i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#messages" role="tab"><i class="icon-speech"></i></a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane active" id="timeline" role="tabpanel">
+                <div class="callout m-0 py-2 text-muted text-center bg-light text-uppercase">
+                    <strong><b>今天</b></strong>
+                </div>
+                <hr class="transparent mx-3 my-0"></hr>
+                <div id="timeline-view-today">
+                    <div class="callout callout-info m-0 py-3">
+                        <div>
+                        </div>
+                    </div>
+                    <hr class="mx-3 my-0"></hr>
+                </div>
+                <!--<div class="callout callout-info m-0 py-3">
+                <div>New UI Project -
+                    <strong>Megan</strong>
+                </div>
+                <small class="text-muted mr-3"><i class="icon-calendar"></i>&nbsp; 10 - 11pm</small>
+                <small class="text-muted"><i class="icon-home"></i>&nbsp; creativeLabs HQ </small>
+                <div class="avatars-stack mt-2">
+                    <div class="avatar avatar-xs">
+                        <img src="img/avatars/2.jpg" class="img-avatar" alt="admin@bootstrapmaster.com"></img>
+                    </div>
+                </div>
+            </div>
+            <hr class="mx-3 my-0"></hr>
+            <div class="callout callout-info m-0 py-3">
+                <div>New UI Project -
+                    <strong>Megan</strong>
+                </div>
+                <small class="text-muted mr-3"><i class="icon-calendar"></i>&nbsp; 10 - 11pm</small>
+                <small class="text-muted"><i class="icon-home"></i>&nbsp; creativeLabs HQ </small>
+                <div class="avatars-stack mt-2">
+                    <div class="avatar avatar-xs">
+                        <img src="img/avatars/2.jpg" class="img-avatar" alt="admin@bootstrapmaster.com"></img>
+                    </div>
+                </div>
+            </div>
+            <hr class="mx-3 my-0"></hr>-->
+                <div class="callout m-0 py-2 text-muted text-center bg-light text-uppercase">
+                    <strong><b>明天</b></strong>
+                </div>
+                <hr class="transparent mx-3 my-0"></hr>
+                <div id="timeline-view-tomorrow">
+                    <div class="callout callout-info m-0 py-3">
+                        <div>
+                        </div>
+                    </div>
+                    <hr class="mx-3 my-0"></hr>
+                </div>
+                <!--<div class="callout callout-danger m-0 py-3">
+                    <div>New UI Project -
+                        <strong>deadline</strong>
+                    </div>
+                    <small class="text-muted mr-3"><i class="icon-calendar"></i>&nbsp; 10 - 11pm</small>
+                    <small class="text-muted"><i class="icon-home"></i>&nbsp; creativeLabs HQ </small>
+                    <div class="avatars-stack mt-2">
+                        <div class="avatar avatar-xs">
+                            <img src="img/avatars/2.jpg" class="img-avatar" alt="admin@bootstrapmaster.com"></img>
+                        </div>
+                    </div>
+                </div>
+                <hr class="mx-3 my-0"></hr>-->
+            </div>
+            <div class="tab-pane p-3" id="messages" role="tabpanel">
+                <strong>通知</strong>
+                <!--<div class="aside-options">
+                    <div class="clearfix mt-4">
+                        <small><b>Option 1</b></small>
+                        <label class="switch switch-text switch-pill switch-success switch-sm float-right">
+                            <input type="checkbox" class="switch-input"></input>
+                            <span class="switch-label" data-on="On" data-off="Off"></span>
+                            <span class="switch-handle"></span>
+                        </label>
+                    </div>
+                    <div>
+                        <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>
+                    </div>
+                </div>
+                <div class="aside-options">
+                    <div class="clearfix mt-4">
+                        <small><b>Option 1</b></small>
+                        <label class="switch switch-text switch-pill switch-success switch-sm float-right">
+                            <input type="checkbox" class="switch-input"></input>
+                            <span class="switch-label" data-on="On" data-off="Off"></span>
+                            <span class="switch-handle"></span>
+                        </label>
+                    </div>
+                    <div>
+                        <small class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</small>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+    </aside>
+    <!--系统提示 结束-->
+</div>
+
+<footer class="app-footer">
+    <span><a href="http://coreui.io">CoreUI</a> &copy; 2017 creativeLabs.</span>
+    <span class="ml-auto">Powered by <a href="http://coreui.io">CoreUI</a></span>
+</footer>
+
+<!-- Bootstrap and necessary plugins -->
+<script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/lib/popper.js/popper.min.js"></script>
+<script type="text/javascript" src="/lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/lib//pace-progress/pace.min.js"></script>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    $.indexPage=/*[[${indexPage}]]*/;//取值
+    /*]]>*/
+</script>
+<!-- CoreUI main scripts -->
+<script src="js/app.js" th:inline="javascript"></script>
+<script src="js/util/ajaxutils.js" th:inline="javascript"></script>
+
+</body>
+</html>

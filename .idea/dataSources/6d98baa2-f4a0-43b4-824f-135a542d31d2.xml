@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="MySQL - goku_coredb@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
+    <schema id="1" name="goku_coredb">
+      <visible>1</visible>
+    </schema>
+    <schema id="2" name="adminlte"/>
+    <schema id="3" name="db_58"/>
+    <schema id="4" name="education"/>
+    <schema id="5" name="goku_db"/>
+    <schema id="6" name="goku_db_tran"/>
+    <schema id="7" name="information_schema"/>
+    <schema id="8" name="invoicing"/>
+    <schema id="9" name="jfinaloa"/>
+    <schema id="10" name="medical"/>
+    <schema id="11" name="mysql"/>
+    <schema id="12" name="oa"/>
+    <schema id="13" name="performance_schema"/>
+    <schema id="14" name="springbootdb"/>
+    <schema id="15" name="springbootdb2"/>
+    <schema id="16" name="sys"/>
+    <table id="17" parent="1" name="sys_department"/>
+    <table id="18" parent="1" name="sys_friend"/>
+    <table id="19" parent="1" name="sys_log">
+      <comment>系统日志</comment>
+    </table>
+    <table id="20" parent="1" name="sys_menu"/>
+    <table id="21" parent="1" name="sys_module"/>
+    <table id="22" parent="1" name="sys_operate"/>
+    <table id="23" parent="1" name="sys_org"/>
+    <table id="24" parent="1" name="sys_role"/>
+    <table id="25" parent="1" name="sys_role_auth">
+      <comment>????</comment>
+    </table>
+    <table id="26" parent="1" name="sys_role_operator">
+      <comment>????</comment>
+    </table>
+    <table id="27" parent="1" name="sys_user"/>
+    <table id="28" parent="1" name="sys_user_info"/>
+    <table id="29" parent="1" name="sys_user_role"/>
+    <table id="30" parent="1" name="sys_schedule"/>
+    <table id="31" parent="1" name="sys_notice"/>
+    <table id="32" parent="1" name="sys_user_notice"/>
+    <column id="33" parent="17" name="ids">
+      <mandatory>1</mandatory>
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="34" parent="17" name="version">
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="35" parent="17" name="allchildnodeids">
+      <data-type>varchar(2000)|0</data-type>
+    </column>
+    <column id="36" parent="17" name="departmentlevel">
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="37" parent="17" name="depttype">
+      <data-type>char(1)|0</data-type>
+    </column>
+    <column id="38" parent="17" name="description">
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="39" parent="17" name="images">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="40" parent="17" name="isparent">
+      <data-type>varchar(5)|0</data-type>
+    </column>
+    <column id="41" parent="17" name="names">
+      <data-type>varchar(25)|0</data-type>
+    </column>
+    <column id="42" parent="17" name="orderids">
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="43" parent="17" name="url">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="44" parent="17" name="parentdepartmentids">
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="45" parent="17" name="principaluserids">
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <key id="46" parent="17" name="PRIMARY">
+      <columns>ids</columns>
+      <primary>1</primary>
+    </key>
+    <column id="47" parent="18" name="id">
+      <mandatory>1</mandatory>
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="48" parent="18" name="friend_id">
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="49" parent="18" name="user_id">
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <key id="50" parent="18" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="51" parent="19" name="id">
+      <mandatory>1</mandatory>
+      <data-type>bigint(20)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="52" parent="19" name="username">
+      <comment>用户名</comment>
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="53" parent="19" name="operation">
+      <comment>用户操作</comment>
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="54" parent="19" name="method">
+      <comment>请求方法</comment>
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="55" parent="19" name="params">
+      <comment>请求参数</comment>
+      <data-type>varchar(5000)|0</data-type>
+    </column>
+    <column id="56" parent="19" name="ip">
+      <comment>IP地址</comment>
+      <data-type>varchar(64)|0</data-type>
+    </column>
+    <column id="57" parent="19" name="create_date">
+      <comment>创建时间</comment>
+      <data-type>datetime|0</data-type>
+    </column>
+    <key id="58" parent="19" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="59" parent="20" name="id">
+      <mandatory>1</mandatory>
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="60" parent="20" name="module_id">
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="61" parent="20" name="name">
+      <data-type>varchar(25)|0</data-type>
+    </column>
+    <column id="62" parent="20" name="parent_id">
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="63" parent="20" name="isparent">
+      <data-type>varchar(5)|0</data-type>
+    </column>
+    <column id="64" parent="20" name="sort">
+      <data-type>int(20)|0</data-type>
+    </column>
+    <column id="65" parent="20" name="icon">
+      <comment>图标</comment>
+      <data-type>varchar(50)|0</data-type>
+      <default-expression>&apos;&apos;</default-expression>
+    </column>
+    <column id="66" parent="20" name="description">
+      <data-type>varchar(500)|0</data-type>
+      <default-expression>&apos;&apos;</default-expression>
+    </column>
+    <column id="67" parent="20" name="if_show">
+      <comment>是否显示。0：不显示。1：显示。</comment>
+      <data-type>varchar(1)|0</data-type>
+      <default-expression>&apos;1&apos;</default-expression>
+    </column>
+    <column id="68" parent="20" name="is_leaf">
+      <data-type>varchar(1)|0</data-type>
+    </column>
+    <column id="69" parent="20" name="permission">
+      <comment>权限key</comment>
+      <data-type>varchar(255)|0</data-type>
+      <default-expression>&apos;&apos;</default-expression>
+    </column>
+    <column id="70" parent="20" name="url">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <key id="71" parent="20" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="72" parent="21" name="id">
+      <mandatory>1</mandatory>
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="73" parent="21" name="version">
+      <data-type>bigint(20)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="74" parent="21" name="description">
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="75" parent="21" name="image">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="76" parent="21" name="name">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="77" parent="21" name="index_page">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="78" parent="21" name="if_show">
+      <data-type>varchar(1)|0</data-type>
+    </column>
+    <column id="79" parent="21" name="sort">
+      <data-type>int(20)|0</data-type>
+    </column>
+    <key id="80" parent="21" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="81" parent="22" name="id">
+      <mandatory>1</mandatory>
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="82" parent="22" name="version">
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="83" parent="22" name="permission">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="84" parent="22" name="description">
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="85" parent="22" name="name">
+      <data-type>varchar(25)|0</data-type>
+    </column>
+    <column id="86" parent="22" name="one_many">
+      <data-type>char(1)|0</data-type>
+    </column>
+    <column id="87" parent="22" name="return_url">
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="88" parent="22" name="row_filter">
+      <data-type>char(1)|0</data-type>
+    </column>
+    <column id="89" parent="22" name="url">
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="90" parent="22" name="module_id">
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="91" parent="22" name="form_token">
+      <data-type>char(1)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="92" parent="22" name="ip_black">
+      <data-type>char(1)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="93" parent="22" name="privilegess">
+      <data-type>char(1)|0</data-type>
+      <default-expression>&apos;1&apos;</default-expression>
+    </column>
+    <column id="94" parent="22" name="module_name">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="95" parent="22" name="sort">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <index id="96" parent="22" name="onemanyindex">
+      <columns>one_many</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="97" parent="22" name="returnurlindex">
+      <columns>return_url</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="98" parent="22" name="rowfilterindex">
+      <columns>row_filter</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="99" parent="22" name="urlindex">
+      <columns>url</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="100" parent="22" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="101" parent="23" name="id">
+      <mandatory>1</mandatory>
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="102" parent="23" name="version">
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="103" parent="23" name="level">
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="104" parent="23" name="type">
+      <data-type>char(1)|0</data-type>
+    </column>
+    <column id="105" parent="23" name="description">
+      <data-type>varchar(2000)|0</data-type>
+    </column>
+    <column id="106" parent="23" name="image">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="107" parent="23" name="isparent">
+      <data-type>varchar(5)|0</data-type>
+    </column>
+    <column id="108" parent="23" name="name">
+      <data-type>varchar(25)|0</data-type>
+    </column>
+    <column id="109" parent="23" name="sort">
+      <data-type>bigint(20)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="110" parent="23" name="url">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="111" parent="23" name="parent_id">
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="112" parent="23" name="operate">
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <key id="113" parent="23" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="114" parent="24" name="id">
+      <mandatory>1</mandatory>
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="115" parent="24" name="version">
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="116" parent="24" name="key">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="117" parent="24" name="name">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="118" parent="24" name="description">
+      <data-type>varchar(2000)|0</data-type>
+    </column>
+    <key id="119" parent="24" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="120" parent="25" name="id">
+      <comment>??</comment>
+      <mandatory>1</mandatory>
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="121" parent="25" name="role_id">
+      <comment>??ids</comment>
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="122" parent="25" name="menu_id">
+      <comment>??ids</comment>
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <key id="123" parent="25" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="124" parent="26" name="id">
+      <mandatory>1</mandatory>
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="125" parent="26" name="role_id">
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="126" parent="26" name="operator_id">
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <key id="127" parent="26" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="128" parent="27" name="id">
+      <mandatory>1</mandatory>
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="129" parent="27" name="username">
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="130" parent="27" name="password">
+      <data-type>varchar(500)|0</data-type>
+    </column>
+    <column id="131" parent="27" name="name">
+      <comment>姓名</comment>
+      <data-type>varchar(25)|0</data-type>
+    </column>
+    <column id="132" parent="27" name="sex">
+      <comment>0:女</comment>
+      <data-type>varchar(1)|0</data-type>
+      <default-expression>&apos;1&apos;</default-expression>
+    </column>
+    <column id="133" parent="27" name="status">
+      <comment>0:禁用</comment>
+      <data-type>char(1)|0</data-type>
+      <default-expression>&apos;1&apos;</default-expression>
+    </column>
+    <column id="134" parent="27" name="orgid">
+      <comment>部门ID</comment>
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="135" parent="27" name="stationid">
+      <comment>岗位ID</comment>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="136" parent="27" name="email">
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="137" parent="27" name="idcard">
+      <comment>身份证号</comment>
+      <data-type>varchar(25)|0</data-type>
+    </column>
+    <column id="138" parent="27" name="is_admin">
+      <comment>是否是管理员</comment>
+      <data-type>varchar(1)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="139" parent="27" name="sort">
+      <data-type>bigint(99)|0</data-type>
+    </column>
+    <column id="140" parent="27" name="mobile">
+      <data-type>varchar(15)|0</data-type>
+    </column>
+    <index id="141" parent="27" name="usernameindex">
+      <columns>username</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="142" parent="27" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="143" parent="28" name="id">
+      <mandatory>1</mandatory>
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="144" parent="28" name="user_id">
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="145" parent="28" name="head_portrait">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="146" parent="28" name="address">
+      <comment>家庭住址</comment>
+      <data-type>varchar(300)|0</data-type>
+    </column>
+    <column id="147" parent="28" name="post_code">
+      <comment>邮编</comment>
+      <data-type>varchar(6)|0</data-type>
+    </column>
+    <column id="148" parent="28" name="height">
+      <comment>身高</comment>
+      <data-type>varchar(5)|0</data-type>
+    </column>
+    <column id="149" parent="28" name="weight">
+      <comment>体重</comment>
+      <data-type>varchar(5)|0</data-type>
+    </column>
+    <column id="150" parent="28" name="birthday">
+      <comment>出生日期</comment>
+      <data-type>date|0</data-type>
+    </column>
+    <column id="151" parent="28" name="blood">
+      <comment>血型</comment>
+      <data-type>varchar(15)|0</data-type>
+    </column>
+    <column id="152" parent="28" name="culture">
+      <comment>文化程度</comment>
+      <data-type>varchar(30)|0</data-type>
+    </column>
+    <column id="153" parent="28" name="finish_school_date">
+      <data-type>date|0</data-type>
+    </column>
+    <column id="154" parent="28" name="folk">
+      <comment>民族</comment>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="155" parent="28" name="government">
+      <comment>党员关系</comment>
+      <data-type>varchar(25)|0</data-type>
+    </column>
+    <column id="156" parent="28" name="homepage">
+      <comment>个人主页</comment>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="157" parent="28" name="householder">
+      <comment>户主</comment>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="158" parent="28" name="marriage">
+      <comment>婚否</comment>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="159" parent="28" name="msn">
+      <comment>MSN</comment>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="160" parent="28" name="nativity_address">
+      <comment>出生地</comment>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="161" parent="28" name="qq">
+      <comment>QQ</comment>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="162" parent="28" name="speciality">
+      <comment>特长</comment>
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="163" parent="28" name="description">
+      <comment>描述信息</comment>
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="164" parent="28" name="version">
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <index id="165" parent="28" name="bloodgroupindex">
+      <columns>blood</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="166" parent="28" name="msnindex">
+      <columns>msn</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="167" parent="28" name="nativityaddressindex">
+      <columns>nativity_address</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="168" parent="28" name="postboyindex">
+      <columns>post_code</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="169" parent="28" name="specialityindex">
+      <columns>speciality</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="170" parent="28" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="171" parent="29" name="id">
+      <mandatory>1</mandatory>
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="172" parent="29" name="user_id">
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="173" parent="29" name="role_id">
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <key id="174" parent="29" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="175" parent="30" name="id">
+      <mandatory>1</mandatory>
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="176" parent="30" name="name">
+      <data-type>varchar(150)|0</data-type>
+    </column>
+    <column id="177" parent="30" name="date">
+      <data-type>date|0</data-type>
+    </column>
+    <column id="178" parent="30" name="start_time">
+      <data-type>time|0</data-type>
+    </column>
+    <column id="179" parent="30" name="end_time">
+      <data-type>time|0</data-type>
+    </column>
+    <column id="180" parent="30" name="description">
+      <data-type>varchar(500)|0</data-type>
+    </column>
+    <column id="181" parent="30" name="participate_id">
+      <data-type>text|0</data-type>
+    </column>
+    <key id="182" parent="30" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="183" parent="31" name="id">
+      <mandatory>1</mandatory>
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="184" parent="31" name="description">
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <key id="185" parent="31" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="186" parent="32" name="id">
+      <mandatory>1</mandatory>
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="187" parent="32" name="userid">
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="188" parent="32" name="noticeid">
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <key id="189" parent="32" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+  </database-model>
+</dataSource>
