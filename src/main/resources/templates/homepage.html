@@ -25,28 +25,20 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!--子系统模块  开始-->
-    <ul class="nav navbar-nav d-md-down-none">
-        <li class="nav-item px-3">
-            <a class="nav-link" href="#">系统模块</a>
+    <!--子系统模块  开始 OK-->
+    <ul class="nav navbar-nav d-md-down-none" >
+
+        <li class="nav-item px-3" th:if="${moduleStat.index&lt;4}" th:each="module ,moduleStat: ${sysModules}">
+            <a class="nav-link" href="#" th:href="@{'home?moduleId='+${module.id}}" th:text="${module.name}" target="_top"></a>
         </li>
-        <li class="nav-item px-3">
-            <a class="nav-link" href="#">OA模块</a>
-        </li>
-        <li class="nav-item px-3">
-            <a class="nav-link" href="#">WMS模块</a>
-        </li>
-        <li class="nav-item px-3">
-            <a class="nav-link" href="#">CRM模块</a>
-        </li>
-        <li class="dropdown nav-item px-3">
+        <li class="dropdown nav-item px-3"  th:if="${sysModules.size()>4}">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 其他模块
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu"  aria-labelledby="dropdownMenu">
-                <a class="dropdown-item"  href="#">ERP模块</a>
-                <a class="dropdown-item"  href="#">报表模块</a>
+                <a class="dropdown-item"  href="#" th:if="${moduleStat.index>=4}"  th:each="module ,moduleStat: ${sysModules}"
+                   th:href="@{'home?moduleId='+${module.id}}" th:text="${module.name}" target="_top"></a>
             </ul>
         </li>
     </ul>
@@ -84,25 +76,26 @@
 
     <div class="sidebar">
 
-        <!--子系统模块菜单  开始-->
+        <!--子系统模块菜单  开始 OK-->
         <nav class="sidebar-nav">
             <ul class="nav">
                 <li class="nav-item">
                     <a class="nav-link" href="#" th:href="${indexPage}"><i class="icon-speedometer"></i> 首页 </a>
                 </li>
-                <li class="nav-title">
-                    系统模块
+                <li class="nav-title" th:inline="text">
+                    [[${moduleName}]]
                 </li>
-                <li class="nav-item nav-dropdown">
-                    <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-puzzle"></i> 系统管理</a>
-                    <ul class="nav-dropdown-items">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="icon-puzzle"></i> 权限管理</a>
+
+                <li class="nav-item nav-dropdown" th:if="${menu.subMenu.size()>0}" th:each="menu ,menuStat: ${sysMens}">
+                    <a class="nav-link nav-dropdown-toggle" href="#" th:inline="text"><i th:class=" ${menu.icon}"> </i> [[${menu.name}]] </a>
+                    <ul class="nav-dropdown-items" >
+                        <li class="nav-item" th:each="submenu ,submenuStat: ${menu.subMenu}">
+                            <a class="nav-link" href="#" th:href="@{${submenu.url}}" th:inline="text"><i th:class=" ${submenu.icon}"> </i> [[${submenu.name}]] </a>
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="icon-calculator"></i> 字典管理</a>
+                <li class="nav-item" th:if="${menu.subMenu.size()==0}" th:each="menu ,menuStat: ${sysMens}">
+                    <a class="nav-link" href="#" th:href="@{${menu.url}}" th:inline="text"><i th:class="${menu.icon}"></i> [[${menu.name}]] </a>
                 </li>
             </ul>
         </nav>
@@ -114,7 +107,7 @@
     <!-- Main content -->
     <main class="main">
 
-        <!-- 面包屑 开始-->
+        <!-- 面包屑 开始 OK -->
         <ol class="breadcrumb" id="breadcrumb-view"></ol>
         <!-- 面包屑 结束-->
 
