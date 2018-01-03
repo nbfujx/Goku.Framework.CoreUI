@@ -17,6 +17,7 @@
 | Fastjson |JSON处理器|
 | Maven | 项目构建管理  |
 | Thymeleaf| 页面模板  |
+| Websocket| 消息推送 |
 
 # 系统功能
 | **序号** | **功能** | **是否完成**|
