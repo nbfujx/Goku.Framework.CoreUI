@@ -175,14 +175,22 @@ function loadPage(url) {
                 + "</li>");
           }else
           {
-            $.breadcrumbContent.append("<li class='breadcrumb-item'>"
+            $.breadcrumbContent.append("<li class='nav breadcrumb-item'>"
                 + "<a href='" + responseText[index].url + "'>" + responseText[index].name + "</a>"
                 + "</li>");
           }
         }else{
-          $.breadcrumbContent.append("<li class='breadcrumb-item'>"
-              +responseText[index].name
-              +"</li>");
+          if(responseText[index].isleaf=="Y") {
+            $.breadcrumbContent.append("<li class='breadcrumb-item active'>"
+                + responseText[index].name
+                + "</li>");
+          }else
+          {
+            $.breadcrumbContent.append("<li class='breadcrumb-item'>"
+                +responseText[index].name
+                +"</li>");
+          }
+
         }
       }
 

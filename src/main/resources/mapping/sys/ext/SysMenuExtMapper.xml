@@ -23,14 +23,17 @@
       select * from (  select m.* from sys_menu m
             left join sys_module md on m.module_id=md.id
             left join sys_user_auth sua on m.id=sua.menu_id
-        where md.id= #{ModuleId,jdbcType=VARCHAR}
+        where md.id= #{ModuleId,jdbcType=VARCHAR} and m.if_show='Y'
         and sua.user_id=#{UserId,jdbcType=VARCHAR}
         union
         select m.* from sys_menu m
             left join sys_module md on m.module_id=md.id
             left join sys_role_auth sra on m.id=sra.menu_id
             left join sys_user_role sur on sra.role_id=sur.role_id
-        where md.id= #{ModuleId,jdbcType=VARCHAR}
+        where md.id= #{ModuleId,jdbcType=VARCHAR} and m.if_show='Y'
         and sur.user_id=#{UserId,jdbcType=VARCHAR}) m ORDER  BY sort
+    </select>
+    <select id="getMenuByUrl" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select m.* from sys_menu m where url= #{Url,jdbcType=VARCHAR}
     </select>
 </mapper>

@@ -10,4 +10,6 @@ import java.util.List;
  */
 public interface SysMenuService {
     List<SysMenu> getModuleMenus(String ModuleId, String UserId);
+    SysMenu getMenuByMenuId(String MenuId);
+    SysMenu getMenuByUrl(String Url);
 }

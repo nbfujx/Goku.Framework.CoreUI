@@ -25,6 +25,9 @@ public class HomeControllerImpl implements HomeController {
     SysMenuService sysMenuService;
 
     @Autowired
+    MenuTreeUtil menuTreeUtil;
+
+    @Autowired
     SysModuleServiceImpl sysModuleService;
 
     @RequestMapping("/login")
@@ -40,7 +43,7 @@ public class HomeControllerImpl implements HomeController {
     @RequestMapping("/home")
     public String home(Model model,@RequestParam(value="moduleId", required=false, defaultValue="") String moduleId) {
         List<SysModule>  sysModules=sysModuleService.getUserModules("999");
-        List<SysMenu>   sysMens= MenuTreeUtil.menuList(sysMenuService.getModuleMenus("28c3ef4eefb111e7a2360a0027000038","999"));
+        List<SysMenu>   sysMens= menuTreeUtil.menuList(sysMenuService.getModuleMenus("28c3ef4eefb111e7a2360a0027000038","999"));
         //List<SysNotice>  sysNotices=new ArrayList<SysNotice>();
         //List<SysSchedule>  sysSchedules=new ArrayList<SysSchedule>();
         model.addAttribute("sysModules",sysModules);

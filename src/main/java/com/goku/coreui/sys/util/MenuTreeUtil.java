@@ -1,6 +1,7 @@
 package com.goku.coreui.sys.util;
 
 import com.goku.coreui.sys.model.SysMenu;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -10,9 +11,10 @@ import java.util.Map;
 /**
  * Created by nbfujx on 2018/1/2.
  */
+@Component
 public  class MenuTreeUtil {
 
-    public static List<SysMenu> menuList(List<SysMenu> menu){
+    public  List<SysMenu> menuList(List<SysMenu> menu){
         List<SysMenu> list = new ArrayList<>();
         for (SysMenu x : menu) {
             SysMenu sysMenu = new SysMenu();
@@ -36,7 +38,7 @@ public  class MenuTreeUtil {
         return list;
     }
 
-    public static List<SysMenu> menuChild(List<SysMenu> menu,String id){
+    public  List<SysMenu> menuChild(List<SysMenu> menu,String id){
         List<SysMenu> lists = new ArrayList<SysMenu>();
         for(SysMenu x:menu){
             SysMenu sysMenu = new SysMenu();
