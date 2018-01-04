@@ -21,26 +21,28 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card-group">
-                <div class="card p-4">
+                <div class="card p-6">
                     <div class="card-body">
                         <h1>登录</h1>
-                        <p class="text-muted">登录的账号</p>
-                        <div class="input-group mb-3">
-                            <span class="input-group-addon"><i class="icon-user"></i></span>
-                            <input type="text" class="form-control" placeholder="Username"/>
-                        </div>
-                        <div class="input-group mb-4">
-                            <span class="input-group-addon"><i class="icon-lock"></i></span>
-                            <input type="password" class="form-control" placeholder="Password"/>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <button type="button" class="btn btn-primary px-4">登录</button>
+                        <p class="text-muted">登录到您的帐户</p>
+                        <form action="/doLogin" method="post">
+                            <div class="input-group mb-3">
+                                <span class="input-group-addon"><i class="icon-user"></i></span>
+                                <input type="text" name="username" class="form-control" placeholder="Username"/>
                             </div>
-                            <div class="col-6 text-right">
-                                <button type="button" class="btn btn-link px-0">忘记密码?</button>
+                            <div class="input-group mb-4">
+                                <span class="input-group-addon"><i class="icon-lock"></i></span>
+                                <input type="password" name="password" class="form-control" placeholder="Password"/>
                             </div>
-                        </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <button type="submit" class="btn btn-primary px-4" >登录</button>
+                                </div>
+                                <div class="col-6 text-right">
+                                    <button type="button" class="btn btn-link px-0">忘记密码?</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div class="card" style="width:44%">
@@ -55,5 +57,15 @@
 <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="/lib/popper.js/popper.min.js"></script>
 <script type="text/javascript" src="/lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/lib/layer/layer.js"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var error=/*[[${error}]]*/;//取值
+    /*]]>*/
+    if(error)
+    {
+        layer.alert(error, {icon: 0});
+    }
+</script>
 </body>
 </html>

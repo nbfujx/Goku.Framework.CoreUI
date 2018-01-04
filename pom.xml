@@ -72,9 +72,16 @@
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <!--<scope>provided</scope>-->
         </dependency>
+
+        <!--thymeleaf -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.theborakompanioni</groupId>
+            <artifactId>thymeleaf-extras-shiro</artifactId>
+            <version>1.2.1</version>
         </dependency>
 
         <!-- 单元测试 -->

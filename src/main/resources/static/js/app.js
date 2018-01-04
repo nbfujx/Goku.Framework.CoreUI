@@ -211,12 +211,12 @@ function loadPage(url) {
           }).delay(250).animate({opacity: 1}, 0);
         },
         error: function () {
-          //window.location.href = $.page404;
+          window.location.href = $.page404;
         }
       });
     },
     error : function(XMLHttpRequest, textStatus, errorThrown) {
-      //window.location.href = $.page404;
+       window.location.href = $.page404;
     }
 
   });

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.goku.coreui.sys.mapper.ext.SysUserExtMapper">
+  <resultMap id="BaseResultMap" type="com.goku.coreui.sys.model.SysUser">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="orgid" jdbcType="VARCHAR" property="orgid" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="is_admin" jdbcType="VARCHAR" property="isAdmin" />
+    <result column="sort" jdbcType="BIGINT" property="sort" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+  </resultMap>
+
+</mapper>
