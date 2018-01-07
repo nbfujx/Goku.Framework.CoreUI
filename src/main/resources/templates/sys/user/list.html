@@ -1,0 +1,28 @@
+<!--templates-->
+<div class="animated fadeIn" >
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header" th:inline="text">
+                    <i class="fa fa-align-justify"></i>
+                </div>
+                <div class="nav card-body">
+                    <a shiro:hasPermission="sys:user:edit" class=" nav-link" href="sys/user/getListPage@sys/user/editPage">修改</a>
+                    <a shiro:hasPermission="sys:user:delete" class=" nav-link" href="sys/user/getListPage@sys/user/delete">删除</a>
+                </div>
+            </div>
+            <!--/.row-->
+        </div>
+    </div>
+</div>
+
+<!--js-->
+<script th:inline="javascript">
+
+</script>
+<script src="js/sys/user/list.js" th:inline="javascript"></script>
+
+<!--css-->
+<style type="text/css">
+
+</style>

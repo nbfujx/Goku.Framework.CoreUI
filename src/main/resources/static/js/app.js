@@ -147,12 +147,22 @@ if ($.ajaxLoad) {
 }
 
 function setUpUrl(url) {
-  $('nav .nav li .nav-link').removeClass('active');
-  $('nav .nav li.nav-dropdown').removeClass('open');
-  $('nav .nav li:has(a[href="' + url.split('?')[0] + '"])').addClass('open');
-  $('nav .nav a[href="' + url.split('?')[0] + '"]').addClass('active');
+  if(url.indexOf("@") < 0) {
+    $('nav .nav li .nav-link').removeClass('active');
+    $('nav .nav li.nav-dropdown').removeClass('open');
+    $('nav .nav li:has(a[href="' + url.split('?')[0] + '"])').addClass('open');
+    $('nav .nav a[href="' + url.split('?')[0] + '"]').addClass('active');
+    loadPage(url);
+  }else
+  {
+    $('nav .nav li .nav-link').removeClass('active');
+    $('nav .nav li.nav-dropdown').removeClass('open');
+    $('nav .nav li:has(a[href="' + url.split('@')[0].split('?')[0] + '"])').addClass('open');
+    $('nav .nav a[href="' + url.split('@')[0].split('?')[0] + '"]').addClass('active');
+    loadPage(url.split('@')[1]);
+  }
 
-  loadPage(url);
+
 }
 
 function loadPage(url) {
@@ -165,7 +175,6 @@ function loadPage(url) {
     },
     success : function(responseText) {
       //加载面包屑
-      debugger;
       for(var index in responseText)
       {
         if(responseText[index].url!== null && typeof(responseText[index].url)!="undefined"){
@@ -210,13 +219,13 @@ function loadPage(url) {
             window.location.hash = url;
           }).delay(250).animate({opacity: 1}, 0);
         },
-        error: function () {
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
           window.location.href = $.page404;
         }
       });
     },
     error : function(XMLHttpRequest, textStatus, errorThrown) {
-       window.location.href = $.page404;
+      window.location.href = $.page404;
     }
 
   });

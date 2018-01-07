@@ -3,6 +3,7 @@ package com.goku.coreui.sys.controller.home.impl;
 import com.goku.coreui.sys.controller.home.HomeController;
 import com.goku.coreui.sys.model.SysMenu;
 import com.goku.coreui.sys.model.SysModule;
+import com.goku.coreui.sys.model.SysUser;
 import com.goku.coreui.sys.service.SysMenuService;
 import com.goku.coreui.sys.service.impl.SysModuleServiceImpl;
 import com.goku.coreui.sys.util.MenuTreeUtil;
@@ -11,6 +12,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.session.SessionException;
 import org.apache.shiro.subject.Subject;
@@ -56,7 +58,7 @@ public class HomeControllerImpl implements HomeController,ErrorController {
          UsernamePasswordToken token = new UsernamePasswordToken(userName, passwordmd5);
         try {
             subject.login(token);
-            return "home";
+            return "redirect:/home";
         }catch (UnknownAccountException e) {
             model.addAttribute("error", "账号不存在!");
             return "login";
@@ -92,16 +94,19 @@ public class HomeControllerImpl implements HomeController,ErrorController {
 
     @RequestMapping("/home")
     public String home(Model model,@RequestParam(value="moduleId", required=false, defaultValue="") String moduleId) {
-        List<SysModule>  sysModules=sysModuleService.getUserModules("999");
-        List<SysMenu>   sysMens= menuTreeUtil.menuList(sysMenuService.getModuleMenus("28c3ef4eefb111e7a2360a0027000038","999"));
+        //
+        SysUser user = (SysUser) SecurityUtils.getSubject().getSession().getAttribute("user");
+        moduleId= "".equals(moduleId)?user.getSysUserInfo().getHomepage():moduleId;
+        List<SysModule>  sysModules=sysModuleService.getUserModules(user.getId());
+        List<SysMenu>   sysMens= menuTreeUtil.menuList(sysMenuService.getModuleMenus(moduleId,user.getId()));
+        SysModule sysModule=sysModuleService.selectByPrimaryKey(moduleId);
         //List<SysNotice>  sysNotices=new ArrayList<SysNotice>();
         //List<SysSchedule>  sysSchedules=new ArrayList<SysSchedule>();
         model.addAttribute("sysModules",sysModules);
         model.addAttribute("sysMens",sysMens);
-        model.addAttribute("moduleName","系统模块");
+        model.addAttribute("module",sysModule);
         //model.addAttribute("sysNotices",sysNotices);
         //model.addAttribute("sysSchedules",sysSchedules);
-        model.addAttribute("indexPage","sys/index");
         return "homepage";
     }
 

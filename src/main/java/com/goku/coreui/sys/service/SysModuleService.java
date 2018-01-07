@@ -10,4 +10,5 @@ import java.util.List;
  */
 public interface SysModuleService {
     List<SysModule> getUserModules(String UserId);
+    SysModule selectByPrimaryKey(String id);
 }

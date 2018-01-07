@@ -22,4 +22,9 @@ public class SysModuleServiceImpl implements SysModuleService {
     public List<SysModule> getUserModules(String UserId) {
         return sysModuleExtMapper.getUserModules(UserId);
     }
+
+    @Override
+    public SysModule selectByPrimaryKey(String id) {
+        return sysModuleExtMapper.selectByPrimaryKey(id);
+    }
 }

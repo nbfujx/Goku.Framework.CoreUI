@@ -54,14 +54,14 @@
                  </div>
                  <a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i> 短信息</a>
                  <a class="dropdown-item" href="#"><i class="fa fa-comments"></i> 评论</a>-->
-                 <div class="dropdown-header text-center">
-                     <strong>设置</strong>
-                 </div>
+                <div class="dropdown-header text-center">
+                    <strong>设置</strong>
+                </div>
                 <a class="dropdown-item" href="#"><i class="fa fa-user"></i> 个人信息</a>
                 <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> 系统设置</a>
                 <div class="divider"></div>
                 <!--<a class="dropdown-item" href="#"><i class="fa fa-shield"></i> 系统锁屏</a>-->
-                <a class="dropdown-item" href="#"><i class="fa fa-lock"></i> 系统退出</a>
+                <a class="dropdown-item" href="/logout" target="_top"><i class="fa fa-lock"></i> 系统退出</a>
             </div>
         </li>
     </ul>
@@ -79,10 +79,10 @@
         <nav class="sidebar-nav">
             <ul class="nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#" th:href="${indexPage}"><i class="icon-speedometer"></i> 首页 </a>
+                    <a class="nav-link" href="#" th:href="${module.indexPage}"><i class="icon-speedometer"></i> 首页 </a>
                 </li>
                 <li class="nav-title" th:inline="text">
-                    [[${moduleName}]]
+                    [[${module.name}]]
                 </li>
 
                 <li class="nav-item nav-dropdown" th:if="${menu.subMenu.size()>0}" th:each="menu ,menuStat: ${sysMens}">
@@ -238,7 +238,7 @@
 
 <script th:inline="javascript">
     /*<![CDATA[*/
-    $.indexPage=/*[[${indexPage}]]*/;//取值
+    $.indexPage=/*[[${module.indexPage}]]*/;//取值
     /*]]>*/
 </script>
 <!-- CoreUI main scripts -->

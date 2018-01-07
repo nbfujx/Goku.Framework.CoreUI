@@ -1,5 +1,6 @@
 package com.goku.coreui.sys.config.shiro;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -81,7 +82,7 @@ public class ShiroConfig {
         Map<String, String> filterChainDefinitionManager = new LinkedHashMap<String, String>();
         //登录
         filterChainDefinitionManager.put("/login", "anon");
-        filterChainDefinitionManager.put("/api/login", "anon");
+        filterChainDefinitionManager.put("/doLogin", "anon");
         //登出
         filterChainDefinitionManager.put("/logout", "anon");
         //静态资源
@@ -90,8 +91,8 @@ public class ShiroConfig {
         filterChainDefinitionManager.put("/img/**","anon");
         filterChainDefinitionManager.put("/lib/**","anon");
         //业务操作
-        filterChainDefinitionManager.put("/api/**", "anon");//"authc,perms");
-        filterChainDefinitionManager.put("/**", "anon");//"authc,perms");
+        filterChainDefinitionManager.put("/api/**", "authc,perms");//"authc,perms");
+        filterChainDefinitionManager.put("/**", "authc,perms");//"authc,perms");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionManager);
 
         shiroFilterFactoryBean.setLoginUrl("/login");
@@ -125,6 +126,9 @@ public class ShiroConfig {
     }
 
 
-
+    @Bean(name = "shiroDialect")
+    public ShiroDialect shiroDialect(){
+        return new ShiroDialect();
+    }
 
 }

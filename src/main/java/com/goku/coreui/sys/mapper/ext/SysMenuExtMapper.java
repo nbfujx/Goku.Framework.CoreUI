@@ -13,5 +13,5 @@ import java.util.List;
 public interface SysMenuExtMapper extends SysMenuMapper {
     List<SysMenu> getModuleMenus(@Param("ModuleId")  String ModuleId, @Param("UserId") String UserId);
     SysMenu getMenuByUrl(@Param("Url") String Url);
-    List<SysMenu> selectByUserId(String id);
+    List<SysMenu> getMenuByUserId(@Param("UserId") String UserId);
 }
