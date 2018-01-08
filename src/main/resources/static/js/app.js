@@ -123,7 +123,7 @@ if ($.ajaxLoad) {
     setUpUrl($.defaultPage);
   }
 
-  $(document).on('click', '.nav a[href!="#"]', function(e) {
+  $(document).on('click', 'a[href!="#"]', function(e) {
     if ( $(this).parent().parent().hasClass('nav-tabs') || $(this).parent().parent().hasClass('nav-pills') ) {
       e.preventDefault();
     } else if ( $(this).attr('target') == '_top' ) {
@@ -139,10 +139,6 @@ if ($.ajaxLoad) {
       var target = $(e.currentTarget);
       setUpUrl(target.attr('href'));
     }
-  });
-
-  $(document).on('click', 'a[href="#"]', function(e) {
-    e.preventDefault();
   });
 }
 
