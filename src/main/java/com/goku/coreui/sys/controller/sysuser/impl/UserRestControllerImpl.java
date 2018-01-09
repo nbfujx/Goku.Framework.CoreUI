@@ -5,6 +5,7 @@ import com.goku.coreui.sys.model.ext.Breadcrumb;
 import com.goku.coreui.sys.model.ext.TablePage;
 import com.goku.coreui.sys.service.SysUserService;
 import com.goku.coreui.sys.util.BreadcrumbUtil;
+import com.goku.coreui.sys.util.CamelUtil;
 import com.goku.coreui.sys.util.PageUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class UserRestControllerImpl {
 
     @Autowired
     SysUserService sysUserService;
+
+    @Autowired
+    CamelUtil camelUtil;
 
     @RequestMapping("/getListPage")
     @RequiresPermissions(value={"sys:user:query"})
@@ -57,7 +61,7 @@ public class UserRestControllerImpl {
                                     @RequestParam(required=false)  String sortName, @RequestParam(required=false)  String sortOrder,
                                     @RequestParam int pageNumber, @RequestParam int pageSize)
     {
-        TablePage tp= pageUtil.getDataForPaging(sysUserService.getUserForPaging(username,name,sortName,sortOrder,pageNumber,pageSize));
+        TablePage tp= pageUtil.getDataForPaging(sysUserService.getUserForPaging(username,name,camelUtil.camelToUnderline(sortName),sortOrder,pageNumber,pageSize));
         return JSON.toJSONString (tp);
     }
 }

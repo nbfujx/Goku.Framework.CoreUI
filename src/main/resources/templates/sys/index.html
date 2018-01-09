@@ -21,8 +21,8 @@
                                     <input type="text" id="name" name="name" class="form-control search-content"/>
                                 </div>
                             </div>
-                            <a shiro:hasPermission="sys:user:query" style="margin-left:15px" class="opreate-btn btn btn-primary btn-sm" href="#" data-type="reload" id="resetTable" ><i class="icon-magnifier"></i>查询</a>
-                            <a shiro:hasPermission="sys:user:query" style="margin-left:15px" class="opreate-btn btn btn-secondary btn-sm" href="#" onclick="resetTable()"><i class="icon-refresh"></i>重置</a>
+                            <a shiro:hasPermission="sys:user:query" style="margin-left:15px" class="opreate-btn btn btn-primary btn-sm" href="#" data-type="reload" id="refreshTable" ><i class="icon-magnifier"></i>查询</a>
+                            <a shiro:hasPermission="sys:user:query" style="margin-left:15px" class="opreate-btn btn btn-secondary btn-sm" href="#" data-type="reset" id="resetTable"><i class="icon-refresh"></i>重置</a>
                         </div>
                         <div class="row" >
                             <a shiro:hasPermission="sys:user:add" class="opreate-btn btn btn-success btn-sm" href="sys/user/getListPage@sys/user/addPage"><i class="icon-plus"></i>新增</a>
@@ -44,6 +44,9 @@
 <!--js-->
 <script th:inline="javascript">
 
+    var dic_isAdmin={"0":"否","1":"是"	};
+    var dic_status={"0":"冻结","1":"在用"};
+
     layui.use('table', function(){
         var table = layui.table;
         var $ = layui.jquery;
@@ -56,9 +59,14 @@
             ,limit:5
             ,limits:[5,10,20,50]
             ,cols: [[
-                {field:'id', width:80, title: 'ID', sort: true}
-                ,{field:'username', width:80, title: '用户名'}
-                ,{field:'sex', width:80, title: '性别', sort: true}
+                {field:'username', width:100, title: '用户名'}
+                ,{field:'name', width:100, title: '姓名'}
+                ,{field:'sex', width:60, title: '性别',templet: '#sexTpl'}
+                ,{field:'status', width:100, title: '使用状态',sort: true, templet: '#statusTpl'}
+                ,{field:'email', width:150, title: 'email'}
+                ,{field:'idcard', width:200, title: '身份证'}
+                ,{field:'isAdmin', width:120, title: '是否管理员', sort: true,templet: '#adminTpl'}
+                ,{field:'mobile', width:150, title: '联系方式'}
             ]],
             request: {
                 pageName: 'pageNumber', //页码的参数名称，默认：page
@@ -93,9 +101,24 @@
                     username:$('#username').val(),
                     name:$('#name').val()
                 }});
+            },
+            reset: function(){
+                $('#username').val("");
+                $('#name').val("");
+                var tableIns = table.render(opt)
+                tableIns.reload({ where: {
+                    username:$('#username').val(),
+                    name:$('#name').val()
+                }});
             }
         };
 
+
+        $('#refreshTable').on('click', function(){
+            debugger;
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
 
         $('#resetTable').on('click', function(){
             debugger;
@@ -107,6 +130,27 @@
 
 
 
+</script>
+<script type="text/html" id="sexTpl">
+    {{#  if(d.sex === '0'){ }}
+    <span style="color: #F581B1;">女</span>
+    {{#  } else { }}
+    <span style="color:#8DB6CD;"> 男 </span>
+    {{#  } }}
+</script>
+<script type="text/html" id="statusTpl">
+    {{#   for (var key in dic_status) { }}
+    {{#      if (key == d.status) { }}
+    {{             dic_status[key]}}
+    {{#      } }}
+    {{#  } }}
+</script>
+<script type="text/html" id="adminTpl">
+    {{#   for (var key in dic_isAdmin) { }}
+    {{#      if (key == d.isAdmin) { }}
+    {{             dic_isAdmin[key]}}
+    {{#      } }}
+    {{#  } }}
 </script>
 
 <!--css-->
