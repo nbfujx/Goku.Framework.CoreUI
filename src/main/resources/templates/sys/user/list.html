@@ -21,35 +21,28 @@
                                     <input type="text" id="name" name="name" class="form-control search-content"/>
                                 </div>
                             </div>
+                            <a shiro:hasPermission="sys:user:query" style="margin-left:15px" class="opreate-btn btn btn-primary btn-sm" href="#" onclick="refreshTable()">查询</a>
                         </div>
                         <div class="row" >
-                            <a shiro:hasPermission="sys:user:query" style="margin-left:15px" class="opreate-btn btn btn-primary btn-sm" href="#" onclick="alert('2222')">查询</a>
                             <a shiro:hasPermission="sys:user:add" class="opreate-btn btn btn-success btn-sm" href="sys/user/getListPage@sys/user/addPage">新增</a>
                             <a shiro:hasPermission="sys:user:edit" class="opreate-btn btn btn-success btn-sm" href="sys/user/getListPage@sys/user/editPage">修改</a>
                             <a shiro:hasPermission="sys:user:delete"  class="opreate-btn btn btn-danger btn-sm"  href="#" onclick="alert('2222')">删除</a>
-                            <a class="opreate-btn btn btn-success btn-sm"  href="#" onclick="alert('2222')">角色赋值</a>
+                            <a shiro:hasPermission="sys:user:add,sys:role:add" class="opreate-btn btn btn-success btn-sm"  href="#" onclick="alert('2222')">角色赋值</a>
                         </div>
                         <table class="table table-responsive-sm"
                                id="table"
-                               data-toggle="table"
-                               data-height="460"
-                               data-query-params="queryParams"
-                               data-pagination="true"
-                               data-page-size="10"
-                               data-page-list="[10,20,50,ALL]"
-                               data-side-pagination="server">
-                            <!--data-url-->
+                               data-height="410">
                             <thead>
                             <tr>
-                                <th data-field="state" data-checkbox="true"></th>
-                                <th data-field="id">用户名</th>
+                                <th  data-checkbox="true"></th>
+                                <th data-field="username">用户名</th>
                                 <th data-field="name">姓名</th>
-                                <th data-field="price">性别</th>
-                                <th data-field="price">使用状态</th>
-                                <th data-field="price">email</th>
-                                <th data-field="price">身份证</th>
-                                <th data-field="price">是否管理员</th>
-                                <th data-field="price">联系方式</th>
+                                <th data-field="sex">性别</th>
+                                <th data-field="status">使用状态</th>
+                                <th data-field="email">email</th>
+                                <th data-field="idacrd">身份证</th>
+                                <th data-field="isAdmin">是否管理员</th>
+                                <th data-field="mobile">联系方式</th>
                             </tr>
                             </thead>
                         </table>
@@ -65,41 +58,49 @@
 <script th:inline="javascript">
 
     var $table = $('#table');
+    var opt={
+        method: "get",  //使用get请求到服务器获取数据
+        url: "/api/sys/user/getUserForPaging", //获取数据的Servlet地址
+        striped: true,  //表格显示条纹
+        pagination: true, //启动分页
+        pageSize: 5,  //每页显示的记录数
+        pageNumber:1, //当前第几页
+        pageList: [5, 10, 20, 50, 'All'],  //记录数可选列表
+        search: false,  //是否启用查询
+        sidePagination: "server", //表示服务端请求
+        queryParamsType : "undefined",
+        queryParams: function queryParams(params) {   //设置查询参数
+            var param = {
+                pageNumber: params.pageNumber,
+                pageSize: params.pageSize,
+                sortName: this.sortName,
+                sortOrder: this.sortOrder,
+                username:$('#username').val(),
+                name:$('#name').val()
+            };
+            return param;
+        },
+        onLoadSuccess: function(){  //加载成功时执行
+            //layer.msg("加载成功");
+        },
+        onLoadError: function(){  //加载失败时执行
+            //layer.msg("加载数据失败", {time : 1500, icon : 2});
+        }
+    };
+
+    function initTable() {
+        //初始化表格,动态从服务器加载数据
+        $table.bootstrapTable(opt);
+    }
+
+    function refreshTable(){
+        $table.bootstrapTable(opt);
+        $table.bootstrapTable("refresh")
+    }
+
 
     $(function () {
-        var data = [
-            {
-                "id": 0,
-                "name": "Item 0",
-                "price": "$0"
-            },
-            {
-                "id": 1,
-                "name": "Item 1",
-                "price": "$1"
-            },
-            {
-                "id": 2,
-                "name": "Item 2",
-                "price": "$2"
-            },
-            {
-                "id": 3,
-                "name": "Item 3",
-                "price": "$3"
-            },
-            {
-                "id": 4,
-                "name": "Item 4",
-                "price": "$4"
-            },
-            {
-                "id": 5,
-                "name": "Item 5",
-                "price": "$5"
-            }
-        ];
-        $table.bootstrapTable({data: data});
+        initTable();
     });
 
 </script>
@@ -113,6 +114,7 @@
     }
     .opreate-btn
     {
-        margin:0 0 10px 10px;
+        width: 60px;
+        margin:0 0 10px 15px;
     }
 </style>

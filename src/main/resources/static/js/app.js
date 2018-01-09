@@ -134,13 +134,17 @@ if ($.ajaxLoad) {
       e.preventDefault();
       var target = $(e.currentTarget);
       window.open(target.attr('href'));
-    } else {
+    } else if('a[href=="#"]'){
       e.preventDefault();
       var target = $(e.currentTarget);
       setUpUrl(target.attr('href'));
     }
   });
 }
+
+$(document).on('click', 'a[href="#"]', function(e) {
+  e.preventDefault();
+});
 
 function setUpUrl(url) {
   if(url.indexOf("@") < 0) {

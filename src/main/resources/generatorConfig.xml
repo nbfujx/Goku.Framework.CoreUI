@@ -37,7 +37,7 @@
         </javaClientGenerator>
 
         <!-- !!!! Table Configurations !!!! -->
-        <table tableName="sys_user_auth" domainObjectName="SysUserAuth" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+        <table tableName="" domainObjectName="" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false"/>
     </context>
 </generatorConfiguration>

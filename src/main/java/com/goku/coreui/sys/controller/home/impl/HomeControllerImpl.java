@@ -102,6 +102,10 @@ public class HomeControllerImpl implements HomeController,ErrorController {
         SysModule sysModule=sysModuleService.selectByPrimaryKey(moduleId);
         //List<SysNotice>  sysNotices=new ArrayList<SysNotice>();
         //List<SysSchedule>  sysSchedules=new ArrayList<SysSchedule>();
+        //默认主模块为空
+        if(sysModule==null){
+            sysModule=sysModules.get(0);
+        }
         model.addAttribute("sysModules",sysModules);
         model.addAttribute("sysMens",sysMens);
         model.addAttribute("module",sysModule);

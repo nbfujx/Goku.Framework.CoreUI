@@ -17,7 +17,6 @@ public class IndexControllerImpl implements IndexController {
     @RequestMapping("/index")
     @RequiresPermissions(value={"sys:index:*"})
     public String  index(Model model) {
-        model.addAttribute("str","表格");
         return  "sys/index";
     }
 

@@ -1392,7 +1392,7 @@
                     } else {
                         active = page === that.options.pageSize ? ' class="active"' : '';
                     }
-                    pageNumber.push(sprintf('<li role="menuitem"%s><a href="#">%s</a></li>', active, page));
+                    pageNumber.push(sprintf('<li role="menuitem"%s><a href="#" style="display: block;padding: 3px 20px;clear: both;font-weight: 400;line-height: 1.42857143;color: #333;white-space: nowrap;">%s</a></li>', active, page));
                 }
             });
             pageNumber.push('</ul></span>');

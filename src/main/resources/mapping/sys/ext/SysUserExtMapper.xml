@@ -65,4 +65,25 @@
     culture, finish_school_date, folk, government, homepage, householder, marriage, msn,
     nativity_address, qq, speciality, description, version FROM  sys_user_info where user_id = #{id,jdbcType=VARCHAR}
   </select>
+  <select id="getUserForPaging" resultMap="SysUserMap">
+    select
+     id, username, password, name, sex, status, orgid, email, idcard, is_admin, sort,mobile
+    from sys_user
+    <where>
+      <if test="username != null and username != ''">
+        <bind name="username" value="'%' + username + '%'" />
+        username LIKE #{username}
+      </if>
+      <if test="name != null and name != ''">
+        <bind name="name" value="'%' + name + '%'" />
+        name LIKE #{name}
+      </if>
+    </where>
+    <if test="orderFiled != null" >
+      order by  ${orderFiled}
+      <if test="orderSort != null" >
+        ${orderSort}
+      </if>
+    </if>
+  </select>
 </mapper>
