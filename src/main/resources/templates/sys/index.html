@@ -8,27 +8,6 @@
                 </div>
                 <div class="card-body">
                     <div class=" form-horizontal">
-
-                        <div class="form-group  row">
-                            <div class="col-md-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon search-content">用户名</span>
-                                    <input type="text" id="username2" name="username" class="form-control search-content"/>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon search-content">姓名</span>
-                                    <input type="text" id="name2" name="name" class="form-control search-content"/>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon search-content">用户名</span>
-                                    <input type="text" id="username222" name="username" class="form-control search-content"/>
-                                </div>
-                            </div>
-                        </div>
                         <div class="form-group  row">
                             <div class="col-md-3">
                                 <div class="input-group">
@@ -42,44 +21,18 @@
                                     <input type="text" id="name" name="name" class="form-control search-content"/>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon search-content">用户名</span>
-                                    <input type="text" id="username22" name="username" class="form-control search-content"/>
-                                </div>
-                            </div>
-                            <a shiro:hasPermission="sys:user:query" style="margin-left:15px;float:right" class="opreate-btn btn btn-primary btn-sm" href="#" onclick="alert('2222')">查询</a>
+                            <a shiro:hasPermission="sys:user:query" style="margin-left:15px" class="opreate-btn btn btn-primary btn-sm" href="#" data-type="reload" id="resetTable" ><i class="icon-magnifier"></i>查询</a>
+                            <a shiro:hasPermission="sys:user:query" style="margin-left:15px" class="opreate-btn btn btn-secondary btn-sm" href="#" onclick="resetTable()"><i class="icon-refresh"></i>重置</a>
                         </div>
                         <div class="row" >
-                            <a shiro:hasPermission="sys:user:add" class="opreate-btn btn btn-success btn-sm" href="sys/user/getListPage@sys/user/addPage">新增</a>
-                            <a shiro:hasPermission="sys:user:edit" class="opreate-btn btn btn-success btn-sm" href="sys/user/getListPage@sys/user/editPage">修改</a>
-                            <a shiro:hasPermission="sys:user:delete"  class="opreate-btn btn btn-danger btn-sm"  href="#" onclick="alert('2222')">删除</a>
-                            <a shiro:hasPermission="sys:user:add,sys:role:add" class="opreate-btn btn btn-success btn-sm"  href="#" onclick="alert('2222')">角色赋值</a>
+                            <a shiro:hasPermission="sys:user:add" class="opreate-btn btn btn-success btn-sm" href="sys/user/getListPage@sys/user/addPage"><i class="icon-plus"></i>新增</a>
+                            <a shiro:hasPermission="sys:user:edit" class="opreate-btn btn btn-success btn-sm" href="sys/user/getListPage@sys/user/editPage"><i class="icon-plus"></i>修改</a>
+                            <a shiro:hasPermission="sys:user:delete"  class="opreate-btn btn btn-danger btn-sm"  href="#" onclick="freezeIds()"><i class="icon-close"></i>冻结</a>
+                            <a shiro:hasPermission="sys:user:delete"  class="opreate-btn btn btn-danger btn-sm"  href="#" onclick="deleteIds()"><i class="icon-close"></i>删除</a>
+                            <a shiro:hasPermission="sys:user:add" style="width: 80px;" class="opreate-btn btn btn-success btn-sm"  href="#" onclick="alert('2222')"><i class="icon-user-follow"></i>角色赋值</a>
+                            <a shiro:hasPermission="sys:user:add" style="width: 80px;" class="opreate-btn btn btn-success btn-sm"  href="#" onclick="alert('2222')"><i class="icon-user-follow"></i>菜单赋值</a>
                         </div>
-                        <table class="table table-responsive-sm"
-                               id="table"
-                               data-toggle="table"
-                               data-height="460"
-                               data-query-params="queryParams"
-                               data-pagination="true"
-                               data-page-size="10"
-                               data-page-list="[10,20,50,ALL]"
-                               data-side-pagination="server">
-                            <!--data-url-->
-                            <thead>
-                            <tr>
-                                <th  data-checkbox="true"></th>
-                                <th data-field="id">用户名</th>
-                                <th data-field="name">姓名</th>
-                                <th data-field="price">性别</th>
-                                <th data-field="price">使用状态</th>
-                                <th data-field="price">email</th>
-                                <th data-field="price">身份证</th>
-                                <th data-field="price">是否管理员</th>
-                                <th data-field="price">联系方式</th>
-                            </tr>
-                            </thead>
-                        </table>
+                        <table class="table table-responsive-sm" id="table"></table>
                     </div>
                 </div>
             </div>
@@ -91,43 +44,54 @@
 <!--js-->
 <script th:inline="javascript">
 
-    var $table = $('#table');
+    layui.use('table', function(){
+        var table = layui.table;
+        var $ = layui.jquery;
 
-    $(function () {
-        var data = [
-            {
-                "id": 0,
-                "name": "Item 0",
-                "price": "$0"
+        var opt={
+            elem: '#table'
+            ,url:'/api/sys/user/getUserForPaging'
+            ,height: 410
+            ,page: true //开启分页,
+            ,limit:5
+            ,limits:[5,10,20,50]
+            ,cols: [[
+                {field:'id', width:80, title: 'ID', sort: true}
+                ,{field:'username', width:80, title: '用户名'}
+                ,{field:'sex', width:80, title: '性别', sort: true}
+            ]],
+            request: {
+                pageName: 'pageNumber', //页码的参数名称，默认：page
+                limitName: 'pageSize' //每页数据量的参数名，默认：limit
             },
-            {
-                "id": 1,
-                "name": "Item 1",
-                "price": "$1"
-            },
-            {
-                "id": 2,
-                "name": "Item 2",
-                "price": "$2"
-            },
-            {
-                "id": 3,
-                "name": "Item 3",
-                "price": "$3"
-            },
-            {
-                "id": 4,
-                "name": "Item 4",
-                "price": "$4"
-            },
-            {
-                "id": 5,
-                "name": "Item 5",
-                "price": "$5"
+            response: {
+                countName: 'total', //数据总数的字段名称，默认：count
+                dataName: 'rows' //数据列表的字段名称，默认：data
             }
-        ];
-        $table.bootstrapTable({data: data});
+        };
+
+        table.render(opt);
+
+        var active = {
+            reload: function(){
+                var tableIns = table.render(opt)
+                tableIns.reload({ where: {
+                    username:$('#username').val(),
+                    name:$('#name').val()
+                }});
+            }
+        };
+
+
+        $('#resetTable').on('click', function(){
+            debugger;
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+
     });
+
+
 
 </script>
 

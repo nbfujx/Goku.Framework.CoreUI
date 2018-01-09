@@ -124,7 +124,7 @@ if ($.ajaxLoad) {
   }
 
   $(document).on('click', 'a[href!="#"]', function(e) {
-    if ( $(this).parent().parent().hasClass('nav-tabs') || $(this).parent().parent().hasClass('nav-pills') ) {
+    if ( $(this).parent().parent().hasClass('nav-tabs') || $(this).parent().parent().hasClass('nav-pills')||$(this).attr('href')=="javascript:;") {
       e.preventDefault();
     } else if ( $(this).attr('target') == '_top' ) {
       e.preventDefault();
@@ -134,10 +134,12 @@ if ($.ajaxLoad) {
       e.preventDefault();
       var target = $(e.currentTarget);
       window.open(target.attr('href'));
-    } else if('a[href=="#"]'){
+    } else{
       e.preventDefault();
       var target = $(e.currentTarget);
-      setUpUrl(target.attr('href'));
+      if(target.attr('href')!=undefined) {
+        setUpUrl(target.attr('href'));
+      }
     }
   });
 }

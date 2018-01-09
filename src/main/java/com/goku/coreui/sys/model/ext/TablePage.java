@@ -6,8 +6,26 @@ import java.util.List;
  * Created by nbfujx on 2018/1/9.
  */
 public class TablePage {
+    private int code;
+    private String msg;
     private long total;
     private List<Object> rows;
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
     public long getTotal() {
         return total;
@@ -24,4 +42,6 @@ public class TablePage {
     public void setRows(List<Object> rows) {
         this.rows = rows;
     }
+
+
 }

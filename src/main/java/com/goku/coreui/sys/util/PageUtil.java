@@ -13,6 +13,8 @@ public class PageUtil {
      public TablePage getDataForPaging(PageInfo pageInfo)
      {
          TablePage tp=new TablePage();
+         tp.setCode(0);
+         tp.setMsg("");
          tp.setTotal(pageInfo.getTotal());
          tp.setRows(pageInfo.getList());
          return tp;

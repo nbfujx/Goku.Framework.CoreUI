@@ -79,9 +79,9 @@
         name LIKE #{name}
       </if>
     </where>
-    <if test="orderFiled != null" >
+    <if test="orderFiled != null and orderFiled != ''" >
       order by  ${orderFiled}
-      <if test="orderSort != null" >
+      <if test="orderSort != null and orderSort !=" >
         ${orderSort}
       </if>
     </if>

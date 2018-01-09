@@ -21,27 +21,30 @@
                                     <input type="text" id="name" name="name" class="form-control search-content"/>
                                 </div>
                             </div>
-                            <a shiro:hasPermission="sys:user:query" style="margin-left:15px" class="opreate-btn btn btn-primary btn-sm" href="#" onclick="refreshTable()">查询</a>
+                            <a shiro:hasPermission="sys:user:query" style="margin-left:15px" class="opreate-btn btn btn-primary btn-sm" href="#" onclick="refreshTable()"><i class="icon-magnifier"></i>查询</a>
+                            <a shiro:hasPermission="sys:user:query" style="margin-left:15px" class="opreate-btn btn btn-secondary btn-sm" href="#" onclick="resetTable()"><i class="icon-refresh"></i>重置</a>
                         </div>
                         <div class="row" >
-                            <a shiro:hasPermission="sys:user:add" class="opreate-btn btn btn-success btn-sm" href="sys/user/getListPage@sys/user/addPage">新增</a>
-                            <a shiro:hasPermission="sys:user:edit" class="opreate-btn btn btn-success btn-sm" href="sys/user/getListPage@sys/user/editPage">修改</a>
-                            <a shiro:hasPermission="sys:user:delete"  class="opreate-btn btn btn-danger btn-sm"  href="#" onclick="alert('2222')">删除</a>
-                            <a shiro:hasPermission="sys:user:add,sys:role:add" class="opreate-btn btn btn-success btn-sm"  href="#" onclick="alert('2222')">角色赋值</a>
+                            <a shiro:hasPermission="sys:user:add" class="opreate-btn btn btn-success btn-sm" href="sys/user/getListPage@sys/user/addPage"><i class="icon-plus"></i>新增</a>
+                            <a shiro:hasPermission="sys:user:edit" class="opreate-btn btn btn-success btn-sm" href="sys/user/getListPage@sys/user/editPage"><i class="icon-plus"></i>修改</a>
+                            <a shiro:hasPermission="sys:user:delete"  class="opreate-btn btn btn-danger btn-sm"  href="#" onclick="freezeIds()"><i class="icon-close"></i>冻结</a>
+                            <a shiro:hasPermission="sys:user:delete"  class="opreate-btn btn btn-danger btn-sm"  href="#" onclick="deleteIds()"><i class="icon-close"></i>删除</a>
+                            <a shiro:hasPermission="sys:user:add" style="width: 80px;" class="opreate-btn btn btn-success btn-sm"  href="#" onclick="alert('2222')"><i class="icon-user-follow"></i>角色赋值</a>
+                            <a shiro:hasPermission="sys:user:add" style="width: 80px;" class="opreate-btn btn btn-success btn-sm"  href="#" onclick="alert('2222')"><i class="icon-user-follow"></i>菜单赋值</a>
                         </div>
                         <table class="table table-responsive-sm"
                                id="table"
                                data-height="410">
                             <thead>
                             <tr>
-                                <th  data-checkbox="true"></th>
+                                <th data-checkbox="true"></th>
                                 <th data-field="username">用户名</th>
                                 <th data-field="name">姓名</th>
-                                <th data-field="sex">性别</th>
-                                <th data-field="status">使用状态</th>
+                                <th data-field="sex" data-formatter="sexFormatter">性别</th>
+                                <th data-field="status" data-formatter="statusFormatter">使用状态</th>
                                 <th data-field="email">email</th>
-                                <th data-field="idacrd">身份证</th>
-                                <th data-field="isAdmin">是否管理员</th>
+                                <th data-field="idcard">身份证</th>
+                                <th data-field="isAdmin" data-formatter="isAdminFormatter">是否管理员</th>
                                 <th data-field="mobile">联系方式</th>
                             </tr>
                             </thead>
@@ -56,6 +59,10 @@
 
 <!--js-->
 <script th:inline="javascript">
+
+    var dic_sex={"0":"女","1":"男","9":"其他"};
+    var dic_isAdmin={"0":"否","1":"是"	};
+    var dic_status={"0":"冻结","1":"在用"};
 
     var $table = $('#table');
     var opt={
@@ -96,6 +103,61 @@
     function refreshTable(){
         $table.bootstrapTable(opt);
         $table.bootstrapTable("refresh")
+    }
+
+    function resetTable(){
+        $('#username').val("");
+        $('#name').val("");
+        $table.bootstrapTable(opt);
+        $table.bootstrapTable("refresh")
+    }
+
+    function sexFormatter(value, row, index) {
+        for (var key in dic_sex) {
+            if (key == value) {
+                return dic_sex[key];
+            }
+        }
+    }
+
+    function isAdminFormatter(value, row, index) {
+        for (var key in dic_isAdmin) {
+            if (key == value) {
+                return dic_isAdmin[key];
+            }
+        }
+    }
+
+    function statusFormatter(value, row, index) {
+        for (var key in dic_status) {
+            if (key == value) {
+                return dic_status[key];
+            }
+        }
+    }
+
+    function deleteIds() {
+        var deleteids=$table.bootstrapTable('getSelections');
+        if(deleteids.length==0){
+            layer.alert("请选择要删除的数据！", {icon: 0});
+        }else {
+            layer.confirm('确认是否要删除数据?', {icon: 3, title:'提示'}, function(index){
+                console.log("111");
+                layer.close(index);
+            });
+        }
+    }
+
+    function freezeIds() {
+        var deleteids=$table.bootstrapTable('getSelections');
+        if(deleteids.length==0){
+            layer.alert("请选择要冻结的数据！", {icon: 0});
+        }else {
+            layer.confirm('确认是否要冻结数据?', {icon: 3, title:'提示'}, function(index){
+                console.log("111");
+                layer.close(index);
+            });
+        }
     }
 
 
