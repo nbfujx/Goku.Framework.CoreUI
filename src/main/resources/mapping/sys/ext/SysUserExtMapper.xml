@@ -81,7 +81,7 @@
     </where>
     <if test="orderFiled != null and orderFiled != ''" >
       order by  ${orderFiled}
-      <if test="orderSort != null and orderSort !=" >
+      <if test="orderSort != null and orderSort !=''" >
         ${orderSort}
       </if>
     </if>

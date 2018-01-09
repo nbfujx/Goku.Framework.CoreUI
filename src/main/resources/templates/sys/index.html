@@ -32,7 +32,7 @@
                             <a shiro:hasPermission="sys:user:add" style="width: 80px;" class="opreate-btn btn btn-success btn-sm"  href="#" onclick="alert('2222')"><i class="icon-user-follow"></i>角色赋值</a>
                             <a shiro:hasPermission="sys:user:add" style="width: 80px;" class="opreate-btn btn btn-success btn-sm"  href="#" onclick="alert('2222')"><i class="icon-user-follow"></i>菜单赋值</a>
                         </div>
-                        <table class="table table-responsive-sm" id="table"></table>
+                        <table class="table table-responsive-sm" id="table" lay-filter="table"></table>
                     </div>
                 </div>
             </div>
@@ -71,6 +71,20 @@
         };
 
         table.render(opt);
+
+        table.on('sort(table)', function (obj) {
+            debugger;
+            var tableIns = table.render(opt)
+            tableIns.reload({
+                initSort: obj,
+                where: {
+                    sortName: obj.field,
+                    sortOrder: obj.type,
+                    pageName: 'pageNumber', //页码的参数名称，默认：page
+                    limitName: 'pageSize' //每页数据量的参数名，默认：limit
+                }
+            })
+        });
 
         var active = {
             reload: function(){
