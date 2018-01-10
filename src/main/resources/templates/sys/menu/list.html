@@ -1,0 +1,149 @@
+<!--templates-->
+<div class="animated fadeIn" >
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> 菜单列表
+                </div>
+                <div class="card-body">
+                    <div class=" form-horizontal">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <table class="layui-table" id="moduleTable"  lay-filter="module"></table><!--lay-skin="nob"-->
+                            </div>
+                            <div class="col-md-9" style="float: right">
+                                <div class="row">
+                                    <a shiro:hasPermission="sys:menu:add" class="opreate-btn btn btn-success btn-sm" href="sys/menu/getListPage@sys/menu/addPage"><i class="icon-plus"></i>新增</a>
+                                    <a shiro:hasPermission="sys:menu:edit" class="opreate-btn btn btn-success btn-sm" href="sys/menu/getListPage@sys/menu/editPage"><i class="icon-plus"></i>修改</a>
+                                    <a shiro:hasPermission="sys:menu:delete"  class="opreate-btn btn btn-danger btn-sm"  href="#" data-type="delete" id="deleteIds"><i class="icon-close"></i>删除</a>
+                                </div>
+                                <table class="layui-table table-responsive-sm" id="menuTable" lay-filter="menu"></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.row-->
+        </div>
+    </div>
+</div>
+
+<!--js-->
+<script th:inline="javascript">
+
+    var checkedMudleId;
+
+    layui.config({
+        base: 'lib/layuiextend/treegrid/'
+    }).use(['laytpl', 'treegrid',"table"], function () {
+        var laytpl = layui.laytpl,table=layui.table,
+                treegrid = layui.treegrid;
+        treegrid.config.render = function (viewid, data) {
+            var view = document.getElementById(viewid).innerHTML;
+            return laytpl(view).render(data) || '';
+        };
+
+        table.render({
+            elem: '#moduleTable'
+            ,url:'/api/sys/module/getModuleForPaging'
+            ,page: false
+            ,cols: [[
+                {field:'name',title: '模块名称',event: 'setName'}
+            ]],
+            response: {
+                countName: 'total',
+                dataName: 'rows'
+            },
+            done: function(res, curr, count) {
+                if (res.rows.length>0) {
+                    checkedMudleId=res.rows[0].id;
+                    getJSON("/api/sys/menu/getMenuForPaging?moduleId=" + checkedMudleId)
+                            .catch(error => {
+
+                            }).then(value => {
+                        debugger;
+                        var rows=JSON.parse(value);
+                        treegrid.createNew({
+                            elem: 'menuTable',
+                            view: 'menuView',
+                            data: {rows: rows},
+                            id: 'id',
+                            root: "-1",
+                            parentid: 'parentId',
+                            singleSelect: true
+                        }).build();
+                    })
+                }
+            }
+        });
+
+        table.on('tool(module)', function(obj){
+            debugger;
+            var data = obj.data;
+            var event=obj.event;
+            if(event=="setName"){
+                checkedMudleId=data.id;
+                getJSON("/api/sys/menu/getMenuForPaging?moduleId="+checkedMudleId)
+                        .catch( error => {
+
+                        }).then( value => {
+                    debugger;
+                    var rows=JSON.parse(value);
+                    treegrid.createNew({
+                        elem: 'menuTable',
+                        view: 'menuView',
+                        data: { rows: rows },
+                        id: 'id',
+                        root:"-1",
+                        parentid: 'parentId',
+                        singleSelect: true
+                    }).build();
+                })
+            }
+        });
+
+    });
+
+</script>
+<!--模板 js start-->
+<script id="menuView" type="text/html">
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th>菜单名称</th>
+            <th>菜单图标</th>
+            <th>菜单描述</th>
+            <th>是否展示</th>
+            <th>业务权限</th>
+            <th>访问路径</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{# layui.each(d.rows,function(index,r){ }}
+        <tr>
+            <td><input type="checkbox" />{{r.name}}</td>
+            <td><i class="{{r.icon}}"></i></td>
+            <td>{{r.description}}</td>
+            <td>{{#  if(d.ifShow === '0'){ }}
+                不展示
+                {{#  } else { }}
+                展示
+                {{#  } }}</td>
+            <td>{{r.permission}}</td>
+            <td>{{r.url}}</td>
+        </tr>
+        {{# }); }}
+        </tbody>
+    </table>
+</script>
+<!--模板 end-->
+
+<!--css-->
+<style type="text/css">
+    .opreate-btn
+    {
+        width: 60px;
+        margin:0 0 10px 15px;
+    }
+</style>

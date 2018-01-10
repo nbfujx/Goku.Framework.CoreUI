@@ -23,13 +23,13 @@ import java.util.List;
 public class UserRestControllerImpl {
 
     @Autowired
+    SysUserService sysUserService;
+
+    @Autowired
     BreadcrumbUtil breadcrumbUtil;
 
     @Autowired
     PageUtil pageUtil;
-
-    @Autowired
-    SysUserService sysUserService;
 
     @Autowired
     CamelUtil camelUtil;

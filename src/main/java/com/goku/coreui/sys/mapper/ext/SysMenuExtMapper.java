@@ -14,4 +14,5 @@ public interface SysMenuExtMapper extends SysMenuMapper {
     List<SysMenu> getModuleMenus(@Param("ModuleId")  String ModuleId, @Param("UserId") String UserId);
     SysMenu getMenuByUrl(@Param("Url") String Url);
     List<SysMenu> getMenuByUserId(@Param("UserId") String UserId);
+    List<SysMenu> getMenuForPaging(@Param("ModuleId")  String ModuleId);
 }

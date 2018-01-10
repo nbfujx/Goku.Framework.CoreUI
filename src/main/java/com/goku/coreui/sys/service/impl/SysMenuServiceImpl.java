@@ -33,4 +33,9 @@ public class SysMenuServiceImpl implements SysMenuService {
     public SysMenu getMenuByUrl(String Url) {
         return sysMenuExtMapper.getMenuByUrl(Url);
     }
+
+    @Override
+    public List<SysMenu> getMenuForPaging(String ModuleId) {
+        return sysMenuExtMapper.getMenuForPaging(ModuleId);
+    }
 }

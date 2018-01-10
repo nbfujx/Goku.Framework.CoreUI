@@ -23,4 +23,8 @@
             left join sys_user_role sur on sra.role_id=sur.role_id
         where  sur.user_id=#{UserId,jdbcType=VARCHAR} and md.if_show='1') md ORDER  BY sort
     </select>
+    <select id="getModuleForPaging" resultMap="SysModuleMap">
+        select *
+        from sys_module ORDER BY sort
+    </select>
 </mapper>

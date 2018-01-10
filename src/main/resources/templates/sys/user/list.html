@@ -27,12 +27,12 @@
                         <div class="row" >
                             <a shiro:hasPermission="sys:user:add" class="opreate-btn btn btn-success btn-sm" href="sys/user/getListPage@sys/user/addPage"><i class="icon-plus"></i>新增</a>
                             <a shiro:hasPermission="sys:user:edit" class="opreate-btn btn btn-success btn-sm" href="sys/user/getListPage@sys/user/editPage"><i class="icon-plus"></i>修改</a>
-                            <a shiro:hasPermission="sys:user:delete"  class="opreate-btn btn btn-danger btn-sm"  href="#" onclick="freezeIds()"><i class="icon-close"></i>冻结</a>
-                            <a shiro:hasPermission="sys:user:delete"  class="opreate-btn btn btn-danger btn-sm"  href="#" onclick="deleteIds()"><i class="icon-close"></i>删除</a>
-                            <a shiro:hasPermission="sys:user:add" style="width: 80px;" class="opreate-btn btn btn-success btn-sm"  href="#" onclick="alert('2222')"><i class="icon-user-follow"></i>角色赋值</a>
-                            <a shiro:hasPermission="sys:user:add" style="width: 80px;" class="opreate-btn btn btn-success btn-sm"  href="#" onclick="alert('2222')"><i class="icon-user-follow"></i>菜单赋值</a>
+                            <a shiro:hasPermission="sys:user:delete"  class="opreate-btn btn btn-danger btn-sm"  href="#" data-type="freeze" id="freezeIds"><i class="icon-close"></i>冻结</a>
+                            <a shiro:hasPermission="sys:user:delete"  class="opreate-btn btn btn-danger btn-sm"  href="#" data-type="delete" id="deleteIds"><i class="icon-close"></i>删除</a>
+                            <a shiro:hasAllPermissions="sys:user:add,sys:role:add" style="width: 80px;" class="opreate-btn btn btn-success btn-sm"  href="#" onclick="alert('2222')"><i class="icon-user-follow"></i>角色赋值</a>
+                            <a shiro:hasAllPermissions="sys:user:add,sys:menu:add" style="width: 80px;" class="opreate-btn btn btn-success btn-sm"  href="#" onclick="alert('2222')"><i class="icon-user-follow"></i>菜单赋值</a>
                         </div>
-                        <table class="table table-responsive-sm" id="table" lay-filter="table"></table>
+                        <table class="layui-table table-responsive-sm" id="table" lay-filter="table"></table>
                     </div>
                 </div>
             </div>
@@ -48,9 +48,7 @@
     var dic_status={"0":"冻结","1":"在用"};
 
     layui.use('table', function(){
-        var table = layui.table;
-        var $ = layui.jquery;
-
+        var table = layui.table,$ = layui.jquery;
         var opt={
             elem: '#table'
             ,url:'/api/sys/user/getUserForPaging'
@@ -59,13 +57,14 @@
             ,limit:5
             ,limits:[5,10,20,50]
             ,cols: [[
-                {field:'id', width:80, title: 'ID', sort: true}
+                {type:'checkbox'}
+                ,{field:'id', width:80, title: 'ID', sort: true}
                 ,{field:'username', width:100, title: '用户名'}
                 ,{field:'name', width:100, title: '姓名'}
                 ,{field:'sex', width:60, title: '性别',templet: '#sexTpl'}
-                ,{field:'status', width:100, title: '使用状态',sort: true, templet: '#statusTpl'}
+                ,{field:'status', width:120, title: '使用状态',sort: true, templet: '#statusTpl'}
                 ,{field:'email', width:150, title: 'email'}
-                ,{field:'idcard', width:200, title: '身份证'}
+                ,{field:'idcard', width:150, title: '身份证'}
                 ,{field:'isAdmin', width:120, title: '是否管理员', sort: true,templet: '#adminTpl'}
                 ,{field:'mobile', width:150, title: '联系方式'}
             ]],
@@ -78,9 +77,7 @@
                 dataName: 'rows' //数据列表的字段名称，默认：data
             }
         };
-
         table.render(opt);
-
         table.on('sort(table)', function (obj) {
             debugger;
             var tableIns = table.render(opt)
@@ -94,7 +91,6 @@
                 }
             })
         });
-
         var active = {
             reload: function(){
                 var tableIns = table.render(opt)
@@ -113,25 +109,21 @@
                 }});
             }
         };
-
-
         $('#refreshTable').on('click', function(){
             debugger;
             var type = $(this).data('type');
             active[type] ? active[type].call(this) : '';
         });
-
         $('#resetTable').on('click', function(){
             debugger;
             var type = $(this).data('type');
             active[type] ? active[type].call(this) : '';
         });
-
     });
 
 
-
 </script>
+<!--模板 js start-->
 <script type="text/html" id="sexTpl">
     {{#  if(d.sex === '0'){ }}
     <span style="color: #F581B1;">女</span>
@@ -153,6 +145,7 @@
     {{#      } }}
     {{#  } }}
 </script>
+<!--模板 end-->
 
 <!--css-->
 <style type="text/css">

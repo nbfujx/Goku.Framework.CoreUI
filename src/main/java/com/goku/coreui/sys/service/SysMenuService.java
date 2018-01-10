@@ -12,4 +12,5 @@ public interface SysMenuService {
     List<SysMenu> getModuleMenus(String ModuleId, String UserId);
     SysMenu getMenuByMenuId(String MenuId);
     SysMenu getMenuByUrl(String Url);
+    List<SysMenu> getMenuForPaging(String ModuleId);
 }

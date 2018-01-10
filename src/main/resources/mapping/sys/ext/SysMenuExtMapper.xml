@@ -44,4 +44,8 @@
             left join sys_user_role sur on sra.role_id=sur.role_id
         where sur.user_id=#{UserId,jdbcType=VARCHAR}) m ORDER  BY sort
     </select>
+    <select id="getMenuForPaging" resultMap="SysMenuMap">
+        select *
+        from sys_menu where module_id= #{ModuleId,jdbcType=VARCHAR} ORDER BY sort
+    </select>
 </mapper>
