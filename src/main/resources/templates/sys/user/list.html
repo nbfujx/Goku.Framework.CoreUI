@@ -107,6 +107,16 @@
                     username:$('#username').val(),
                     name:$('#name').val()
                 }});
+            },
+            freeze: function(){
+                var checkStatus = table.checkStatus('table')
+                        ,data = checkStatus.data;
+                layer.alert(JSON.stringify(data));
+            },
+            delete: function(){
+                var checkStatus = table.checkStatus('table')
+                        ,data = checkStatus.data;
+                layer.alert(JSON.stringify(data));
             }
         };
         $('#refreshTable').on('click', function(){
@@ -115,6 +125,16 @@
             active[type] ? active[type].call(this) : '';
         });
         $('#resetTable').on('click', function(){
+            debugger;
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+        $('#freezeIds').on('click', function(){
+            debugger;
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+        $('#deleteIds').on('click', function(){
             debugger;
             var type = $(this).data('type');
             active[type] ? active[type].call(this) : '';

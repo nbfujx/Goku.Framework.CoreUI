@@ -33,6 +33,7 @@
 <script th:inline="javascript">
 
     var checkedMudleId;
+    var checkedtreegrid;
 
     layui.config({
         base: 'lib/layuiextend/treegrid/'
@@ -64,7 +65,7 @@
                             }).then(value => {
                         debugger;
                         var rows=JSON.parse(value);
-                        treegrid.createNew({
+                        checkedtreegrid=treegrid.createNew({
                             elem: 'menuTable',
                             view: 'menuView',
                             data: {rows: rows},
@@ -72,7 +73,8 @@
                             root: "-1",
                             parentid: 'parentId',
                             singleSelect: true
-                        }).build();
+                        });
+                        checkedtreegrid.build();
                     })
                 }
             }
@@ -90,17 +92,24 @@
                         }).then( value => {
                     debugger;
                     var rows=JSON.parse(value);
-                    treegrid.createNew({
+                    checkedtreegrid=treegrid.createNew({
                         elem: 'menuTable',
                         view: 'menuView',
-                        data: { rows: rows },
+                        data: {rows: rows},
                         id: 'id',
-                        root:"-1",
+                        root: "-1",
                         parentid: 'parentId',
                         singleSelect: true
-                    }).build();
+                    });
+                    checkedtreegrid.build();
                 })
             }
+        });
+
+        $('#deleteIds').on('click', function(){
+            debugger;
+            var row =checkedtreegrid.selectRow();
+            layer.alert(JSON.stringify(row));
         });
 
     });
@@ -125,7 +134,7 @@
             <td><input type="checkbox" />{{r.name}}</td>
             <td><i class="{{r.icon}}"></i></td>
             <td>{{r.description}}</td>
-            <td>{{#  if(d.ifShow === '0'){ }}
+            <td>{{#  if(r.ifShow == '0'){ }}
                 不展示
                 {{#  } else { }}
                 展示
@@ -138,7 +147,6 @@
     </table>
 </script>
 <!--模板 end-->
-
 <!--css-->
 <style type="text/css">
     .opreate-btn

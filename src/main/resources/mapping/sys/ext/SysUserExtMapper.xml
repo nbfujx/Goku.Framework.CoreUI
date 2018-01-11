@@ -9,6 +9,7 @@
     <result column="sex" jdbcType="VARCHAR" property="sex" />
     <result column="status" jdbcType="CHAR" property="status" />
     <result column="orgid" jdbcType="VARCHAR" property="orgid" />
+    <result column="deptid" jdbcType="VARCHAR" property="deptid" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="idcard" jdbcType="VARCHAR" property="idcard" />
     <result column="is_admin" jdbcType="VARCHAR" property="isAdmin" />
@@ -50,7 +51,7 @@
   </resultMap>
   <select id="getUserByUsername" parameterType="java.lang.String" resultMap="SysUserMap">
     select
-      id, username, password, name, sex, status, orgid, email, idcard, is_admin, sort,mobile
+      id, username, password, name, sex, status, orgid,deptid, email, idcard, is_admin, sort,mobile
     from sys_user
     where status='1' and username = #{username,jdbcType=VARCHAR}
   </select>
@@ -67,7 +68,7 @@
   </select>
   <select id="getUserForPaging" resultMap="SysUserMap">
     select
-     id, username, password, name, sex, status, orgid, email, idcard, is_admin, sort,mobile
+     id, username, password, name, sex, status, orgid, deptid,email, idcard, is_admin, sort,mobile
     from sys_user
     <where>
       <if test="username != null and username != ''">
