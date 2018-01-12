@@ -14,9 +14,9 @@
                             </div>
                             <div class="col-md-9" style="float: right">
                                 <div class="row">
-                                    <a shiro:hasPermission="sys:menu:add" class="opreate-btn btn btn-success btn-sm" href="sys/menu/getListPage@sys/menu/addPage"><i class="icon-plus"></i>新增</a>
-                                    <a shiro:hasPermission="sys:menu:edit" class="opreate-btn btn btn-success btn-sm" href="sys/menu/getListPage@sys/menu/editPage"><i class="icon-plus"></i>修改</a>
-                                    <a shiro:hasPermission="sys:menu:delete"  class="opreate-btn btn btn-danger btn-sm"  href="#" data-type="delete" id="deleteIds"><i class="icon-close"></i>删除</a>
+                                    <a shiro:hasPermission="sys:menu:add" class="opreate-btn btn btn-success btn-sm" id="addbtn" href="#"><i class="icon-plus"></i>新增</a>
+                                    <a shiro:hasPermission="sys:menu:edit" class="opreate-btn btn btn-success btn-sm" id="editbtn" href="#"><i class="icon-plus"></i>修改</a>
+                                    <a shiro:hasPermission="sys:menu:delete"  class="opreate-btn btn btn-danger btn-sm"  id="deletebtn" href="#"  ><i class="icon-close"></i>删除</a>
                                 </div>
                                 <table class="layui-table table-responsive-sm" id="menuTable" lay-filter="menu"></table>
                             </div>
@@ -63,7 +63,6 @@
                             .catch(error => {
 
                             }).then(value => {
-                        debugger;
                         var rows=JSON.parse(value);
                         checkedtreegrid=treegrid.createNew({
                             elem: 'menuTable',
@@ -106,10 +105,26 @@
             }
         });
 
-        $('#deleteIds').on('click', function(){
-            debugger;
+        $('#deletebtn').on('click', function(){
             var row =checkedtreegrid.selectRow();
-            layer.alert(JSON.stringify(row));
+            if(row==null){
+                layer.alert("请选择一条记录!", {icon: 0});
+            }else {
+                layer.alert(JSON.stringify(row));
+            }
+        });
+
+        $('#addbtn').on('click', function(){
+            setUpUrl("sys/menu/getListPage@sys/menu/addPage?moduleId="+checkedMudleId);
+        });
+
+        $('#editbtn').on('click', function(){
+            var row =checkedtreegrid.selectRow();
+            if(row==null){
+                layer.alert("请选择一条记录!", {icon: 0});
+            }else {
+                setUpUrl("sys/menu/getListPage@sys/menu/editPage?menuId=" + row.id);
+            }
         });
 
     });

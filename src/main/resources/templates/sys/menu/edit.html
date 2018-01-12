@@ -3,14 +3,141 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-header">
-                    <i class="fa fa-align-justify"></i>
+                <div class="card-header" th:inline="text" >
+                    <i class="fa fa-align-justify"></i> [[${pageTitle}]]
                 </div>
                 <div class="card-body">
                     <div class=" form-horizontal">
-                        <div class="row">
-
-                        </div>
+                        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                            <legend>菜单基本信息</legend>
+                        </fieldset>
+                        <form class="layui-form" action="">
+                            <div th:if="${sysMenu!=null}">
+                                <div class="layui-form-item row">
+                                    <label class="layui-form-label">所在模块</label>
+                                    <div class="layui-input-block col-md-4">
+                                        <select name="interest" lay-filter="aihao">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                    <label class="layui-form-label">菜单名称</label>
+                                    <div class="layui-input-block col-md-4">
+                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入菜单名称" class="layui-input" th:field="${sysMenu.name}"></input>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item row">
+                                    <label class="layui-form-label">父级菜单</label>
+                                    <div class="layui-input-block col-md-4">
+                                        <select name="interest" lay-filter="aihao">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                    <label class="layui-form-label">排列序号</label>
+                                    <div class="layui-input-block col-md-4">
+                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入排列序号" class="layui-input" th:field="${sysMenu.sort}"></input>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item row">
+                                    <label class="layui-form-label">菜单图标</label>
+                                    <div class="layui-input-block col-md-4">
+                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入菜单图标" class="layui-input" th:field="${sysMenu.icon}"></input>
+                                    </div>
+                                    <label class="layui-form-label">是否展示</label>
+                                    <div th:switch="${sysMenu.ifShow}" class="layui-input-block col-md-4">
+                                        <p th:case="1">
+                                            <input type="radio" name="ifShow" title="展示" value="1" checked=""></input>
+                                            <input type="radio" name="ifShow" title="不展示" value="0"></input>
+                                        </p>
+                                        <p th:case="0">
+                                            <input type="radio" name="ifShow" title="展示" value="1" ></input>
+                                            <input type="radio" name="ifShow" title="不展示" value="0" checked=""></input>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item row">
+                                    <label class="layui-form-label">菜单权限</label>
+                                    <div class="layui-input-block col-md-4">
+                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入菜单权限" class="layui-input" th:field="${sysMenu.permission}"></input>
+                                    </div>
+                                    <label class="layui-form-label">菜单地址</label>
+                                    <div class="layui-input-block col-md-4">
+                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入菜单地址" class="layui-input" th:field="${sysMenu.url}"></input>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item row">
+                                    <label class="layui-form-label">菜单描述</label>
+                                    <div class="layui-input-block col-md-9">
+                                        <textarea class="layui-textarea" name="content"   th:field="${sysMenu.description}"></textarea>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item" style="margin-left:30px">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div th:if="${sysMenu==null}">
+                                <div class="layui-form-item row">
+                                    <label class="layui-form-label">所在模块</label>
+                                    <div class="layui-input-block col-md-4">
+                                        <select name="interest" lay-filter="aihao">
+                                            <option value=""></option>
+                                        </select>
+                                    </div>
+                                    <label class="layui-form-label">菜单名称</label>
+                                    <div class="layui-input-block col-md-4">
+                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入菜单名称" class="layui-input"></input>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item row">
+                                    <label class="layui-form-label">父级菜单</label>
+                                    <div class="layui-input-block col-md-4">
+                                        <select name="interest" lay-filter="aihao">
+                                            <option value=""></option>
+                                            <option value="0">写作</option>
+                                        </select>
+                                    </div>
+                                    <label class="layui-form-label">排列序号</label>
+                                    <div class="layui-input-block col-md-4">
+                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入排列序号" class="layui-input"></input>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item row">
+                                    <label class="layui-form-label">菜单图标</label>
+                                    <div class="layui-input-block col-md-4">
+                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入菜单图标" class="layui-input"></input>
+                                    </div>
+                                    <label class="layui-form-label">是否展示</label>
+                                    <div class="layui-input-block col-md-4">
+                                        <input type="radio" name="ifShow" title="展示" value="1" ></input>
+                                        <input type="radio" name="ifShow" title="不展示" value="0" checked=""></input>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item row">
+                                    <label class="layui-form-label">菜单权限</label>
+                                    <div class="layui-input-block col-md-4">
+                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入菜单权限" class="layui-input"></input>
+                                    </div>
+                                    <label class="layui-form-label">菜单地址</label>
+                                    <div class="layui-input-block col-md-4">
+                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入菜单地址" class="layui-input"></input>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item row">
+                                    <label class="layui-form-label">菜单描述</label>
+                                    <div class="layui-input-block col-md-9">
+                                        <textarea class="layui-textarea" name="content"></textarea>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item" style="margin-left:30px">
+                                    <div class="layui-input-block">
+                                        <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -18,14 +145,19 @@
         </div>
     </div>
 </div>
-
 <!--js-->
 <script th:inline="javascript">
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        var form = layui.form
+                ,layer = layui.layer
+                ,layedit = layui.layedit
+                ,laydate = layui.laydate;
 
+        form.render();
+    });
 </script>
 <!--模板 js start-->
 <!--模板 end-->
-
 <!--css-->
 <style type="text/css">
 
