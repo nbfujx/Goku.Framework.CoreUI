@@ -55,4 +55,5 @@
 ![用户展示](http://images.cnblogs.com/cnblogs_com/nbfujx/1146065/o_TIM%e6%88%aa%e5%9b%be20180111092521.png)
 ### 4.菜单展示
 ![菜单展示](http://images.cnblogs.com/cnblogs_com/nbfujx/1146065/o_TIM%E6%88%AA%E5%9B%BE20180111092458.png)
-
+### 5模块展示
+![模块展示](http://images.cnblogs.com/cnblogs_com/nbfujx/1146065/o_TIM%E6%88%AA%E5%9B%BE20180112133002.png)
