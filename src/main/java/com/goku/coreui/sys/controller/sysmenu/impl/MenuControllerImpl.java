@@ -31,7 +31,9 @@ public class MenuControllerImpl implements MenuController {
     @RequiresPermissions(value={"sys:menu:add"})
     public String  add(@PathParam("moduleId") String moduleId, Model model) {
         model.addAttribute("pageTitle","菜单新增");
-        model.addAttribute("sysMenu",null);
+        SysMenu sysMenu=new SysMenu();
+        sysMenu.setModuleId(moduleId);
+        model.addAttribute("sysMenu",sysMenu);
         return  "sys/menu/edit";
     }
 

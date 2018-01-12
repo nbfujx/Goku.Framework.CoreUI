@@ -9,6 +9,7 @@ import com.goku.coreui.sys.service.impl.SysMenuServiceImpl;
 import com.goku.coreui.sys.util.BreadcrumbUtil;
 import com.goku.coreui.sys.util.CamelUtil;
 import com.goku.coreui.sys.util.PageUtil;
+import com.goku.coreui.sys.util.TreeSelectUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +38,9 @@ public class MenuRestControllerImpl implements MenuRestController {
     @Autowired
     CamelUtil camelUtil;
 
+    @Autowired
+    TreeSelectUtil treeSelectUtil;
+
     @RequestMapping("/getListPage")
     @RequiresPermissions(value={"sys:menu:query"})
     public String  list() {
@@ -63,5 +67,12 @@ public class MenuRestControllerImpl implements MenuRestController {
     public String  getMenuForPaging(@RequestParam(value="moduleId", required=false, defaultValue="") String moduleId)
     {
         return JSON.toJSONString (sysMenuService.getMenuForPaging(moduleId));
+    }
+
+    @RequestMapping("/getMenuDic")
+    @RequiresPermissions(value={"sys:menu:query"})
+    public String  getMenuDic(@RequestParam(value="moduleId", required=false, defaultValue="") String moduleId)
+    {
+        return JSON.toJSONString (treeSelectUtil.TreeSelectList(sysMenuService.getMenuForPaging(moduleId)));
     }
 }

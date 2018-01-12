@@ -11,130 +11,71 @@
                         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
                             <legend>菜单基本信息</legend>
                         </fieldset>
-                        <form class="layui-form" action="">
-                            <div th:if="${sysMenu!=null}">
-                                <div class="layui-form-item row">
-                                    <label class="layui-form-label">所在模块</label>
-                                    <div class="layui-input-block col-md-4">
-                                        <select name="interest" lay-filter="aihao">
-                                            <option value=""></option>
-                                        </select>
-                                    </div>
-                                    <label class="layui-form-label">菜单名称</label>
-                                    <div class="layui-input-block col-md-4">
-                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入菜单名称" class="layui-input" th:field="${sysMenu.name}"></input>
-                                    </div>
+                        <form  id="menuform" class="layui-form">
+                            <div class="layui-form-item row">
+                                <label class="layui-form-label">所在模块</label>
+                                <div class="layui-input-block col-md-4">
+                                    <select id="moduleId" name="moduleId"  lay-filter="moduleId" lay-verify="required">
+                                        <option value=""></option>
+                                    </select>
                                 </div>
-                                <div class="layui-form-item row">
-                                    <label class="layui-form-label">父级菜单</label>
-                                    <div class="layui-input-block col-md-4">
-                                        <select name="interest" lay-filter="aihao">
-                                            <option value=""></option>
-                                        </select>
-                                    </div>
-                                    <label class="layui-form-label">排列序号</label>
-                                    <div class="layui-input-block col-md-4">
-                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入排列序号" class="layui-input" th:field="${sysMenu.sort}"></input>
-                                    </div>
-                                </div>
-                                <div class="layui-form-item row">
-                                    <label class="layui-form-label">菜单图标</label>
-                                    <div class="layui-input-block col-md-4">
-                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入菜单图标" class="layui-input" th:field="${sysMenu.icon}"></input>
-                                    </div>
-                                    <label class="layui-form-label">是否展示</label>
-                                    <div th:switch="${sysMenu.ifShow}" class="layui-input-block col-md-4">
-                                        <p th:case="1">
-                                            <input type="radio" name="ifShow" title="展示" value="1" checked=""></input>
-                                            <input type="radio" name="ifShow" title="不展示" value="0"></input>
-                                        </p>
-                                        <p th:case="0">
-                                            <input type="radio" name="ifShow" title="展示" value="1" ></input>
-                                            <input type="radio" name="ifShow" title="不展示" value="0" checked=""></input>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="layui-form-item row">
-                                    <label class="layui-form-label">菜单权限</label>
-                                    <div class="layui-input-block col-md-4">
-                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入菜单权限" class="layui-input" th:field="${sysMenu.permission}"></input>
-                                    </div>
-                                    <label class="layui-form-label">菜单地址</label>
-                                    <div class="layui-input-block col-md-4">
-                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入菜单地址" class="layui-input" th:field="${sysMenu.url}"></input>
-                                    </div>
-                                </div>
-                                <div class="layui-form-item row">
-                                    <label class="layui-form-label">菜单描述</label>
-                                    <div class="layui-input-block col-md-9">
-                                        <textarea class="layui-textarea" name="content"   th:field="${sysMenu.description}"></textarea>
-                                    </div>
-                                </div>
-                                <div class="layui-form-item" style="margin-left:30px">
-                                    <div class="layui-input-block">
-                                        <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-                                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                                    </div>
+                                <label class="layui-form-label">菜单名称</label>
+                                <div class="layui-input-block col-md-4">
+                                    <input type="text" name="name" lay-verify="required" autocomplete="off" placeholder="请输入菜单名称" class="layui-input" th:field="${sysMenu.name}"></input>
+                                    <input type="hidden" name="id" th:field="${sysMenu.id}"></input>
                                 </div>
                             </div>
-                            <div th:if="${sysMenu==null}">
-                                <div class="layui-form-item row">
-                                    <label class="layui-form-label">所在模块</label>
-                                    <div class="layui-input-block col-md-4">
-                                        <select name="interest" lay-filter="aihao">
-                                            <option value=""></option>
-                                        </select>
-                                    </div>
-                                    <label class="layui-form-label">菜单名称</label>
-                                    <div class="layui-input-block col-md-4">
-                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入菜单名称" class="layui-input"></input>
-                                    </div>
+                            <div class="layui-form-item row">
+                                <label class="layui-form-label">父级菜单</label>
+                                <div class="layui-input-block col-md-4">
+                                    <input type="text" id="parentId" lay-verify="required" name="parentId" lay-filter="parentId" placeholder="父级菜单" autocomplete="off" class="layui-input" th:field="${sysMenu.parentId}" ></input>
                                 </div>
-                                <div class="layui-form-item row">
-                                    <label class="layui-form-label">父级菜单</label>
-                                    <div class="layui-input-block col-md-4">
-                                        <select name="interest" lay-filter="aihao">
-                                            <option value=""></option>
-                                            <option value="0">写作</option>
-                                        </select>
-                                    </div>
-                                    <label class="layui-form-label">排列序号</label>
-                                    <div class="layui-input-block col-md-4">
-                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入排列序号" class="layui-input"></input>
-                                    </div>
+                                <label class="layui-form-label">排列序号</label>
+                                <div class="layui-input-block col-md-4">
+                                    <input type="text" name="sort" lay-verify="number" autocomplete="off" placeholder="请输入排列序号" class="layui-input" th:field="${sysMenu.sort}"></input>
                                 </div>
-                                <div class="layui-form-item row">
-                                    <label class="layui-form-label">菜单图标</label>
-                                    <div class="layui-input-block col-md-4">
-                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入菜单图标" class="layui-input"></input>
-                                    </div>
-                                    <label class="layui-form-label">是否展示</label>
-                                    <div class="layui-input-block col-md-4">
+                            </div>
+                            <div class="layui-form-item row">
+                                <label class="layui-form-label">菜单图标</label>
+                                <div class="layui-input-block col-md-4">
+                                    <input type="text" name="icon"  autocomplete="off" placeholder="请输入菜单图标" class="layui-input" th:field="${sysMenu.icon}"></input>
+                                </div>
+                                <label class="layui-form-label">是否展示</label>
+                                <div th:switch="${sysMenu.ifShow}" class="layui-input-block col-md-4">
+                                    <p th:case="1">
+                                        <input type="radio" name="ifShow" title="展示" value="1" checked=""></input>
+                                        <input type="radio" name="ifShow" title="不展示" value="0"></input>
+                                    </p>
+                                    <p th:case="0">
                                         <input type="radio" name="ifShow" title="展示" value="1" ></input>
                                         <input type="radio" name="ifShow" title="不展示" value="0" checked=""></input>
-                                    </div>
+                                    </p>
+                                    <p th:case="*">
+                                        <input type="radio" name="ifShow" title="展示" value="1" ></input>
+                                        <input type="radio" name="ifShow" title="不展示" value="0" checked=""></input>
+                                    </p>
                                 </div>
-                                <div class="layui-form-item row">
-                                    <label class="layui-form-label">菜单权限</label>
-                                    <div class="layui-input-block col-md-4">
-                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入菜单权限" class="layui-input"></input>
-                                    </div>
-                                    <label class="layui-form-label">菜单地址</label>
-                                    <div class="layui-input-block col-md-4">
-                                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入菜单地址" class="layui-input"></input>
-                                    </div>
+                            </div>
+                            <div class="layui-form-item row">
+                                <label class="layui-form-label">菜单权限</label>
+                                <div class="layui-input-block col-md-4">
+                                    <input type="text" name="permission"  autocomplete="off" placeholder="请输入菜单权限" class="layui-input" th:field="${sysMenu.permission}"></input>
                                 </div>
-                                <div class="layui-form-item row">
-                                    <label class="layui-form-label">菜单描述</label>
-                                    <div class="layui-input-block col-md-9">
-                                        <textarea class="layui-textarea" name="content"></textarea>
-                                    </div>
+                                <label class="layui-form-label">菜单地址</label>
+                                <div class="layui-input-block col-md-4">
+                                    <input type="text" name="url"  autocomplete="off" placeholder="请输入菜单地址" class="layui-input" th:field="${sysMenu.url}"></input>
                                 </div>
-                                <div class="layui-form-item" style="margin-left:30px">
-                                    <div class="layui-input-block">
-                                        <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-                                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                                    </div>
+                            </div>
+                            <div class="layui-form-item row">
+                                <label class="layui-form-label">菜单描述</label>
+                                <div class="layui-input-block col-md-9">
+                                    <textarea class="layui-textarea" name="description"   th:field="${sysMenu.description}"></textarea>
+                                </div>
+                            </div>
+                            <div class="layui-form-item" style="margin-left:30px">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" lay-submit=""  id="save" lay-filter="save">立即提交</button>
+                                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                                 </div>
                             </div>
                         </form>
@@ -147,13 +88,58 @@
 </div>
 <!--js-->
 <script th:inline="javascript">
-    layui.use(['form', 'layedit', 'laydate'], function(){
+
+    /*<![CDATA[*/
+    var moduleId=/*[[${sysMenu.moduleId}]]*/;//取值
+    /*]]>*/
+
+    layui.config({
+        base: 'lib/layuiextend/treeSelect/'
+    }).use(['layer','form', 'layedit', 'laydate','treeselect'], function(){
+
         var form = layui.form
                 ,layer = layui.layer
                 ,layedit = layui.layedit
-                ,laydate = layui.laydate;
+                ,laydate = layui.laydate
+                ,treeselect = layui.treeselect;
+        treeselect.render({
+            elem: "#parentId",
+            data: "api/sys/menu/getMenuDic?moduleId="+moduleId,
+            method: "GET"
+        });
+
+        getJSON("api/sys/module/getModuleForPaging")
+                .catch(error => {
+
+                }).then(value => {
+            var rows=JSON.parse(value).rows;
+            $.each(rows,function(key,value){
+                $("#moduleId").append(
+                        /*<![CDATA[*/  "<option value=\""+rows[key].id+"\">"+rows[key].name+"</option>"/*]]>*/
+                );
+            })
+            $("#moduleId").val(moduleId);
+            form.render('select');
+        });
 
         form.render();
+
+        form.on('select(moduleId)', function(data){
+            treeselect.render({
+                elem: "#parentId",
+                data: "api/sys/menu/getMenuDic?moduleId="+data.value,
+                method: "GET"
+            });
+        });
+
+        form.on('submit(save)',function(data){
+            debugger;
+            var from= $("#menuform");
+            var model= serializeObject(from);
+            setUpUrl("sys/menu/getListPage");
+        });
+
+
     });
 </script>
 <!--模板 js start-->
