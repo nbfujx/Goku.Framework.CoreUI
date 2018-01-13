@@ -33,7 +33,9 @@
 <script th:inline="javascript">
 
     var checkedMudleId;
-    var checkedtreegrid;
+    /*<![CDATA[*/
+    var checkedtreegrid=/*[[${pageTitle}]]*/;//取值
+    /*]]>*/
 
     layui.config({
         base: 'lib/layuiextend/treegrid/'
@@ -58,7 +60,9 @@
             },
             done: function(res, curr, count) {
                 if (res.rows.length>0) {
-                    checkedMudleId=res.rows[0].id;
+                    if(checkedMudleId==null) {
+                        checkedMudleId=res.rows[0].id;
+                    }
                     getJSON("/api/sys/menu/getMenuForPaging?moduleId=" + checkedMudleId)
                             .catch(error => {
 
@@ -110,7 +114,45 @@
             if(row==null){
                 layer.alert("请选择一条记录!", {icon: 0});
             }else {
-                layer.alert(JSON.stringify(row));
+                if(row.isLeaf=="1") {
+                    var menuid=row.id;
+                    postJSON("/api/sys/menu/delete",menuid)
+                            .catch(error => {
+
+                            })
+                            .then(value => {
+                                var result=JSON.parse(value);
+                                if(result==true) {
+                                    layer.alert( '该菜单删除成功!',{
+                                        icon: 6
+                                        ,btn: ['确认']
+                                        ,yes: function(index) {
+                                            layer.close(index);
+                                            getJSON("/api/sys/menu/getMenuForPaging?moduleId=" + checkedMudleId)
+                                                    .catch(error => {
+
+                                                    }).then(value => {
+                                                var rows=JSON.parse(value);
+                                                checkedtreegrid=treegrid.createNew({
+                                                    elem: 'menuTable',
+                                                    view: 'menuView',
+                                                    data: {rows: rows},
+                                                    id: 'id',
+                                                    root: "-1",
+                                                    parentid: 'parentId',
+                                                    singleSelect: true
+                                                });
+                                                checkedtreegrid.build();
+                                            })
+                                        }
+                                    });
+                                }else{
+                                    layer.alert("该条记录删除失败!", {icon: 2});
+                                }
+                            });
+                }else{
+                    layer.alert("该条记录非叶子节点，不能删除!", {icon: 2});
+                }
             }
         });
 

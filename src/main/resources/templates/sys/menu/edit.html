@@ -28,7 +28,7 @@
                             <div class="layui-form-item row">
                                 <label class="layui-form-label">父级菜单</label>
                                 <div class="layui-input-block col-md-4">
-                                    <input type="text" id="parentId" lay-verify="required" name="parentId" lay-filter="parentId" placeholder="父级菜单" autocomplete="off" class="layui-input" th:field="${sysMenu.parentId}" ></input>
+                                    <input type="text" id="parentId"  name="parentId" lay-filter="parentId" placeholder="父级菜单" autocomplete="off" class="layui-input" th:field="${sysMenu.parentId}" ></input>
                                 </div>
                                 <label class="layui-form-label">排列序号</label>
                                 <div class="layui-input-block col-md-4">
@@ -74,7 +74,7 @@
                             </div>
                             <div class="layui-form-item" style="margin-left:30px">
                                 <div class="layui-input-block">
-                                    <button class="layui-btn" lay-submit=""  id="save" lay-filter="save">立即提交</button>
+                                    <button type="reset" class="layui-btn" lay-submit=""  id="save" lay-filter="save">立即提交</button>
                                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                                 </div>
                             </div>
@@ -93,6 +93,10 @@
     var moduleId=/*[[${sysMenu.moduleId}]]*/;//取值
     /*]]>*/
 
+    /*<![CDATA[*/
+    var pageTitle=/*[[${pageTitle}]]*/;//取值
+    /*]]>*/
+
     layui.config({
         base: 'lib/layuiextend/treeSelect/'
     }).use(['layer','form', 'layedit', 'laydate','treeselect'], function(){
@@ -104,39 +108,68 @@
                 ,treeselect = layui.treeselect;
         treeselect.render({
             elem: "#parentId",
-            data: "api/sys/menu/getMenuDic?moduleId="+moduleId,
+            data: "api/sys/menu/getMenuForTree?moduleId="+moduleId,
             method: "GET"
         });
 
         getJSON("api/sys/module/getModuleForPaging")
                 .catch(error => {
-
-                }).then(value => {
-            var rows=JSON.parse(value).rows;
-            $.each(rows,function(key,value){
-                $("#moduleId").append(
-                        /*<![CDATA[*/  "<option value=\""+rows[key].id+"\">"+rows[key].name+"</option>"/*]]>*/
-                );
-            })
-            $("#moduleId").val(moduleId);
-            form.render('select');
-        });
+                    layer.alert("模块初始化失败!", {icon: 2});
+                })
+                .then(value => {
+                    var rows=JSON.parse(value).rows;
+                    $.each(rows,function(key,value){
+                        $("#moduleId").append(
+                                /*<![CDATA[*/  "<option value=\""+rows[key].id+"\">"+rows[key].name+"</option>"/*]]>*/
+                        );
+                    })
+                    $("#moduleId").val(moduleId);
+                    form.render('select');
+                });
 
         form.render();
 
         form.on('select(moduleId)', function(data){
             treeselect.render({
                 elem: "#parentId",
-                data: "api/sys/menu/getMenuDic?moduleId="+data.value,
+                data: "api/sys/menu/getMenuForTree?moduleId="+data.value,
                 method: "GET"
             });
         });
+
+        form.render();
+
+        debugger;
 
         form.on('submit(save)',function(data){
             debugger;
             var from= $("#menuform");
             var model= serializeObject(from);
-            setUpUrl("sys/menu/getListPage");
+            postJSON("/api/sys/menu/save",model)
+                    .catch(error => {
+
+                    })
+                    .then(value =>{
+                        if(value==undefined) {
+                            layer.alert(pageTitle+"失败!", {icon: 2});
+                        }else{
+                            var result=JSON.parse(value);
+                            if (result == true) {
+                                layer.alert( pageTitle+'成功!',{
+                                    icon: 6
+                                    ,btn: ['确认']
+                                    ,yes: function(index) {
+                                        layer.close(index);
+                                        setUpUrl("sys/menu/getListPage?moduleId="+moduleId)
+                                    }
+                                });
+                            } else {
+                                layer.alert(pageTitle+"失败!", {icon: 2});
+                            }
+                        }
+                    });
+
+            return false;
         });
 
 

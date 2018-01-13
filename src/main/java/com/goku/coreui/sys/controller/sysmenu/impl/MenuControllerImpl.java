@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.websocket.server.PathParam;
 
@@ -23,7 +24,8 @@ public class MenuControllerImpl implements MenuController {
 
     @RequestMapping("/getListPage")
     @RequiresPermissions(value={"sys:menu:query"})
-    public String  list(Model model) {
+    public String  list(@RequestParam(value="moduleId",  defaultValue="") String moduleId, Model model) {
+        model.addAttribute("moduleId",moduleId);
         return  "sys/menu/list";
     }
 

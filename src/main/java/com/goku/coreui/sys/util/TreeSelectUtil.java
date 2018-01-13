@@ -5,6 +5,7 @@ import com.goku.coreui.sys.model.ext.TreeSelect;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -24,6 +25,7 @@ public class TreeSelectUtil {
                     list.add(ts);
                 }
             }
+            Collections.reverse(list);
             return list;
         }
 

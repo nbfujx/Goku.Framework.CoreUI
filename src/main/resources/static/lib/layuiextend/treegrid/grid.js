@@ -463,6 +463,7 @@
                         }
                     }
                     else {*/
+                    debugger;
                     if (!grid.singleSelect) {
                         rows = [];
                         this.elem.find('.grid-body tbody tr').each(function (i) {
