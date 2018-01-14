@@ -204,7 +204,6 @@ function loadPage(url) {
 
         }
       }
-
       //加载页面
       $.ajax({
         type: 'GET',
@@ -229,7 +228,6 @@ function loadPage(url) {
     error : function(XMLHttpRequest, textStatus, errorThrown) {
       window.location.href = $.page404;
     }
-
   });
 }
 

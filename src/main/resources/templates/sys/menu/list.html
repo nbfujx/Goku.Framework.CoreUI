@@ -52,7 +52,7 @@
             ,url:'/api/sys/module/getModuleForPaging'
             ,page: false
             ,cols: [[
-                {field:'name',title: '模块名称',event: 'setName'}
+                {field:'name',title: '模块名称',event: 'setName',width:230}
             ]],
             response: {
                 countName: 'total',
@@ -116,40 +116,44 @@
             }else {
                 if(row.isLeaf=="1") {
                     var menuid=row.id;
-                    postJSON("/api/sys/menu/delete",menuid)
-                            .catch(error => {
+                    layer.alert( '请确认是否删除该菜单!',{
+                        icon: 3
+                        ,btn: ['确认']
+                        ,yes: function(index) {
+                            layer.close(index);
+                            postJSON("/api/sys/menu/delete", menuid)
+                                    .catch(error => {
 
-                            })
-                            .then(value => {
-                                var result=JSON.parse(value);
-                                if(result==true) {
-                                    layer.alert( '该菜单删除成功!',{
-                                        icon: 6
-                                        ,btn: ['确认']
-                                        ,yes: function(index) {
-                                            layer.close(index);
-                                            getJSON("/api/sys/menu/getMenuForPaging?moduleId=" + checkedMudleId)
-                                                    .catch(error => {
+                                    })
+                                    .then(value => {
+                                        var result=JSON.parse(value);
+                                        if (result == true) {
+                                            layer.alert('该菜单删除成功!', {
+                                                icon: 6, btn: ['确认'], yes: function (index) {
+                                                    layer.close(index);
+                                                    getJSON("/api/sys/menu/getMenuForPaging?moduleId=" + checkedMudleId)
+                                                            .catch(error => {
 
-                                                    }).then(value => {
-                                                var rows=JSON.parse(value);
-                                                checkedtreegrid=treegrid.createNew({
-                                                    elem: 'menuTable',
-                                                    view: 'menuView',
-                                                    data: {rows: rows},
-                                                    id: 'id',
-                                                    root: "-1",
-                                                    parentid: 'parentId',
-                                                    singleSelect: true
-                                                });
-                                                checkedtreegrid.build();
-                                            })
+                                                            }).then(value => {
+                                                        var rows=JSON.parse(value);
+                                                        checkedtreegrid=treegrid.createNew({
+                                                            elem: 'menuTable',
+                                                            view: 'menuView',
+                                                            data: {rows: rows},
+                                                            id: 'id',
+                                                            root: "-1",
+                                                            parentid: 'parentId',
+                                                            singleSelect: true
+                                                        });
+                                                        checkedtreegrid.build();
+                                                    })
+                                                }
+                                            });
+                                        } else {
+                                            layer.alert("该菜单删除失败!", {icon: 2});
                                         }
                                     });
-                                }else{
-                                    layer.alert("该条记录删除失败!", {icon: 2});
-                                }
-                            });
+                        }})
                 }else{
                     layer.alert("该条记录非叶子节点，不能删除!", {icon: 2});
                 }

@@ -100,12 +100,12 @@
     layui.config({
         base: 'lib/layuiextend/treeSelect/'
     }).use(['layer','form', 'layedit', 'laydate','treeselect'], function(){
-
         var form = layui.form
                 ,layer = layui.layer
                 ,layedit = layui.layedit
                 ,laydate = layui.laydate
                 ,treeselect = layui.treeselect;
+
         treeselect.render({
             elem: "#parentId",
             data: "api/sys/menu/getMenuForTree?moduleId="+moduleId,
@@ -114,7 +114,7 @@
 
         getJSON("api/sys/module/getModuleForPaging")
                 .catch(error => {
-                    layer.alert("模块初始化失败!", {icon: 2});
+
                 })
                 .then(value => {
                     var rows=JSON.parse(value).rows;
@@ -127,7 +127,6 @@
                     form.render('select');
                 });
 
-        form.render();
 
         form.on('select(moduleId)', function(data){
             treeselect.render({
@@ -138,8 +137,6 @@
         });
 
         form.render();
-
-        debugger;
 
         form.on('submit(save)',function(data){
             debugger;

@@ -3,14 +3,60 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-header">
-                    <i class="fa fa-align-justify"></i>
+                <div class="card-header" th:inline="text">
+                    <i class="fa fa-align-justify"></i> [[${pageTitle}]]
                 </div>
                 <div class="card-body">
                     <div class=" form-horizontal">
-                        <div class="row">
-
-                        </div>
+                        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                            <legend>模块基本信息</legend>
+                        </fieldset>
+                        <form  id="moduleform" class="layui-form">
+                            <div class="layui-form-item row">
+                                <label class="layui-form-label">模块名称</label>
+                                <div class="layui-input-block col-md-4">
+                                    <input type="text" name="name" lay-verify="required" autocomplete="off" placeholder="请输入模块名称" class="layui-input" th:field="${sysModule.name}"></input>
+                                    <input type="hidden" name="id" th:field="${sysModule.id}"></input>
+                                </div>
+                                <label class="layui-form-label">模块首页</label>
+                                <div class="layui-input-block col-md-4">
+                                    <input type="text" name="indexPage" lay-verify="required" autocomplete="off" placeholder="请输入模块首页" class="layui-input" th:field="${sysModule.indexPage}"></input>
+                                </div>
+                            </div>
+                            <div class="layui-form-item row">
+                                <label class="layui-form-label">是否展示</label>
+                                <div th:switch="${sysModule.ifShow}" class="layui-input-block col-md-4">
+                                    <p th:case="1">
+                                        <input type="radio" name="ifShow" title="展示" value="1" checked=""></input>
+                                        <input type="radio" name="ifShow" title="不展示" value="0"></input>
+                                    </p>
+                                    <p th:case="0">
+                                        <input type="radio" name="ifShow" title="展示" value="1" ></input>
+                                        <input type="radio" name="ifShow" title="不展示" value="0" checked=""></input>
+                                    </p>
+                                    <p th:case="*">
+                                        <input type="radio" name="ifShow" title="展示" value="1" ></input>
+                                        <input type="radio" name="ifShow" title="不展示" value="0" checked=""></input>
+                                    </p>
+                                </div>
+                                <label class="layui-form-label">排列序号</label>
+                                <div class="layui-input-block col-md-4">
+                                    <input type="text" name="sort" lay-verify="number" autocomplete="off" placeholder="请输入排列序号" class="layui-input" th:field="${sysModule.sort}"></input>
+                                </div>
+                            </div>
+                            <div class="layui-form-item row">
+                                <label class="layui-form-label">模块描述</label>
+                                <div class="layui-input-block col-md-9">
+                                    <textarea class="layui-textarea" name="description"   th:field="${sysModule.description}"></textarea>
+                                </div>
+                            </div>
+                            <div class="layui-form-item" style="margin-left:30px">
+                                <div class="layui-input-block">
+                                    <button type="reset" class="layui-btn" lay-submit=""  id="save" lay-filter="save">立即提交</button>
+                                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -21,6 +67,52 @@
 
 <!--js-->
 <script th:inline="javascript">
+
+    /*<![CDATA[*/
+    var pageTitle=/*[[${pageTitle}]]*/;//取值
+    /*]]>*/
+
+    layui.use(['layer','form', 'layedit', 'laydate'], function(){
+        var form = layui.form
+                ,layer = layui.layer
+                ,layedit = layui.layedit
+                ,laydate = layui.laydate
+
+        form.render();
+
+        form.on('submit(save)',function(data){
+            debugger;
+            var from= $("#moduleform");
+            var model= serializeObject(from);
+            postJSON("/api/sys/module/save",model)
+                    .catch(error => {
+
+                    })
+                    .then(value =>{
+                        if(value==undefined) {
+                            layer.alert(pageTitle+"失败!", {icon: 2});
+                        }else{
+                            var result=JSON.parse(value);
+                            if (result == true) {
+                                layer.alert( pageTitle+'成功!',{
+                                    icon: 6
+                                    ,btn: ['确认']
+                                    ,yes: function(index) {
+                                        layer.close(index);
+                                        setUpUrl("sys/module/getListPage");
+                                    }
+                                });
+                            } else {
+                                layer.alert(pageTitle+"失败!", {icon: 2});
+                            }
+                        }
+                    });
+
+            return false;
+        });
+
+
+    });
 
 </script>
 <!--模板 js start-->

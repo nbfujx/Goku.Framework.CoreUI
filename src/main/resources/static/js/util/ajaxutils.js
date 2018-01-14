@@ -11,7 +11,12 @@ function getJSON (url) {
         xhr.onreadystatechange = function () {
             if (this.readyState === 4) {
                 if (this.status === 200) {
-                    resolve(this.responseText, this)
+                    debugger;
+                    if(this.responseText!="401") {
+                        resolve(this.responseText, this)
+                    }else{
+                        window.location.href="/login";
+                    }
                 } else {
                     var resJson = { code: this.status, response: this.response }
                     reject(resJson, this)
@@ -32,7 +37,11 @@ function postJSON(url, data) {
         xhr.onreadystatechange = function () {
             if (this.readyState === 4) {
                 if (this.status === 200) {
-                    resolve(JSON.parse(this.responseText), this)
+                    if(this.responseText!="401") {
+                        resolve(JSON.parse(this.responseText), this)
+                    }else{
+                        window.location.href="/login";
+                    }
                 } else {
                     var resJson = { code: this.status, response: this.response }
                     reject(resJson, this)

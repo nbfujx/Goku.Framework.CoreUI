@@ -13,4 +13,6 @@ public interface SysModuleService {
     List<SysModule> getUserModules(String UserId);
     SysModule selectByPrimaryKey(String id);
     PageInfo getModuleForPaging();
+    int saveModule(SysModule symodule);
+    int deleteModuleByids(String ids);
 }

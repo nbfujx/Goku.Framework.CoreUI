@@ -11,6 +11,7 @@ import com.goku.coreui.sys.util.BreadcrumbUtil;
 import com.goku.coreui.sys.util.CamelUtil;
 import com.goku.coreui.sys.util.PageUtil;
 import com.goku.coreui.sys.util.TreeSelectUtil;
+import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -79,7 +80,7 @@ public class MenuRestControllerImpl implements MenuRestController {
     }
 
     @RequestMapping("/save")
-    @RequiresPermissions(value={"sys:menu:add"})
+    @RequiresPermissions(value={"sys:menu:add","sys:menu:edit"},logical = Logical.OR)
     public String  save(@RequestBody SysMenu symenu)
     {
         int result=sysMenuService.saveMenu(symenu);

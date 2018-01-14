@@ -13,5 +13,6 @@ import java.util.List;
 public interface SysModuleExtMapper extends SysModuleMapper {
    List<SysModule> getUserModules(@Param("UserId")  String UserId);
    List<SysModule> getModuleForPaging();
+   int deleteModuleByids(@Param("ids")  String ids);
 
 }

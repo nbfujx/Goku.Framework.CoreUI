@@ -77,6 +77,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setSecurityManager(securityManager());
 
         Map<String, Filter> filters = new LinkedHashMap<String, Filter>();
+        filters.put("restauthc", new RestAuthShiroFilter());
         shiroFilterFactoryBean.setFilters(filters);
 
         Map<String, String> filterChainDefinitionManager = new LinkedHashMap<String, String>();
@@ -91,7 +92,7 @@ public class ShiroConfig {
         filterChainDefinitionManager.put("/img/**","anon");
         filterChainDefinitionManager.put("/lib/**","anon");
         //业务操作
-        filterChainDefinitionManager.put("/api/**", "authc,perms");//"authc,perms");
+        filterChainDefinitionManager.put("/api/**", "restauthc,authc,perms");//"authc,perms");
         filterChainDefinitionManager.put("/**", "authc,perms");//"authc,perms");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionManager);
 

@@ -27,4 +27,8 @@
         select *
         from sys_module ORDER BY sort
     </select>
+    <delete id="deleteModuleByids" parameterType="java.lang.String">
+        delete from sys_module
+        where INSTR(#{ids,jdbcType=VARCHAR},id)>0
+    </delete>
 </mapper>
