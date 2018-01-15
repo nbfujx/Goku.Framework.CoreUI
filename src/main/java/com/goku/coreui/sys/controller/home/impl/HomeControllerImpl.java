@@ -98,8 +98,11 @@ public class HomeControllerImpl implements HomeController,ErrorController {
         SysUser user = (SysUser) SecurityUtils.getSubject().getSession().getAttribute("user");
         moduleId= "".equals(moduleId)?user.getSysUserInfo().getHomepage():moduleId;
         List<SysModule>  sysModules=sysModuleService.getUserModules(user.getId());
-        List<SysMenu>   sysMens= menuTreeUtil.menuList(sysMenuService.getModuleMenus(moduleId,user.getId()));
         SysModule sysModule=sysModuleService.selectByPrimaryKey(moduleId);
+        if(sysModule==null){
+            sysModule=sysModules.get(0);
+        }
+        List<SysMenu>   sysMens= menuTreeUtil.menuList(sysMenuService.getModuleMenus(sysModule.getId(),user.getId()));
         //List<SysNotice>  sysNotices=new ArrayList<SysNotice>();
         //List<SysSchedule>  sysSchedules=new ArrayList<SysSchedule>();
         //默认主模块为空
