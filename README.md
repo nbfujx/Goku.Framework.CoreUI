@@ -2,8 +2,10 @@
 基于 SpringBoot + Spring + SpringMvc+Mybatis+CoreUI 开发后台管理程序
 
 # 演示地址:
-http://47.97.198.227:8080/
-账号:admin,密码：12345
+
+http://47.97.198.227:8080/</br>
+
+账号:admin.密码：12345
 
 # 技术框架:
 | **技术** |  **名称**| 
