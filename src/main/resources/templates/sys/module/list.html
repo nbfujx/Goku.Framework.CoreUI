@@ -9,9 +9,9 @@
                 <div class="card-body">
                     <div class=" form-horizontal">
                         <div class="row" >
-                            <a shiro:hasPermission="sys:module:add"  class="opreate-btn btn btn-success btn-sm" href="#" data-type="add" id="addbtn"><i class="icon-plus"></i>新增</a>
-                            <a shiro:hasPermission="sys:module:edit" class="opreate-btn btn btn-success btn-sm" href="#" data-type="edit" id="editbtn"><i class="icon-plus"></i>修改</a>
-                            <a shiro:hasPermission="sys:module:delete" class="opreate-btn btn btn-danger btn-sm"  href="#" data-type="delete" id="deletebtn"><i class="icon-close"></i>删除</a>
+                            <a shiro:hasPermission="sys:module:add"  class="opreate-btn layui-btn layui-btn-sm" href="#" data-type="add" id="addbtn"><i class="icon-plus"></i>新增</a>
+                            <a shiro:hasPermission="sys:module:edit" class="opreate-btn layui-btn layui-btn-sm" href="#" data-type="edit" id="editbtn"><i class="icon-plus"></i>修改</a>
+                            <a shiro:hasPermission="sys:module:delete" class="opreate-btn layui-btn layui-btn-sm layui-btn-danger"  href="#" data-type="delete" id="deletebtn"><i class="icon-close"></i>删除</a>
                         </div>
                         <table class="layui-table table-responsive-sm" id="table" lay-filter="table"></table>
                     </div>
@@ -56,6 +56,7 @@
         $('#deletebtn').on('click', function(){
             var checkStatus = table.checkStatus('table')
                     ,data = checkStatus.data;
+            moduleName="";
             if(data.length==0){
                 layer.alert("请选择一条记录!", {icon: 0});
             }else {
@@ -150,5 +151,6 @@
     {
         width: 60px;
         margin:0 0 10px 15px;
+        text-decoration : none;
     }
 </style>

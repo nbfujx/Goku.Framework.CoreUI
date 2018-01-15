@@ -12,6 +12,8 @@
     <!-- Icons -->
     <link rel="stylesheet" type="text/css" href="/lib/font-awesome/css/font-awesome.min.css"></link>
     <link rel="stylesheet" type="text/css" href="/lib/simple-line-icons/css/simple-line-icons.css"></link>
+    <!--layui and necessary plugins-->
+    <link rel="stylesheet" type="text/css" href="/lib/layui/css/layui.css"  media="all"></link>
     <!-- Main styles for this application -->
     <link rel="stylesheet" type="text/css" href="/css/style.css"></link>
 </head>
@@ -28,15 +30,15 @@
                         <form action="/doLogin" method="post">
                             <div class="input-group mb-3">
                                 <span class="input-group-addon"><i class="icon-user"></i></span>
-                                <input type="text" name="username" class="form-control" placeholder="Username"/>
+                                <input type="text" name="username" class="form-control" placeholder="账号"/>
                             </div>
                             <div class="input-group mb-4">
                                 <span class="input-group-addon"><i class="icon-lock"></i></span>
-                                <input type="password" name="password" class="form-control" placeholder="Password"/>
+                                <input type="password" name="password" class="form-control" placeholder="密码"/>
                             </div>
                             <div class="row">
                                 <div class="col-6">
-                                    <button type="submit" class="btn btn-primary px-4" >登录</button>
+                                    <button type="submit" class="layui-btn layui-btn-normal" >登录</button>
                                 </div>
                                 <div class="col-6 text-right">
                                     <button type="button" class="btn btn-link px-0">忘记密码?</button>

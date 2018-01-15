@@ -14,9 +14,9 @@
                             </div>
                             <div class="col-md-9" style="float: right">
                                 <div class="row">
-                                    <a shiro:hasPermission="sys:menu:add" class="opreate-btn btn btn-success btn-sm" id="addbtn" href="#"><i class="icon-plus"></i>新增</a>
-                                    <a shiro:hasPermission="sys:menu:edit" class="opreate-btn btn btn-success btn-sm" id="editbtn" href="#"><i class="icon-plus"></i>修改</a>
-                                    <a shiro:hasPermission="sys:menu:delete"  class="opreate-btn btn btn-danger btn-sm"  id="deletebtn" href="#"  ><i class="icon-close"></i>删除</a>
+                                    <a shiro:hasPermission="sys:menu:add" class="opreate-btn  layui-btn layui-btn-sm" id="addbtn" href="#"><i class="icon-plus"></i>新增</a>
+                                    <a shiro:hasPermission="sys:menu:edit" class="opreate-btn layui-btn layui-btn-sm" id="editbtn" href="#"><i class="icon-plus"></i>修改</a>
+                                    <a shiro:hasPermission="sys:menu:delete"  class="opreate-btn layui-btn layui-btn-sm layui-btn-danger"  id="deletebtn" href="#"  ><i class="icon-close"></i>删除</a>
                                 </div>
                                 <table class="layui-table table-responsive-sm" id="menuTable" lay-filter="menu"></table>
                             </div>
@@ -214,5 +214,6 @@
     {
         width: 60px;
         margin:0 0 10px 15px;
+        text-decoration : none;
     }
 </style>
