@@ -47,7 +47,7 @@ public class SysMenuServiceImpl implements SysMenuService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int saveMenu(SysMenu sysMenu) {
         int addResult=0;
         int updateResult=0;

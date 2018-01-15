@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50715
 File Encoding         : 65001
 
-Date: 2018-01-09 21:00:44
+Date: 2018-01-15 14:16:44
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,6 +37,10 @@ CREATE TABLE `sys_department` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
+-- Records of sys_department
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for sys_friend
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_friend`;
@@ -46,6 +50,10 @@ CREATE TABLE `sys_friend` (
   `user_id` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of sys_friend
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for sys_log
@@ -63,6 +71,10 @@ CREATE TABLE `sys_log` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统日志';
 
 -- ----------------------------
+-- Records of sys_log
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for sys_menu
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_menu`;
@@ -75,12 +87,35 @@ CREATE TABLE `sys_menu` (
   `sort` int(20) DEFAULT NULL,
   `icon` varchar(50) COLLATE utf8_bin DEFAULT '' COMMENT '图标',
   `description` varchar(500) COLLATE utf8_bin DEFAULT '',
-  `if_show` varchar(1) COLLATE utf8_bin DEFAULT 'Y' COMMENT '是否显示。N：不显示。Y：显示。',
+  `if_show` varchar(1) COLLATE utf8_bin DEFAULT '1' COMMENT '是否显示。0：不显示。1：显示。',
   `is_leaf` varchar(1) COLLATE utf8_bin DEFAULT NULL,
   `permission` varchar(255) COLLATE utf8_bin DEFAULT '' COMMENT '权限key',
   `url` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of sys_menu
+-- ----------------------------
+INSERT INTO `sys_menu` VALUES ('06fd8633f5f211e78abf0a002700001d', '28c3ef4eefb111e7a2360a0027000038', '菜单修改', 'f287d403efb111e7a2360a0027000038', '0', '11', '', '菜单修改', '0', '1', 'sys:menu:edit', 'sys/menu/editPage');
+INSERT INTO `sys_menu` VALUES ('26831a69efb211e7a2360a0027000038', '28c3ef4eefb111e7a2360a0027000038', '用户管理', '28c3ef4eefb111e7a2360a0027000038', '0', '4', 'icon-puzzle', '用户管理', '1', '0', 'sys:user:query', 'sys/user/getListPage');
+INSERT INTO `sys_menu` VALUES ('28c3ef4eefb111e7a2360a0027000038', '28c3ef4eefb111e7a2360a0027000038', '系统管理', '-1', '1', '1', 'icon-puzzle', '系统管理', '1', '0', '', '');
+INSERT INTO `sys_menu` VALUES ('32c15082f5f211e78abf0a002700001d', '28c3ef4eefb111e7a2360a0027000038', '菜单删除', 'f287d403efb111e7a2360a0027000038', '0', '12', '', '菜单删除', '0', '1', 'sys:menu:delete', ' ');
+INSERT INTO `sys_menu` VALUES ('357ff499f07c11e7a2360a0027000030', '28c3ef4eefb111e7a2360a0027000038', '用户删除', '26831a69efb211e7a2360a0027000038', '0', '9', '', '用户删除', '0', '1', 'sys:user:delete', ' ');
+INSERT INTO `sys_menu` VALUES ('357ff499f07c11e7a2360a0027000038', '28c3ef4eefb111e7a2360a0027000038', '用户新增', '26831a69efb211e7a2360a0027000038', '0', '7', '', '用户新增', '0', '1', 'sys:user:add', 'sys/user/addPage');
+INSERT INTO `sys_menu` VALUES ('35f6df58f07e11e7a2360a0027000038', '28c3ef4eefb111e7a2360a0027000038', '首页', '-1', '1', '0', '', '首页', '0', '1', 'sys:index:*', 'sys/index');
+INSERT INTO `sys_menu` VALUES ('514ab49ef75911e78abf0a002700001d', '28c3ef4eefb111e7a2360a0027000038', '模块修改', 'cab4c933f6d411e78abf0a002700001d', '0', '14', '', '模块修改', '0', '0', 'sys:module:edit', 'sys/module/editPage');
+INSERT INTO `sys_menu` VALUES ('5ea59df3f07f11e7a2360a0027000038', '28c3ef4eefb111e7a2360a0027000038', '用户修改', '26831a69efb211e7a2360a0027000038', '0', '8', '', '用户修改', '0', '1', 'sys:user:edit', 'sys/user/editPage');
+INSERT INTO `sys_menu` VALUES ('70119b90f75911e78abf0a002700001d', '28c3ef4eefb111e7a2360a0027000038', '模块删除', 'cab4c933f6d411e78abf0a002700001d', '0', '15', '', '模块删除', '0', '0', 'sys:module:delete', '');
+INSERT INTO `sys_menu` VALUES ('7cfa8d7defb211e7a2360a0027000038', '28c3ef4eefb111e7a2360a0027000038', '资源管理', '-1', '1', '4', 'icon-calculator', '资源管理', '1', '0', '', '');
+INSERT INTO `sys_menu` VALUES ('90324954030a447ca6c0decd19fa3d43', '6ad537e2327f421eb90964e1148ededb', '测试菜单', '-1', '0', '1', '', '测试菜单，功能测试', '0', '1', '', '');
+INSERT INTO `sys_menu` VALUES ('9fd0374b890d43bdb1630fcaeb591243', '63b2cf7eefb111e7a2360a0027000038', '合同管理', '-1', '1', '2', '', '合同管理', '1', '0', '', '');
+INSERT INTO `sys_menu` VALUES ('b7ce7896f5f111e78abf0a002700001d', '28c3ef4eefb111e7a2360a0027000038', '菜单新增', 'f287d403efb111e7a2360a0027000038', '0', '10', '', '菜单新增', '0', '1', 'sys:menu:add', 'sys/menu/addPage');
+INSERT INTO `sys_menu` VALUES ('be7187ceefb211e7a2360a0027000038', '28c3ef4eefb111e7a2360a0027000038', '字典管理', '7cfa8d7defb211e7a2360a0027000038', '0', '5', 'icon-calculator', '字典管理', '1', '1', 'sys:config:query', 'sys/config/getListPage');
+INSERT INTO `sys_menu` VALUES ('c1923372efc311e7a2360a0027000038', '63b2cf7eefb111e7a2360a0027000038', '客户管理', '-1', '1', '6', 'icon-clock', '客户管理', '1', '0', '', ' ');
+INSERT INTO `sys_menu` VALUES ('cab4c933f6d411e78abf0a002700001d', '28c3ef4eefb111e7a2360a0027000038', '模块管理', '28c3ef4eefb111e7a2360a0027000038', '0', '2', 'icon-clock', '模块管理', '1', '0', 'sys:module:query', 'sys/module/getListPage');
+INSERT INTO `sys_menu` VALUES ('e60ef4d2f75811e78abf0a002700001d', '28c3ef4eefb111e7a2360a0027000038', '模块新增', 'cab4c933f6d411e78abf0a002700001d', '0', '13', '', '模块新增', '0', '0', 'sys:module:add', 'sys/module/addPage');
+INSERT INTO `sys_menu` VALUES ('f287d403efb111e7a2360a0027000038', '28c3ef4eefb111e7a2360a0027000038', '菜单管理', '28c3ef4eefb111e7a2360a0027000038', '0', '3', 'icon-puzzle', '菜单管理', '1', '0', 'sys:menu:query', 'sys/menu/getListPage');
 
 -- ----------------------------
 -- Table structure for sys_module
@@ -93,10 +128,17 @@ CREATE TABLE `sys_module` (
   `image` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `name` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `index_page` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `if_show` varchar(1) COLLATE utf8_bin DEFAULT NULL,
+  `if_show` varchar(1) COLLATE utf8_bin DEFAULT '1',
   `sort` int(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of sys_module
+-- ----------------------------
+INSERT INTO `sys_module` VALUES ('28c3ef4eefb111e7a2360a0027000038', '1', '系统模块', null, '系统模块', 'sys/index', '1', '1');
+INSERT INTO `sys_module` VALUES ('63b2cf7eefb111e7a2360a0027000038', '1', 'CRM模块', null, 'CRM模块', 'crm/index', '1', '2');
+INSERT INTO `sys_module` VALUES ('6ad537e2327f421eb90964e1148ededb', null, '测试模块，功能测试', null, '测试模块', 'erp/index', '1', '3');
 
 -- ----------------------------
 -- Table structure for sys_notice
@@ -107,6 +149,10 @@ CREATE TABLE `sys_notice` (
   `description` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of sys_notice
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for sys_operate
@@ -136,6 +182,10 @@ CREATE TABLE `sys_operate` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
+-- Records of sys_operate
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for sys_org
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_org`;
@@ -156,6 +206,10 @@ CREATE TABLE `sys_org` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
+-- Records of sys_org
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for sys_role
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role`;
@@ -165,8 +219,14 @@ CREATE TABLE `sys_role` (
   `key` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `name` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `description` varchar(2000) COLLATE utf8_bin DEFAULT NULL,
+  `parent_id` varchar(32) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of sys_role
+-- ----------------------------
+INSERT INTO `sys_role` VALUES ('28c3ef4eefb111e7a2360a0027000038', '1', 'admin', '管理员', null, '-1');
 
 -- ----------------------------
 -- Table structure for sys_role_auth
@@ -180,6 +240,23 @@ CREATE TABLE `sys_role_auth` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='????';
 
 -- ----------------------------
+-- Records of sys_role_auth
+-- ----------------------------
+INSERT INTO `sys_role_auth` VALUES ('06fd8633f5f211e78abf0a002700001d', '28c3ef4eefb111e7a2360a0027000038', '06fd8633f5f211e78abf0a002700001d');
+INSERT INTO `sys_role_auth` VALUES ('32c15082f5f211e78abf0a002700001d', '28c3ef4eefb111e7a2360a0027000038', '32c15082f5f211e78abf0a002700001d');
+INSERT INTO `sys_role_auth` VALUES ('514ab49ef75911e78abf0a002700001d', '28c3ef4eefb111e7a2360a0027000038', '514ab49ef75911e78abf0a002700001d');
+INSERT INTO `sys_role_auth` VALUES ('5ea59df3f07f11e7a2360a0027000038', '28c3ef4eefb111e7a2360a0027000038', '5ea59df3f07f11e7a2360a0027000038');
+INSERT INTO `sys_role_auth` VALUES ('70119b90f75911e78abf0a002700001d', '28c3ef4eefb111e7a2360a0027000038', '70119b90f75911e78abf0a002700001d');
+INSERT INTO `sys_role_auth` VALUES ('ac145b7defb311e7a2360a0027000038', '28c3ef4eefb111e7a2360a0027000038', '26831a69efb211e7a2360a0027000038');
+INSERT INTO `sys_role_auth` VALUES ('ac16085eefb311e7a2360a0027000038', '28c3ef4eefb111e7a2360a0027000038', '28c3ef4eefb111e7a2360a0027000038');
+INSERT INTO `sys_role_auth` VALUES ('ac160952efb311e7a2360a0027000038', '28c3ef4eefb111e7a2360a0027000038', '7cfa8d7defb211e7a2360a0027000038');
+INSERT INTO `sys_role_auth` VALUES ('ac1609f5efb311e7a2360a0027000038', '28c3ef4eefb111e7a2360a0027000038', 'be7187ceefb211e7a2360a0027000038');
+INSERT INTO `sys_role_auth` VALUES ('ac160a2aefb311e7a2360a0027000038', '28c3ef4eefb111e7a2360a0027000038', 'f287d403efb111e7a2360a0027000038');
+INSERT INTO `sys_role_auth` VALUES ('b7ce7896f5f111e78abf0a002700001d', '28c3ef4eefb111e7a2360a0027000038', 'b7ce7896f5f111e78abf0a002700001d');
+INSERT INTO `sys_role_auth` VALUES ('cab4c933f6d411e78abf0a002700001d', '28c3ef4eefb111e7a2360a0027000038', 'cab4c933f6d411e78abf0a002700001d');
+INSERT INTO `sys_role_auth` VALUES ('e60ef4d2f75811e78abf0a002700001d', '28c3ef4eefb111e7a2360a0027000038', 'e60ef4d2f75811e78abf0a002700001d');
+
+-- ----------------------------
 -- Table structure for sys_role_operator
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role_operator`;
@@ -189,6 +266,10 @@ CREATE TABLE `sys_role_operator` (
   `operator_id` varchar(32) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='????';
+
+-- ----------------------------
+-- Records of sys_role_operator
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for sys_schedule
@@ -206,6 +287,10 @@ CREATE TABLE `sys_schedule` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of sys_schedule
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for sys_user
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user`;
@@ -217,7 +302,7 @@ CREATE TABLE `sys_user` (
   `sex` varchar(1) COLLATE utf8_bin DEFAULT '1' COMMENT '0:女',
   `status` char(1) COLLATE utf8_bin DEFAULT '1' COMMENT '0:禁用',
   `orgid` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '部门ID',
-  `stationid` text COLLATE utf8_bin COMMENT '岗位ID',
+  `deptid` varchar(32) COLLATE utf8_bin DEFAULT NULL COMMENT '岗位ID',
   `email` varchar(100) COLLATE utf8_bin DEFAULT NULL,
   `idcard` varchar(25) COLLATE utf8_bin DEFAULT NULL COMMENT '身份证号',
   `is_admin` varchar(1) COLLATE utf8_bin DEFAULT '0' COMMENT '是否是管理员',
@@ -226,6 +311,22 @@ CREATE TABLE `sys_user` (
   PRIMARY KEY (`id`),
   KEY `usernameindex` (`username`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+-- Records of sys_user
+-- ----------------------------
+INSERT INTO `sys_user` VALUES ('0', 'lll', null, '小慕', '1', '1', null, null, null, null, '0', null, null);
+INSERT INTO `sys_user` VALUES ('2', 'lxh', null, '小K', '1', '1', null, null, null, null, '0', null, null);
+INSERT INTO `sys_user` VALUES ('3', 'lkj', null, '大河', '0', '1', null, null, null, null, '0', null, null);
+INSERT INTO `sys_user` VALUES ('33', 'fjk', null, '二娃', '1', '1', null, null, null, null, '0', null, null);
+INSERT INTO `sys_user` VALUES ('4', 'ghj', null, '小小年纪', '1', '1', null, null, null, null, '0', null, null);
+INSERT INTO `sys_user` VALUES ('5', 'gnim', null, '小谢谢', '1', '1', null, null, null, null, '0', null, null);
+INSERT INTO `sys_user` VALUES ('6', 'cqy', null, '销毁', '1', '1', null, null, null, null, '0', null, null);
+INSERT INTO `sys_user` VALUES ('7', 'ccc', null, '等等', '1', '1', null, null, null, null, '0', null, null);
+INSERT INTO `sys_user` VALUES ('9', 'dfg', null, '定点', '1', '1', null, null, null, null, '0', null, null);
+INSERT INTO `sys_user` VALUES ('99', 'ff', null, '带刀的', '1', '1', null, null, null, null, '0', null, null);
+INSERT INTO `sys_user` VALUES ('995', 'fl', null, '你妹', '1', '1', null, null, null, null, '0', null, null);
+INSERT INTO `sys_user` VALUES ('999', 'admin', 'fa87f7f90e58ee02504d60e3e431e039', 'nbfujx', '1', '1', null, null, 'nbfujx@qq.com', '222222222222222222', '1', null, '12455555555');
 
 -- ----------------------------
 -- Table structure for sys_user_auth
@@ -237,6 +338,16 @@ CREATE TABLE `sys_user_auth` (
   `menu_id` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of sys_user_auth
+-- ----------------------------
+INSERT INTO `sys_user_auth` VALUES ('0c70c9c7efb411e7a2360a0027000038', '999', '7cfa8d7defb211e7a2360a0027000038');
+INSERT INTO `sys_user_auth` VALUES ('29294f18efb411e7a2360a0027000038', '999', 'be7187ceefb211e7a2360a0027000038');
+INSERT INTO `sys_user_auth` VALUES ('33f6df58f07e11e7a2360a0027000038', '999', '35f6df58f07e11e7a2360a0027000038');
+INSERT INTO `sys_user_auth` VALUES ('357ff499f07c11e7a2360a0027000030', '999', '357ff499f07c11e7a2360a0027000030');
+INSERT INTO `sys_user_auth` VALUES ('fd88a31cefc311e7a2360a0027000038', '999', 'c1923372efc311e7a2360a0027000038');
+INSERT INTO `sys_user_auth` VALUES ('fd89a31cefc311e7a2360a0027000038', '999', '357ff499f07c11e7a2360a0027000038');
 
 -- ----------------------------
 -- Table structure for sys_user_info
@@ -274,6 +385,11 @@ CREATE TABLE `sys_user_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
+-- Records of sys_user_info
+-- ----------------------------
+INSERT INTO `sys_user_info` VALUES ('28c3ef4eefb111e7a2360a0027000038', '999', null, null, null, null, null, null, null, null, null, null, null, '28c3ef4eefb111e7a2360a0027000038', '', null, null, null, null, null, null, null);
+
+-- ----------------------------
 -- Table structure for sys_user_notice
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user_notice`;
@@ -285,6 +401,10 @@ CREATE TABLE `sys_user_notice` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of sys_user_notice
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for sys_user_role
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user_role`;
@@ -294,3 +414,8 @@ CREATE TABLE `sys_user_role` (
   `role_id` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of sys_user_role
+-- ----------------------------
+INSERT INTO `sys_user_role` VALUES ('f3f9cdc7efb311e7a2360a0027000038', '999', '28c3ef4eefb111e7a2360a0027000038');

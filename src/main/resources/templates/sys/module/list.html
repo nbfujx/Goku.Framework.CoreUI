@@ -54,7 +54,13 @@
         table.render(opt);
 
         $('#deletebtn').on('click', function(){
-            getDeleteIds().then(deleteIds())
+            var checkStatus = table.checkStatus('table')
+                    ,data = checkStatus.data;
+            if(data.length==0){
+                layer.alert("请选择一条记录!", {icon: 0});
+            }else {
+                getDeleteIds().then(deleteIds())
+            }
         });
 
         function getDeleteIds() {
@@ -62,7 +68,7 @@
                 var checkStatus = table.checkStatus('table')
                         ,data = checkStatus.data;
                 if(data.length==0){
-                    layer.alert("请选择一条记录!", {icon: 0});
+
                 }else {
                     $.each(data,function(key,value){
                         getJSON("/api/sys/menu/getMenuForPaging?moduleId="+data[key].id)
