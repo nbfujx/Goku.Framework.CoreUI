@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.goku.coreui.sys.mapper.ext.SysLogExtMapper">
+  <resultMap id="SysLogMap" type="com.goku.coreui.sys.model.SysLog">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="operation" jdbcType="VARCHAR" property="operation" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
+    <result column="params" jdbcType="VARCHAR" property="params" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <select id="getLogForPaging" resultMap="SysLogMap">
+    select *
+    from sys_log
+    <where>
+      <if test="username != null and username != ''">
+        <bind name="username" value="'%' + username + '%'" />
+        username LIKE #{username}
+      </if>
+      <if test="begindate != null and begindate != ''">
+        create_date >= #{begindate}
+      </if>
+      <if test="enddate != null and enddate != ''">
+        create_date <![CDATA[ <= ]]> #{enddate}
+      </if>
+    </where>
+      ORDER BY create_date
+  </select>
+</mapper>

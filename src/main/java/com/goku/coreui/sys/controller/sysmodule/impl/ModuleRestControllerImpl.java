@@ -37,8 +37,6 @@ public class ModuleRestControllerImpl implements ModuleRestController {
     @Autowired
     PageUtil pageUtil;
 
-    @Autowired
-    CamelUtil camelUtil;
 
     @RequestMapping("/getListPage")
     @RequiresPermissions(value={"sys:module:query"})

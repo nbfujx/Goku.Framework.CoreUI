@@ -5,6 +5,7 @@ import com.goku.coreui.sys.controller.sysmenu.MenuRestController;
 import com.goku.coreui.sys.model.SysMenu;
 import com.goku.coreui.sys.model.ext.Breadcrumb;
 import com.goku.coreui.sys.model.ext.TablePage;
+import com.goku.coreui.sys.service.SysMenuService;
 import com.goku.coreui.sys.service.SysUserService;
 import com.goku.coreui.sys.service.impl.SysMenuServiceImpl;
 import com.goku.coreui.sys.util.BreadcrumbUtil;
@@ -30,16 +31,10 @@ public class MenuRestControllerImpl implements MenuRestController {
 
 
     @Autowired
-    SysMenuServiceImpl sysMenuService;
+    SysMenuService sysMenuService;
 
     @Autowired
     BreadcrumbUtil breadcrumbUtil;
-
-    @Autowired
-    PageUtil pageUtil;
-
-    @Autowired
-    CamelUtil camelUtil;
 
     @Autowired
     TreeSelectUtil treeSelectUtil;

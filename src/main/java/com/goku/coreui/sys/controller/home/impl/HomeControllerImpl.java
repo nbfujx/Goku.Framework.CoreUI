@@ -1,5 +1,6 @@
 package com.goku.coreui.sys.controller.home.impl;
 
+import com.goku.coreui.sys.config.log.LoggerInfo;
 import com.goku.coreui.sys.controller.home.HomeController;
 import com.goku.coreui.sys.model.SysMenu;
 import com.goku.coreui.sys.model.SysModule;
@@ -42,11 +43,13 @@ public class HomeControllerImpl implements HomeController,ErrorController {
     @Autowired
     SysModuleServiceImpl sysModuleService;
 
+    @Override
     @RequestMapping("/login")
     public String login(Model model) {
         return "login";
     }
 
+    @Override
     @RequestMapping("/doLogin")
     public String doLogin(
         @RequestParam(value = "username", required = true) String userName,
@@ -74,6 +77,7 @@ public class HomeControllerImpl implements HomeController,ErrorController {
         }
     }
 
+    @Override
     @RequestMapping("/logout")
     public String logout() {
         Subject currentUser = SecurityUtils.getSubject();
@@ -92,6 +96,7 @@ public class HomeControllerImpl implements HomeController,ErrorController {
         return "login";
     }
 
+    @Override
     @RequestMapping("/home")
     public String home(Model model,@RequestParam(value="moduleId", required=false, defaultValue="") String moduleId) {
         //
