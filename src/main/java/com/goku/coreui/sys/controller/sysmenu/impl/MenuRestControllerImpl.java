@@ -74,6 +74,7 @@ public class MenuRestControllerImpl implements MenuRestController {
         return JSON.toJSONString (treeSelectUtil.TreeSelectList(sysMenuService.getMenuForPaging(moduleId)));
     }
 
+    @Override
     @RequestMapping("/save")
     @RequiresPermissions(value={"sys:menu:add","sys:menu:edit"},logical = Logical.OR)
     public String  save(@RequestBody SysMenu symenu)
@@ -86,6 +87,7 @@ public class MenuRestControllerImpl implements MenuRestController {
         }
     }
 
+    @Override
     @RequestMapping("/delete")
     @RequiresPermissions(value={"sys:menu:delete"})
     public String  delete(@RequestBody String menuId)

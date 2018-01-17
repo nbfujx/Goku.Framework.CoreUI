@@ -10,10 +10,9 @@ import java.util.*;
 /**
  * Created by nbfujx on 2018/1/14.
  */
-@Component
 public class JsonUtil {
 
-    public HashMap<String, Object> fromJson2Map(String jsonString) {
+    public static HashMap<String, Object> fromJson2Map(String jsonString) {
         HashMap jsonMap = JSON.parseObject(jsonString, HashMap.class);
 
         HashMap<String, Object> resultMap = new HashMap<String, Object>();
@@ -30,7 +29,7 @@ public class JsonUtil {
         return resultMap;
     }
 
-    public  List<HashMap<String, Object>> handleJSONArray(JSONArray jsonArray){
+    public  static List<HashMap<String, Object>> handleJSONArray(JSONArray jsonArray){
         List list = new ArrayList();
         for (Object object : jsonArray) {
             JSONObject jsonObject = (JSONObject) object;

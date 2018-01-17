@@ -77,10 +77,9 @@
                 dataName: 'rows' //数据列表的字段名称，默认：data
             }
         };
-        table.render(opt);
+        var tableIns = table.render(opt);
         table.on('sort(table)', function (obj) {
             debugger;
-            var tableIns = table.render(opt)
             tableIns.reload({
                 initSort: obj,
                 where: {
@@ -93,7 +92,6 @@
         });
         var active = {
             reload: function(){
-                var tableIns = table.render(opt)
                 tableIns.reload({ where: {
                     username:$('#username').val(),
                     name:$('#name').val()
@@ -102,7 +100,6 @@
             reset: function(){
                 $('#username').val("");
                 $('#name').val("");
-                var tableIns = table.render(opt)
                 tableIns.reload({ where: {
                     username:$('#username').val(),
                     name:$('#name').val()

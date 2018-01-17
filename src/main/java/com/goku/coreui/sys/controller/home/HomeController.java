@@ -14,6 +14,7 @@ public interface HomeController {
     @LoggerInfo(Method = "/doLogin",Name = "登录")
     String doLogin(String userName,String password,Model model);
 
+    @LoggerInfo(Method = "/logout",Name = "登出")
     String logout();
 
     @LoggerInfo(Method = "/home",Name = "查看首页")

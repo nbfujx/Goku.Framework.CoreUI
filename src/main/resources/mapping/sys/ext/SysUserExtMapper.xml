@@ -73,11 +73,11 @@
     <where>
       <if test="username != null and username != ''">
         <bind name="username" value="'%' + username + '%'" />
-        username LIKE #{username}
+         and username LIKE #{username}
       </if>
       <if test="name != null and name != ''">
         <bind name="name" value="'%' + name + '%'" />
-        name LIKE #{name}
+        and name LIKE #{name}
       </if>
     </where>
     <if test="orderFiled != null and orderFiled != ''" >

@@ -16,15 +16,15 @@
     <where>
       <if test="username != null and username != ''">
         <bind name="username" value="'%' + username + '%'" />
-        username LIKE #{username}
+        and username LIKE #{username}
       </if>
-      <if test="begindate != null and begindate != ''">
-        create_date >= #{begindate}
+      <if test="begindate != null">
+        <![CDATA[  and  create_date >= #{begindate,jdbcType=DATE}]]>
       </if>
-      <if test="enddate != null and enddate != ''">
-        create_date <![CDATA[ <= ]]> #{enddate}
+      <if test="enddate != null">
+        <![CDATA[  and create_date <= #{enddate,jdbcType=DATE}]]>
       </if>
     </where>
-      ORDER BY create_date
+      ORDER BY create_date desc
   </select>
 </mapper>

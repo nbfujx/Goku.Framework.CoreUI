@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/sys")
 public class IndexControllerImpl implements IndexController {
 
+    @Override
     @RequestMapping("/index")
     @RequiresPermissions(value={"sys:index:*"})
     public String  index(Model model) {

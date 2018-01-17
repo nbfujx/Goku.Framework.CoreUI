@@ -174,6 +174,7 @@ function loadPage(url) {
     dataType : 'json',
     beforeSend: function () {
       $.breadcrumbContent.html("");
+      $.mainContent.css({opacity: 0});
     },
     success : function(responseText) {
       //加载面包屑
@@ -205,25 +206,15 @@ function loadPage(url) {
         }
       }
       //加载页面
-      $.ajax({
-        type: 'GET',
-        url: $.subPagesDirectory + url,
-        dataType: 'html',
-        cache: false,
-        async: false,
-        beforeSend: function () {
-          $.mainContent.css({opacity: 0});
-        },
-        success: function () {
-          $('html, body').animate({scrollTop: 0}, 0);
-          $.mainContent.load($.subPagesDirectory + url, null, function (responseText) {
-            window.location.hash = url;
-          }).delay(250).animate({opacity: 1}, 0);
-        },
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
+      $('html, body').animate({scrollTop: 0}, 0);
+      $.mainContent.load($.subPagesDirectory + url, null, function (responseText,status,xhr) {
+        if(status=="success") {
+          window.location.hash=url;
+        }else{
           window.location.href = $.page404;
         }
-      });
+      }).delay(250).animate({opacity: 1}, 0);
+
     },
     error : function(XMLHttpRequest, textStatus, errorThrown) {
       window.location.href = $.page404;

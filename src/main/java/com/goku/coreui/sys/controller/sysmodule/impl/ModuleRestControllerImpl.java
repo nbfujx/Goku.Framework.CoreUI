@@ -67,6 +67,7 @@ public class ModuleRestControllerImpl implements ModuleRestController {
         return JSON.toJSONString (tp);
     }
 
+    @Override
     @RequestMapping("/save")
     @RequiresPermissions(value={"sys:module:add","sys:module:edit"},logical = Logical.OR)
     public String  save(@RequestBody SysModule symodule)
@@ -79,6 +80,7 @@ public class ModuleRestControllerImpl implements ModuleRestController {
         }
     }
 
+    @Override
     @RequestMapping("/delete")
     @RequiresPermissions(value={"sys:module:delete"})
     public String  delete(@RequestBody String Ids)

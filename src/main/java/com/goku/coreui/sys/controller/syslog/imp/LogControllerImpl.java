@@ -17,6 +17,7 @@ import javax.websocket.server.PathParam;
 @RequestMapping("/sys/log")
 public class LogControllerImpl implements LogController {
 
+    @Override
     @RequestMapping("/getListPage")
     @RequiresPermissions(value={"sys:log:query"})
     public String  list(Model model) {

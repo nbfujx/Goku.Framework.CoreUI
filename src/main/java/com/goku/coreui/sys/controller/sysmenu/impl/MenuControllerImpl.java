@@ -22,6 +22,7 @@ public class MenuControllerImpl implements MenuController {
     @Autowired
     SysMenuServiceImpl sysMenuService;
 
+    @Override
     @RequestMapping("/getListPage")
     @RequiresPermissions(value={"sys:menu:query"})
     public String  list(@RequestParam(value="moduleId",  defaultValue="") String moduleId, Model model) {
@@ -29,6 +30,7 @@ public class MenuControllerImpl implements MenuController {
         return  "sys/menu/list";
     }
 
+    @Override
     @RequestMapping("/addPage")
     @RequiresPermissions(value={"sys:menu:add"})
     public String  add(@PathParam("moduleId") String moduleId, Model model) {
@@ -39,6 +41,7 @@ public class MenuControllerImpl implements MenuController {
         return  "sys/menu/edit";
     }
 
+    @Override
     @RequestMapping("/editPage")
     @RequiresPermissions(value={"sys:menu:edit"})
     public String  edit(@PathParam("menuId") String menuId, Model model) {

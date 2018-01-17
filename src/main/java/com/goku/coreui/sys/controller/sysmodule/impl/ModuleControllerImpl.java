@@ -22,12 +22,14 @@ public class ModuleControllerImpl implements ModuleController {
     @Autowired
     SysModuleService sysModuleService;
 
+    @Override
     @RequestMapping("/getListPage")
     @RequiresPermissions(value={"sys:module:query"})
     public String  list(Model model) {
         return  "sys/module/list";
     }
 
+    @Override
     @RequestMapping("/addPage")
     @RequiresPermissions(value={"sys:module:add"})
     public String  add(Model model) {
@@ -37,6 +39,7 @@ public class ModuleControllerImpl implements ModuleController {
         return  "sys/module/edit";
     }
 
+    @Override
     @RequestMapping("/editPage")
     @RequiresPermissions(value={"sys:module:edit"})
     public String  edit(@PathParam("menuId") String moduleId, Model model) {
