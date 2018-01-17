@@ -1,0 +1,124 @@
+<!--templates-->
+<div class="animated fadeIn" >
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> 用户列表
+                </div>
+                <div class="card-body">
+                    <div class=" form-horizontal">
+                        <div class="form-group  row">
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon search-content">用户名</span>
+                                    <input type="text" id="username" name="username" class="form-control search-content"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon search-content">操作日期</span>
+                                    <input type="text" class="layui-input form-control search-content" id="createdate" name="createdate" placeholder=" - "/>
+                                </div>
+                            </div>
+                            <a shiro:hasPermission="sys:log:query" style="margin-left:15px" class="opreate-btn layui-btn layui-btn-sm layui-btn-normal" href="#" data-type="reload" id="refreshTable" ><i class="icon-magnifier"></i>查询</a>
+                            <a shiro:hasPermission="sys:log:query" style="margin-left:15px" class="opreate-btn layui-btn layui-btn-sm layui-btn-primary" href="#" data-type="reset" id="resetTable"><i class="icon-refresh"></i>重置</a>
+                        </div>
+                        <table class="layui-table table-responsive-sm" id="table" lay-filter="table"></table>
+                    </div>
+                </div>
+            </div>
+            <!--/.row-->
+        </div>
+    </div>
+</div>
+
+<!--js-->
+<script th:inline="javascript">
+
+    var dic_isAdmin={"0":"否","1":"是"	};
+    var dic_status={"0":"冻结","1":"在用"};
+
+    layui.use(['table', 'laydate'], function(){
+        var table = layui.table,$ = layui.jquery,
+                laydate=layui.laydate;
+
+        var opt={
+            elem: '#table'
+            ,url:'/api/sys/log/getLogForPaging'
+            ,height: 410
+            ,page: true //开启分页,
+            ,limit:5
+            ,limits:[5,10,20,50]
+            ,cols: [[
+                {type:'checkbox'}
+                ,{field:'username', width:120, title: '用户名'}
+                ,{field:'ip', width:150, title: 'ip地址'}
+                ,{field:'method', width:150, title: '访问地址'}
+                ,{field:'params', width:450, title: '参数'}
+                ,{field:'createDate', width:150, title: '访问日期',templet: '<div>{{ formatTime(d.createDate) }}</div>'}
+            ]],
+            request: {
+                pageName: 'pageNumber', //页码的参数名称，默认：page
+                limitName: 'pageSize' //每页数据量的参数名，默认：limit
+            },
+            response: {
+                countName: 'total', //数据总数的字段名称，默认：count
+                dataName: 'rows' //数据列表的字段名称，默认：data
+            }
+        };
+        var tableIns = table.render(opt);
+
+        //日期范围
+        laydate.render({
+            elem: '#createdate'
+            ,range: true
+        });
+
+        $('#refreshTable').on('click', function(){
+            debugger;
+            var daterange=$('#createdate').val().split(' - ')
+            tableIns.reload({ where: {
+                username:$('#username').val(),
+                begindate:daterange[0],
+                enddate:daterange[1]
+            }});
+        });
+
+        $('#resetTable').on('click', function(){
+            $('#username').val("")
+           $('#createdate').val("")
+            tableIns.reload({ where: {
+                username:"",
+                begindate:"",
+                enddate:""
+            }});
+        });
+    });
+
+    function formatTime(obj){
+        var date =  new Date(obj);
+        var y = 1900+date.getYear();
+        var m = "0"+(date.getMonth()+1);
+        var d = "0"+date.getDate();
+        return y+"-"+m.substring(m.length-2,m.length)+"-"+d.substring(d.length-2,d.length);
+    }
+
+</script>
+<!--模板 js start-->
+<!--模板 end-->
+
+<!--css-->
+<style type="text/css">
+    .search-content
+    {
+        height:30px;
+        margin-bottom: 5px;
+    }
+    .opreate-btn
+    {
+        width: 60px;
+        margin:0 0 10px 15px;
+        text-decoration : none;
+    }
+</style>
