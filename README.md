@@ -3,7 +3,7 @@
 
 # 演示地址:
 
-http://www.nbfujx.cn:8080//br>
+http://www.nbfujx.cn:8080/</br>
 
 账号:admin</br>
 密码:12345
