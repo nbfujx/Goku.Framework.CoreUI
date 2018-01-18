@@ -77,5 +77,5 @@ http://www.nbfujx.cn:8080/</br>
 ![菜单展示](http://images.cnblogs.com/cnblogs_com/nbfujx/1146065/o_TIM%E6%88%AA%E5%9B%BE20180111092458.png)
 ### 5模块展示
 ![模块展示](http://images.cnblogs.com/cnblogs_com/nbfujx/1146065/o_TIM%E6%88%AA%E5%9B%BE20180112133002.png)
-### 5.日志管理
+### 6.日志管理
 ![日志管理](http://images.cnblogs.com/cnblogs_com/nbfujx/1146065/o_QQ%e6%88%aa%e5%9b%be20180117203022.png)
