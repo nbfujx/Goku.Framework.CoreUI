@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
  */
 
 public interface UserController {
-    @LoggerInfo(Method = "/sys/user/getListPage",Name = "查看用户列表")
+    @LoggerInfo(Method = "/sys/user/getListPage",Name = "用户列表")
     String list(Model model);
     @LoggerInfo(Method = "/sys/user/addPage",Name = "用户新增")
     String  add(Model model);

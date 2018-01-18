@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--suppress ALL -->
 <mapper namespace="com.goku.coreui.sys.mapper.ext.SysMenuExtMapper">
     <resultMap id="SysMenuMap" type="com.goku.coreui.sys.model.SysMenu">
         <id column="id" jdbcType="VARCHAR" property="id" />
@@ -51,4 +52,11 @@
     <update id="updateMenuIsLeaf" parameterType="java.lang.String">
         update sys_menu set  isparent = '1', is_leaf ='0'  where id = #{id,jdbcType=VARCHAR}
     </update>
+    <update id="updateMenuIsParent" parameterType="java.lang.String">
+        update sys_menu set  isparent = '0', is_leaf ='1'  where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <select id="getCountByParentId" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select COUNT(m.id) from sys_menu m where parent_id= #{id,jdbcType=VARCHAR}
+    </select>
+
 </mapper>

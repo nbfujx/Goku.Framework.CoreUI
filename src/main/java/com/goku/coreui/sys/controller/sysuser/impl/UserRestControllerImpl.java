@@ -1,6 +1,7 @@
 package com.goku.coreui.sys.controller.sysuser.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.goku.coreui.sys.controller.sysuser.UserRestController;
 import com.goku.coreui.sys.model.ext.Breadcrumb;
 import com.goku.coreui.sys.model.ext.TablePage;
 import com.goku.coreui.sys.service.SysUserService;
@@ -20,7 +21,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/sys/user")
-public class UserRestControllerImpl {
+public class UserRestControllerImpl implements UserRestController {
 
     @Autowired
     SysUserService sysUserService;

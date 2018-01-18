@@ -42,8 +42,24 @@ public class SysMenuServiceImpl implements SysMenuService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int deleteMenu(String MenuId) {
-        return sysMenuExtMapper.deleteByPrimaryKey(MenuId);
+        //需要修改
+        int deleteResult=0;
+        int updateResult=0;
+        SysMenu sysMenu = sysMenuExtMapper.selectByPrimaryKey(MenuId);
+        String parentId=sysMenu.getParentId();
+        deleteResult=sysMenuExtMapper.deleteByPrimaryKey(MenuId);
+        int count=sysMenuExtMapper.getCountByParentId(parentId);
+        if(count==0){
+            updateResult = sysMenuExtMapper.updateMenuIsParent(parentId);
+        }else{
+            updateResult=1;
+        }
+        if (deleteResult == 1 && updateResult == 1) {
+            return 1;
+        }
+        return 0;
     }
 
     @Override

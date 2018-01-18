@@ -4,7 +4,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <i class="fa fa-align-justify"></i> 用户列表
+                    <i class="fa fa-align-justify"></i> 日志列表
                 </div>
                 <div class="card-body">
                     <div class=" form-horizontal">
@@ -54,9 +54,10 @@
                 {type:'checkbox'}
                 ,{field:'username', width:120, title: '用户名'}
                 ,{field:'ip', width:150, title: 'ip地址'}
+                ,{field:'operation', width:100, title: '操作'}
                 ,{field:'method', width:150, title: '访问地址'}
-                ,{field:'params', width:450, title: '参数'}
-                ,{field:'createDate', width:150, title: '访问日期',templet: '<div>{{ formatTime(d.createDate) }}</div>'}
+                ,{field:'params', width:400, title: '参数'}
+                ,{field:'createDate', width:120, title: '访问日期',templet: '<div>{{ formatTime(d.createDate) }}</div>'}
             ]],
             request: {
                 pageName: 'pageNumber', //页码的参数名称，默认：page
