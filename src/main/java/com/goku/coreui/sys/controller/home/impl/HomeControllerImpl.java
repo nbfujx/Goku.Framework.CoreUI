@@ -100,7 +100,7 @@ public class HomeControllerImpl implements HomeController,ErrorController {
     @RequestMapping("/home")
     public String home(Model model,@RequestParam(value="moduleId", required=false, defaultValue="") String moduleId) {
         //
-        SysUser user = (SysUser) SecurityUtils.getSubject().getSession().getAttribute("user");
+        SysUser user = (SysUser) SecurityUtils.getSubject().getSession().getAttribute(SecurityUtils.getSubject().getPrincipal());
         moduleId= "".equals(moduleId)?user.getSysUserInfo().getHomepage():moduleId;
         List<SysModule>  sysModules=sysModuleService.getUserModules(user.getId());
         SysModule sysModule=sysModuleService.selectByPrimaryKey(moduleId);
