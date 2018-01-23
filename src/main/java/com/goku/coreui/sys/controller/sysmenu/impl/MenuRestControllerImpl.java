@@ -71,7 +71,7 @@ public class MenuRestControllerImpl implements MenuRestController {
     @RequiresPermissions(value={"sys:menu:query"})
     public String  getMenuForTree(@RequestParam(value="moduleId", required=false, defaultValue="") String moduleId)
     {
-        return JSON.toJSONString (treeSelectUtil.TreeSelectList(sysMenuService.getMenuForPaging(moduleId)));
+        return JSON.toJSONString (treeSelectUtil.MenuSelectTree(sysMenuService.getMenuForPaging(moduleId)));
     }
 
     @Override

@@ -1,16 +1,19 @@
 <!--templates-->
-<div class="nav animated fadeIn" >
+<div class="animated fadeIn" >
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-header" th:inline="text">
-                    <i class="fa fa-align-justify"></i>
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i>权限列表
                 </div>
                 <div class="card-body">
                     <div class=" form-horizontal">
                         <div class="row">
-
+                            <a shiro:hasPermission="sys:role:add" class="opreate-btn  layui-btn layui-btn-sm" id="addbtn" href="#"><i class="icon-plus"></i>新增</a>
+                            <a shiro:hasPermission="sys:role:edit" class="opreate-btn layui-btn layui-btn-sm" id="editbtn" href="#"><i class="icon-plus"></i>修改</a>
+                            <a shiro:hasPermission="sys:role:delete"  class="opreate-btn layui-btn layui-btn-sm layui-btn-danger"  id="deletebtn" href="#"  ><i class="icon-close"></i>删除</a>
                         </div>
+                        <table class="layui-table table-responsive-sm" id="roleTable" lay-filter="role"></table>
                     </div>
                 </div>
             </div>
@@ -21,10 +24,131 @@
 
 <!--js-->
 <script th:inline="javascript">
+    layui.config({
+        base: '../lib/layui/layuiextend/treegrid/'
+    }).use(['laytpl', 'treegrid'], function () {
 
+        var laytpl = layui.laytpl,treegrid = layui.treegrid;
+        treegrid.config.render = function (viewid, data) {
+            var view = document.getElementById(viewid).innerHTML;
+            return laytpl(view).render(data) || '';
+        };
+
+        getJSON("/api/sys/role/getRoleForPaging")
+                .catch( error => {
+
+                }).then( value => {
+            debugger;
+            var rows=JSON.parse(value);
+            checkedtreegrid=treegrid.createNew({
+                elem: 'roleTable',
+                view: 'roleView',
+                data: {rows: rows},
+                id: 'id',
+                root: "-1",
+                parentid: 'parentId',
+                singleSelect: true
+            });
+            checkedtreegrid.build();
+        })
+
+        $('#addbtn').on('click', function(){
+            setUpUrl("sys/role/getListPage@sys/role/addPage");
+        });
+
+        $('#editbtn').on('click', function(){
+            var row =checkedtreegrid.selectRow();
+            if(row==null){
+                layer.alert("请选择一条记录!", {icon: 0});
+            }else {
+                setUpUrl("sys/role/getListPage@sys/role/editPage?roleId=" + row.id);
+            }
+        });
+
+        $('#deletebtn').on('click', function(){
+            var row =checkedtreegrid.selectRow();
+            if(row==null){
+                layer.alert("请选择一条记录!", {icon: 0});
+            }else {
+                var childrow=checkedtreegrid.getChild(row.id)
+                if(childrow.length=="0") {
+                    var roleId=row.id;
+                    layer.alert( '请确认是否删除该权限!',{
+                        icon: 3
+                        ,btn: ['确认']
+                        ,yes: function(index) {
+                            layer.close(index);
+                            postJSON("/api/sys/role/delete", roleId)
+                                    .catch(error => {
+
+                            })
+                            .then(value => {
+                                var result=JSON.parse(value);
+                                if (result == true) {
+                                    layer.alert('该权限删除成功!', {
+                                        icon: 6, btn: ['确认'], yes: function (index) {
+                                            layer.close(index);
+                                            getJSON("/api/sys/role/getRoleForPaging")
+                                                    .catch( error => {
+
+                                            }).then( value => {
+                                                debugger;
+                                                var rows=JSON.parse(value);
+                                                checkedtreegrid=treegrid.createNew({
+                                                    elem: 'roleTable',
+                                                    view: 'roleView',
+                                                    data: {rows: rows},
+                                                    id: 'id',
+                                                    root: "-1",
+                                                    parentid: 'parentId',
+                                                    singleSelect: true
+                                                });
+                                                checkedtreegrid.build();
+                                            })
+                                        }
+                                    });
+                                } else {
+                                    layer.alert("该权限删除失败!", {icon: 2});
+                                }
+                            });
+                        }})
+                }else{
+                    layer.alert("该条记录非叶子节点，不能删除!", {icon: 2});
+                }
+            }
+        });
+
+
+    })
 </script>
-
+<!--模板 js start-->
+<script id="roleView" type="text/html">
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th>权限代码</th>
+            <th>权限名称</th>
+            <th>权限描述</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{# layui.each(d.rows,function(index,r){ }}
+        <tr>
+            <td><input type="checkbox" />{{r.key}}</td>
+            <td>{{r.name}}</td>
+            <td>{{r.description}}</td>
+        </tr>
+        {{# }); }}
+        </tbody>
+    </table>
+</script>
+<!--模板 end-->
 <!--css-->
 <style type="text/css">
-
+    .opreate-btn
+    {
+        width: 60px;
+        margin:0 0 10px 15px;
+        text-decoration : none;
+    }
 </style>

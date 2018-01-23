@@ -3,14 +3,45 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-header">
-                    <i class="fa fa-align-justify"></i>
+                <div class="card-header" th:inline="text">
+                    <i class="fa fa-align-justify"></i> [[${pageTitle}]]
                 </div>
                 <div class="card-body">
                     <div class=" form-horizontal">
-                        <div class="row">
-
-                        </div>
+                        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                            <legend>权限基本信息</legend>
+                        </fieldset>
+                        <form  id="roleform" class="layui-form">
+                            <div class="layui-form-item row">
+                                <label class="layui-form-label">权限代码</label>
+                                <div class="layui-input-block col-md-4">
+                                    <input type="text" name="key" lay-verify="required" autocomplete="off" placeholder="请输入权限代码" class="layui-input" th:field="${sysRole.key}"></input>
+                                    <input type="hidden" name="id" th:field="${sysRole.id}"></input>
+                                </div>
+                                <label class="layui-form-label">权限名称</label>
+                                <div class="layui-input-block col-md-4">
+                                    <input type="text" name="name" lay-verify="required" autocomplete="off" placeholder="请输入权限名称" class="layui-input" th:field="${sysRole.name}"></input>
+                                </div>
+                            </div>
+                            <div class="layui-form-item row">
+                                <label class="layui-form-label">父级权限</label>
+                                <div class="layui-input-block col-md-4">
+                                    <input type="text" id="parentId"  name="parentId" lay-filter="parentId" placeholder="父级权限" autocomplete="off" class="layui-input" th:field="${sysRole.parentId}" ></input>
+                                </div>
+                            </div>
+                            <div class="layui-form-item row">
+                                <label class="layui-form-label">权限描述</label>
+                                <div class="layui-input-block col-md-9">
+                                    <textarea class="layui-textarea" name="description"   th:field="${sysRole.description}"></textarea>
+                                </div>
+                            </div>
+                            <div class="layui-form-item" style="margin-left:30px">
+                                <div class="layui-input-block">
+                                    <button type="reset" class="layui-btn" lay-submit=""  id="save" lay-filter="save">立即提交</button>
+                                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -21,6 +52,61 @@
 
 <!--js-->
 <script th:inline="javascript">
+
+    /*<![CDATA[*/
+    var pageTitle=/*[[${pageTitle}]]*/;//取值
+    /*]]>*/
+
+    layui.config({
+        base: '../lib/layui/layuiextend/treeSelect/'
+    }).use(['layer','form','treeselect'], function(){
+        var form = layui.form
+                ,layer = layui.layer
+                ,treeselect = layui.treeselect;
+
+        debugger;
+
+        treeselect.render({
+            elem: "#parentId",
+            data: "api/sys/role/getRoleForTree",
+            method: "GET"
+        });
+
+        form.render();
+
+        form.on('submit(save)',function(data){
+            debugger;
+            var from= $("#roleform");
+            var model= serializeObject(from);
+            postJSON("/api/sys/role/save",model)
+                    .catch(error => {
+
+                    })
+                    .then(value =>{
+                        if(value==undefined) {
+                            layer.alert(pageTitle+"失败!", {icon: 2});
+                        }else{
+                            var result=JSON.parse(value);
+                            if (result == true) {
+                                layer.alert( pageTitle+'成功!',{
+                                    icon: 6
+                                    ,btn: ['确认']
+                                    ,yes: function(index) {
+                                        layer.close(index);
+                                        setUpUrl("sys/role/getListPage");
+                                    }
+                                });
+                            } else {
+                                layer.alert(pageTitle+"失败!", {icon: 2});
+                            }
+                        }
+                    });
+
+            return false;
+        });
+
+
+    });
 
 </script>
 <!--模板 js start-->
