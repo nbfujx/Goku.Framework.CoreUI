@@ -26,4 +26,19 @@ public class SysUserServiceImpl implements SysUserService {
         PageInfo page = new PageInfo(list);
         return page;
     }
+
+    @Override
+    public SysUser selectByPrimaryKey(String UserId) {
+        return sysuserextmapper.selectByPrimaryKey(UserId);
+    }
+
+    @Override
+    public int deleteUser(String UserId) {
+        return 0;
+    }
+
+    @Override
+    public int saveUser(SysUser sysUser) {
+        return 0;
+    }
 }

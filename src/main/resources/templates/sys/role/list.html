@@ -12,6 +12,7 @@
                             <a shiro:hasPermission="sys:role:add" class="opreate-btn  layui-btn layui-btn-sm" id="addbtn" href="#"><i class="icon-plus"></i>新增</a>
                             <a shiro:hasPermission="sys:role:edit" class="opreate-btn layui-btn layui-btn-sm" id="editbtn" href="#"><i class="icon-plus"></i>修改</a>
                             <a shiro:hasPermission="sys:role:delete"  class="opreate-btn layui-btn layui-btn-sm layui-btn-danger"  id="deletebtn" href="#"  ><i class="icon-close"></i>删除</a>
+                            <a shiro:hasAllPermissions="sys:role:add,sys:menu:add" style="width: 80px;" class="opreate-btn layui-btn layui-btn-sm"  href="#" onclick="alert('2222')"><i class="icon-user-follow"></i>菜单赋值</a>
                         </div>
                         <table class="layui-table table-responsive-sm" id="roleTable" lay-filter="role"></table>
                     </div>

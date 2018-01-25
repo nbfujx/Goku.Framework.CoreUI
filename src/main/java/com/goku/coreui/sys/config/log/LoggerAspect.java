@@ -35,9 +35,9 @@ public class LoggerAspect {
     @After("execution(* com.goku.coreui.**.controller..*.*(..))")
     public void After(JoinPoint point){
         Object target = point.getTarget();
-        this.logger.info(target.toString());
+        //this.logger.info(target.toString());
         String method = point.getSignature().getName();
-        this.logger.info(method);
+        //this.logger.info(method);
         Class<?>[] classz = target.getClass().getInterfaces();
         Class<?>[] parameterTypes = ((MethodSignature) point.getSignature())
                 .getMethod().getParameterTypes();
@@ -46,7 +46,7 @@ public class LoggerAspect {
             if (m != null && m.isAnnotationPresent(LoggerInfo.class)) {
                 LoggerInfo loggerinfo = m.getAnnotation(LoggerInfo.class);
                 Subject subject = SecurityUtils.getSubject();
-                this.logger.info("oper："+loggerinfo.Name()+"|"+"method"+ loggerinfo.Method());
+                //this.logger.info("oper："+loggerinfo.Name()+"|"+"method"+ loggerinfo.Method());
                 SysLog syslog=new SysLog();
                 String uuid = UUID.randomUUID().toString().replaceAll("-", "");
                 syslog.setId(uuid);
@@ -60,7 +60,7 @@ public class LoggerAspect {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+           // e.printStackTrace();
         }
     }
 }

@@ -41,7 +41,6 @@ public class ShiroRealm extends AuthorizingRealm {
         //赋予权限
         for(SysMenu menu:sysmenuextmapper.getMenuByUserId(user.getId())){
             if(!"".equals(menu.getPermission())) {
-                this.logger.info(menu.getPermission());
                 info.addStringPermission(menu.getPermission());
             }
         }

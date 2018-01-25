@@ -13,5 +13,5 @@ public interface UserController {
     @LoggerInfo(Method = "/sys/user/addPage",Name = "用户新增")
     String  add(Model model);
     @LoggerInfo(Method = "/sys/user/editPage",Name = "用户修改")
-    String  edit(Model model);
+    String  edit(String UserId,Model model);
 }
