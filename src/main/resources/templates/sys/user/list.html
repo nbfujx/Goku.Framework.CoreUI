@@ -25,8 +25,8 @@
                             <a shiro:hasPermission="sys:user:query" style="margin-left:15px" class="opreate-btn layui-btn layui-btn-sm layui-btn-primary" href="#" data-type="reset" id="resetTable"><i class="icon-refresh"></i>重置</a>
                         </div>
                         <div class="row" >
-                            <a shiro:hasPermission="sys:user:add" class="opreate-btn  layui-btn layui-btn-sm" href="sys/user/getListPage@sys/user/addPage"><i class="icon-plus"></i>新增</a>
-                            <a shiro:hasPermission="sys:user:edit" class="opreate-btn  layui-btn layui-btn-sm" href="sys/user/getListPage@sys/user/editPage"><i class="icon-plus"></i>修改</a>
+                            <a shiro:hasPermission="sys:user:add" class="opreate-btn  layui-btn layui-btn-sm" id="addbtn" href="#" ><i class="icon-plus"></i>新增</a>
+                            <a shiro:hasPermission="sys:user:edit" class="opreate-btn  layui-btn layui-btn-sm" id="editbtn" href="#"><i class="icon-plus"></i>修改</a>
                             <a shiro:hasPermission="sys:user:delete"  class="opreate-btn layui-btn layui-btn-sm layui-btn-danger"  href="#" data-type="freeze" id="freezeIds"><i class="icon-close"></i>冻结</a>
                             <a shiro:hasPermission="sys:user:delete"  class="opreate-btn layui-btn layui-btn-sm layui-btn-danger"  href="#" data-type="delete" id="deleteIds"><i class="icon-close"></i>删除</a>
                             <a shiro:hasAllPermissions="sys:user:add,sys:role:add" style="width: 80px;" class="opreate-btn layui-btn layui-btn-sm"  href="#" onclick="alert('2222')"><i class="icon-user-follow"></i>角色赋值</a>
@@ -90,51 +90,47 @@
                 }
             })
         });
-        var active = {
-            reload: function(){
-                tableIns.reload({ where: {
-                    username:$('#username').val(),
-                    name:$('#name').val()
-                }});
-            },
-            reset: function(){
-                $('#username').val("");
-                $('#name').val("");
-                tableIns.reload({ where: {
-                    username:$('#username').val(),
-                    name:$('#name').val()
-                }});
-            },
-            freeze: function(){
-                var checkStatus = table.checkStatus('table')
-                        ,data = checkStatus.data;
-                layer.alert(JSON.stringify(data));
-            },
-            delete: function(){
-                var checkStatus = table.checkStatus('table')
-                        ,data = checkStatus.data;
-                layer.alert(JSON.stringify(data));
+
+        $('#addbtn').on('click', function(){
+            setUpUrl("sys/user/getListPage@sys/user/addPage");
+        });
+
+        $('#editbtn').on('click', function(){
+            var checkStatus = table.checkStatus('table')
+                    ,data = checkStatus.data;
+            if(data.length!=1){
+                layer.alert("请选择一条记录!", {icon: 0});
+            }else {
+                setUpUrl("sys/user/getListPage@sys/user/editPage?userId=" + data[0].id);
             }
-        };
+        });
+
         $('#refreshTable').on('click', function(){
-            debugger;
-            var type = $(this).data('type');
-            active[type] ? active[type].call(this) : '';
+            tableIns.reload({ where: {
+                username:$('#username').val(),
+                name:$('#name').val()
+            }});
         });
+
         $('#resetTable').on('click', function(){
-            debugger;
-            var type = $(this).data('type');
-            active[type] ? active[type].call(this) : '';
+            $('#username').val("");
+            $('#name').val("");
+            tableIns.reload({ where: {
+                username:$('#username').val(),
+                name:$('#name').val()
+            }});
         });
+
         $('#freezeIds').on('click', function(){
-            debugger;
-            var type = $(this).data('type');
-            active[type] ? active[type].call(this) : '';
+            var checkStatus = table.checkStatus('table')
+                    ,data = checkStatus.data;
+            layer.alert(JSON.stringify(data));
         });
+
         $('#deleteIds').on('click', function(){
-            debugger;
-            var type = $(this).data('type');
-            active[type] ? active[type].call(this) : '';
+            var checkStatus = table.checkStatus('table')
+                    ,data = checkStatus.data;
+            layer.alert(JSON.stringify(data));
         });
     });
 

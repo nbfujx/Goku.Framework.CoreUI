@@ -42,7 +42,7 @@ public class UserControllerImpl implements UserController {
     @RequestMapping("/editPage")
     @RequiresPermissions(value={"sys:user:edit"})
     public String  edit(@PathParam("userId") String UserId, Model model) {
-        model.addAttribute("pageTitle","用户新增");
+        model.addAttribute("pageTitle","用户修改");
         SysUser sysUser=sysUserService.selectByPrimaryKey(UserId);
         model.addAttribute("sysUser",sysUser);
         return  "sys/user/edit";
