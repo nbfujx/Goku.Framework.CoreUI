@@ -40,7 +40,7 @@ http://www.nbfujx.cn:8080/</br>
 |1.2.|用户修改||
 |1.3.|用户删除||
 |1.4.|用户展示|Y|
-|1.5.|角色赋值||
+|1.5.|权限赋值||
 |1.6.|菜单赋值||
 |2.|菜单管理|Y|
 |2.1.|菜单新增|Y|
@@ -52,11 +52,12 @@ http://www.nbfujx.cn:8080/</br>
 |3.2.|模块修改|Y|
 |3.3.|模块删除|Y|
 |3.4.|模块展示|Y|
-|4.|权限管理|Y|
+|4.|权限管理||
 |4.1.|权限新增|Y|
 |4.2.|权限修改|Y|
 |4.3.|权限删除|Y|
 |4.4.|权限展示|Y|
+|4.5.|菜单赋值||
 |5.|日志管理|Y|
 |5.1.|日志记录|Y|
 
@@ -79,4 +80,4 @@ http://www.nbfujx.cn:8080/</br>
 
 
 # 其他 待续
-[Goku.Framework.CoreUI.Vue 前后端分离实现](https://github.com/nbfujx/Goku.Framework.CoreUI.Vue) </br>
+### [Goku.Framework.CoreUI.Vue 前后端分离实现](https://github.com/nbfujx/Goku.Framework.CoreUI.Vue) </br>
