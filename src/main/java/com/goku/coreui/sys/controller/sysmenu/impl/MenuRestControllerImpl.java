@@ -3,6 +3,7 @@ package com.goku.coreui.sys.controller.sysmenu.impl;
 import com.alibaba.fastjson.JSON;
 import com.goku.coreui.sys.controller.sysmenu.MenuRestController;
 import com.goku.coreui.sys.model.SysMenu;
+import com.goku.coreui.sys.model.SysUser;
 import com.goku.coreui.sys.model.ext.Breadcrumb;
 import com.goku.coreui.sys.model.ext.TablePage;
 import com.goku.coreui.sys.service.SysMenuService;
@@ -12,6 +13,7 @@ import com.goku.coreui.sys.util.BreadcrumbUtil;
 import com.goku.coreui.sys.util.CamelUtil;
 import com.goku.coreui.sys.util.PageUtil;
 import com.goku.coreui.sys.util.TreeSelectUtil;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,6 +74,14 @@ public class MenuRestControllerImpl implements MenuRestController {
     public String  getMenuForTree(@RequestParam(value="moduleId", required=false, defaultValue="") String moduleId)
     {
         return JSON.toJSONString (treeSelectUtil.MenuSelectTree(sysMenuService.getMenuForPaging(moduleId)));
+    }
+
+    @RequestMapping("/getUserMenuForTree")
+    @RequiresPermissions(value={"sys:menu:query"})
+    public String  getUserMenuForTree(@RequestParam(value="moduleId", required=false, defaultValue="") String moduleId,
+                                      @RequestParam(value="roleId", required=false, defaultValue="") String roleId)
+    {
+        return JSON.toJSONString (sysMenuService.getUserModuleMenus(moduleId,roleId));
     }
 
     @Override

@@ -58,5 +58,12 @@
     <select id="getCountByParentId" parameterType="java.lang.String" resultType="java.lang.Integer">
         select COUNT(m.id) from sys_menu m where parent_id= #{id,jdbcType=VARCHAR}
     </select>
+    <select id="getUserModuleMenus" parameterType="java.lang.String" resultMap="SysMenuMap">
+        select m.* from sys_menu m
+        left join sys_module md on m.module_id=md.id
+        left join sys_role_auth sra on m.id=sra.menu_id
+        where md.id= #{ModuleId,jdbcType=VARCHAR}
+        and sra.role_id=#{roleId,jdbcType=VARCHAR} ORDER  BY sort
+    </select>
 
 </mapper>

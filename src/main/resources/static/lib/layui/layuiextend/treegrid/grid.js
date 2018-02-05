@@ -208,7 +208,7 @@
                 function fnSuccess() {
                     grid.elem.html('');
                     var content = $('<div class="grid-content"></div>').appendTo(grid.elem),
-                           html = CONFIG.render(grid.view, grid.pageData);
+                        html = CONFIG.render(grid.view, grid.pageData);
                     fnHeader(html, content);
                     fnBody(html, content);
 
@@ -245,12 +245,12 @@
                     tbHead.find('thead th,thead td').each(function (i) {
                         var that = $(this);
                         /*if (typeof (that.attr('order')) != 'undefined') {
-                            that.append('<i class="grid-order"></i>').on('click', events.order);
-                        }
+                         that.append('<i class="grid-order"></i>').on('click', events.order);
+                         }
 
-                        if (i == 0 && $(this).find(':checkbox').length > 0 && !grid.singleSelect) {
-                            that.find(':checkbox').on('click', events.selectAll);
-                        }*/
+                         if (i == 0 && $(this).find(':checkbox').length > 0 && !grid.singleSelect) {
+                         that.find(':checkbox').on('click', events.selectAll);
+                         }*/
 
                         that.html('<div class="grid-coll">' + that.html() + '</div>');
                         if (typeof (that.attr('order')) != 'undefined') {
@@ -278,7 +278,7 @@
 
                     tbBody.find('thead th,thead td').each(function () {
                         /*if (typeof ($(this).attr('order')) != 'undefined')
-                            $(this).append('<i class="grid-order"></i>');*/
+                         $(this).append('<i class="grid-order"></i>');*/
 
                         var that = $(this);
                         that.html('<div class="grid-coll">' + that.html() + '</div>');
@@ -388,7 +388,7 @@
                 }
 
                 grid.selectValue = function (v) {
-                    var rowid = this.rowid;
+                    var rowid = this.id;
                     if (v == undefined) {
                         var rows = this.selectRow();
                         if (rows == null)
@@ -424,45 +424,45 @@
 
                 grid.selectRow = function () {
                     /*if (values != undefined) {
-                        grid.elem.find('.grid-body tbody tr.selected').removeClass('selected').each(function () {
-                            if ($(this).find('td:first :checkbox').length > 0)
-                                $(this).find('td:first :checkbox')[0].checked = false;
-                        });
-                        var keys = grid.keys.split(';');
-                        if (Object.prototype.toString.call(values) == '[object Array]' && !grid.singleSelect) {
-                            $.each(values, function (a, value) {
-                                $.each(grid.pageData.rows, function (i, r) {
-                                    var key = '';
-                                    $.each(keys, function (j, k) {
-                                        key += r[k]+';';
-                                    });
-                                    if (value + ';' == key) {
-                                        var tr = grid.elem.find('.grid-body tbody tr:eq(' + i + ')');
-                                        tr.addClass('selected');
-                                        if (tr.find('td:first :checkbox').length > 0)
-                                            tr.find('td:first :checkbox')[0].checked = true;
-                                        return false;
-                                    }
-                                });
-                            });
-                        }
-                        else {
-                            $.each(grid.pageData.rows, function (i, r) {
-                                var key = '';
-                                $.each(keys, function (j, k) {
-                                    key += r[k]+';';
-                                });
-                                if (values + ';' == key) {
-                                    var tr = grid.elem.find('.grid-body tbody tr:eq(' + i + ')');
-                                    tr.addClass('selected');
-                                    if (tr.find('td:first :checkbox').length > 0)
-                                        tr.find('td:first :checkbox')[0].checked = true;
-                                    return false;
-                                }
-                            });
-                        }
-                    }
-                    else {*/
+                     grid.elem.find('.grid-body tbody tr.selected').removeClass('selected').each(function () {
+                     if ($(this).find('td:first :checkbox').length > 0)
+                     $(this).find('td:first :checkbox')[0].checked = false;
+                     });
+                     var keys = grid.keys.split(';');
+                     if (Object.prototype.toString.call(values) == '[object Array]' && !grid.singleSelect) {
+                     $.each(values, function (a, value) {
+                     $.each(grid.pageData.rows, function (i, r) {
+                     var key = '';
+                     $.each(keys, function (j, k) {
+                     key += r[k]+';';
+                     });
+                     if (value + ';' == key) {
+                     var tr = grid.elem.find('.grid-body tbody tr:eq(' + i + ')');
+                     tr.addClass('selected');
+                     if (tr.find('td:first :checkbox').length > 0)
+                     tr.find('td:first :checkbox')[0].checked = true;
+                     return false;
+                     }
+                     });
+                     });
+                     }
+                     else {
+                     $.each(grid.pageData.rows, function (i, r) {
+                     var key = '';
+                     $.each(keys, function (j, k) {
+                     key += r[k]+';';
+                     });
+                     if (values + ';' == key) {
+                     var tr = grid.elem.find('.grid-body tbody tr:eq(' + i + ')');
+                     tr.addClass('selected');
+                     if (tr.find('td:first :checkbox').length > 0)
+                     tr.find('td:first :checkbox')[0].checked = true;
+                     return false;
+                     }
+                     });
+                     }
+                     }
+                     else {*/
                     if (!grid.singleSelect) {
                         rows = [];
                         this.elem.find('.grid-body tbody tr').each(function (i) {

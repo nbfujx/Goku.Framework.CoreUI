@@ -12,7 +12,7 @@
                             <a shiro:hasPermission="sys:role:add" class="opreate-btn  layui-btn layui-btn-sm" id="addbtn" href="#"><i class="icon-plus"></i>新增</a>
                             <a shiro:hasPermission="sys:role:edit" class="opreate-btn layui-btn layui-btn-sm" id="editbtn" href="#"><i class="icon-plus"></i>修改</a>
                             <a shiro:hasPermission="sys:role:delete"  class="opreate-btn layui-btn layui-btn-sm layui-btn-danger"  id="deletebtn" href="#"  ><i class="icon-close"></i>删除</a>
-                            <a shiro:hasAllPermissions="sys:role:add,sys:menu:add" style="width: 80px;" class="opreate-btn layui-btn layui-btn-sm"  href="#" onclick="alert('2222')"><i class="icon-user-follow"></i>菜单赋值</a>
+                            <a shiro:hasPermission="sys:role:auth"  style="width: 80px;" class="opreate-btn layui-btn layui-btn-sm" id="authbtn" href="#"><i class="icon-user-follow"></i>菜单赋值</a>
                         </div>
                         <table class="layui-table table-responsive-sm" id="roleTable" lay-filter="role"></table>
                     </div>
@@ -82,36 +82,36 @@
                             postJSON("/api/sys/role/delete", roleId)
                                     .catch(error => {
 
-                            })
-                            .then(value => {
-                                var result=JSON.parse(value);
-                                if (result == true) {
-                                    layer.alert('该权限删除成功!', {
-                                        icon: 6, btn: ['确认'], yes: function (index) {
-                                            layer.close(index);
-                                            getJSON("/api/sys/role/getRoleForPaging")
-                                                    .catch( error => {
+                                    })
+                                    .then(value => {
+                                        var result=JSON.parse(value);
+                                        if (result == true) {
+                                            layer.alert('该权限删除成功!', {
+                                                icon: 6, btn: ['确认'], yes: function (index) {
+                                                    layer.close(index);
+                                                    getJSON("/api/sys/role/getRoleForPaging")
+                                                            .catch( error => {
 
-                                            }).then( value => {
-                                                debugger;
-                                                var rows=JSON.parse(value);
-                                                checkedtreegrid=treegrid.createNew({
-                                                    elem: 'roleTable',
-                                                    view: 'roleView',
-                                                    data: {rows: rows},
-                                                    id: 'id',
-                                                    root: "-1",
-                                                    parentid: 'parentId',
-                                                    singleSelect: true
-                                                });
-                                                checkedtreegrid.build();
-                                            })
+                                                            }).then( value => {
+                                                        debugger;
+                                                        var rows=JSON.parse(value);
+                                                        checkedtreegrid=treegrid.createNew({
+                                                            elem: 'roleTable',
+                                                            view: 'roleView',
+                                                            data: {rows: rows},
+                                                            id: 'id',
+                                                            root: "-1",
+                                                            parentid: 'parentId',
+                                                            singleSelect: true
+                                                        });
+                                                        checkedtreegrid.build();
+                                                    })
+                                                }
+                                            });
+                                        } else {
+                                            layer.alert("该权限删除失败!", {icon: 2});
                                         }
                                     });
-                                } else {
-                                    layer.alert("该权限删除失败!", {icon: 2});
-                                }
-                            });
                         }})
                 }else{
                     layer.alert("该条记录非叶子节点，不能删除!", {icon: 2});
@@ -119,6 +119,20 @@
             }
         });
 
+        $('#authbtn').on('click', function(){
+            var row =checkedtreegrid.selectRow();
+            if(row==null){
+                layer.alert("请选择一条记录!", {icon: 0});
+            }else {
+                var childrow=checkedtreegrid.getChild(row.id)
+                if(childrow.length=="0") {
+                    var roleId=row.id;
+                    setUpUrl("sys/role/getListPage@sys/role/authPage?roleId=" + roleId);
+                }else{
+                    layer.alert("该条记录非叶子节点，不能赋权!", {icon: 2});
+                }
+            }
+        });
 
     })
 </script>

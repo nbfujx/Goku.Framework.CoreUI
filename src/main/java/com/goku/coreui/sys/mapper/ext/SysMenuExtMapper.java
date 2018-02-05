@@ -18,4 +18,6 @@ public interface SysMenuExtMapper extends SysMenuMapper {
     int updateMenuIsLeaf(@Param("id")  String id);
     int updateMenuIsParent(@Param("id")  String id);
     int getCountByParentId(@Param("id")  String id);
+    List<SysMenu> getUserModuleMenus(@Param("ModuleId")  String ModuleId, @Param("roleId") String roleId);
+
 }

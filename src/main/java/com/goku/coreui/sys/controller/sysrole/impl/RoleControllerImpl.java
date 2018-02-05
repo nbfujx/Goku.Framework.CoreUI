@@ -49,4 +49,14 @@ public class RoleControllerImpl implements RoleController {
         model.addAttribute("sysRole",sysRole);
         return  "sys/role/edit";
     }
+
+    @Override
+    @RequestMapping("/authPage")
+    @RequiresPermissions(value={"sys:role:auth"})
+    public String auth(String roleId, Model model) {
+        model.addAttribute("pageTitle","权限赋权");
+        SysRole sysRole=sysRoleService.selectByPrimaryKey(roleId);
+        model.addAttribute("sysRole",sysRole);
+        return  "sys/role/menuauth";
+    }
 }

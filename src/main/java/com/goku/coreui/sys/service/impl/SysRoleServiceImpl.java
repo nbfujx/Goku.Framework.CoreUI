@@ -1,10 +1,14 @@
 package com.goku.coreui.sys.service.impl;
 
+import com.goku.coreui.sys.mapper.ext.SysRoleAuthExtMapper;
 import com.goku.coreui.sys.mapper.ext.SysRoleExtMapper;
+import com.goku.coreui.sys.model.SysMenu;
 import com.goku.coreui.sys.model.SysRole;
+import com.goku.coreui.sys.model.SysRoleAuth;
 import com.goku.coreui.sys.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -17,6 +21,9 @@ public class SysRoleServiceImpl implements SysRoleService {
 
     @Autowired
     SysRoleExtMapper sysRoleExtMapper;
+
+    @Autowired
+    SysRoleAuthExtMapper sysRoleAuthExtMapper;
 
     @Override
     public SysRole selectByPrimaryKey(String RoleId) {
@@ -61,5 +68,30 @@ public class SysRoleServiceImpl implements SysRoleService {
             addResult=sysRoleExtMapper.updateByPrimaryKey(newRole);
         }
         return addResult;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int menuAuth(List<SysMenu> sysMenus,String roleId,String moduleId) {
+        int deleteResult=0;
+        int addResult=0;
+        deleteResult=sysRoleAuthExtMapper.deleteRoleAuthByModuleId(moduleId);
+        if(sysMenus!=null) {
+            SysRoleAuth sra = null;
+            for (SysMenu sr : sysMenus) {
+                sra = new SysRoleAuth();
+                sra.setId(UUID.randomUUID().toString().replaceAll("-", ""));
+                sra.setRoleId(roleId);
+                sra.setMenuId(sr.getId());
+                addResult = sysRoleAuthExtMapper.insert(sra);
+            }
+        }else
+        {
+            addResult = 1;
+        }
+        if (addResult == 1 && deleteResult >= 0) {
+            return 1;
+        }
+        return 0;
     }
 }
