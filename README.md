@@ -77,3 +77,6 @@ http://www.nbfujx.cn:8080/</br>
 ### 7.权限管理
 ![权限管理](http://images.cnblogs.com/cnblogs_com/nbfujx/1146065/o_QQ%e6%88%aa%e5%9b%be20180123210224.jpg)
 
+
+# 其他 待续
+[Goku.Framework.CoreUI.Vue 前后端分离实现](https://github.com/nbfujx/Goku.Framework.CoreUI.Vue) </br>
