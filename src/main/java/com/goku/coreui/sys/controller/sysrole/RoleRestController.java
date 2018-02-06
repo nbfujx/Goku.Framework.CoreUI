@@ -16,6 +16,6 @@ public interface RoleRestController {
     String  save( SysRole sysRole);
     @LoggerInfo(Method = "/api/sys/role/delete",Name = "权限删除")
     String  delete(String roleId);
-    @LoggerInfo(Method = "/api/sys/role/menuauth",Name = "权限赋值")
+    @LoggerInfo(Method = "/api/sys/role/menuauth",Name = "权限菜单赋值")
     String  menuauth(@RequestBody Map<String, Object> sys);
 }

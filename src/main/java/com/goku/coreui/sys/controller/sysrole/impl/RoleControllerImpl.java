@@ -54,7 +54,7 @@ public class RoleControllerImpl implements RoleController {
     @RequestMapping("/authPage")
     @RequiresPermissions(value={"sys:role:auth"})
     public String auth(String roleId, Model model) {
-        model.addAttribute("pageTitle","权限赋权");
+        model.addAttribute("pageTitle","权限菜单赋权");
         SysRole sysRole=sysRoleService.selectByPrimaryKey(roleId);
         model.addAttribute("sysRole",sysRole);
         return  "sys/role/menuauth";

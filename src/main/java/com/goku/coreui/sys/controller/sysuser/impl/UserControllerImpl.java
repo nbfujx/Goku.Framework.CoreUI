@@ -48,5 +48,25 @@ public class UserControllerImpl implements UserController {
         return  "sys/user/edit";
     }
 
+    @Override
+    @RequestMapping("/menuAuthPage")
+    @RequiresPermissions(value={"sys:user:menuauth"})
+    public String menuAuth(String UserId, Model model) {
+        model.addAttribute("pageTitle","用户菜单赋值");
+        SysUser sysUser=sysUserService.selectByPrimaryKey(UserId);
+        model.addAttribute("sysUser",sysUser);
+        return  "sys/user/menuauth";
+    }
+
+    @Override
+    @RequestMapping("/roleAuthPage")
+    @RequiresPermissions(value={"sys:user:roleauth"})
+    public String roleAuth(String UserId, Model model) {
+        model.addAttribute("pageTitle","用户权限赋值");
+        SysUser sysUser=sysUserService.selectByPrimaryKey(UserId);
+        model.addAttribute("sysUser",sysUser);
+        return  "sys/user/roleauth";
+    }
+
 
 }

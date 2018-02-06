@@ -13,6 +13,7 @@ import com.goku.coreui.sys.util.CamelUtil;
 import com.goku.coreui.sys.util.PageUtil;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,6 +70,7 @@ public class ModuleRestControllerImpl implements ModuleRestController {
 
     @Override
     @RequestMapping("/save")
+    @RequiresRoles("admin_sys")
     @RequiresPermissions(value={"sys:module:add","sys:module:edit"},logical = Logical.OR)
     public String  save(@RequestBody SysModule symodule)
     {
@@ -82,6 +84,7 @@ public class ModuleRestControllerImpl implements ModuleRestController {
 
     @Override
     @RequestMapping("/delete")
+    @RequiresRoles("admin_sys")
     @RequiresPermissions(value={"sys:module:delete"})
     public String  delete(@RequestBody String Ids)
     {

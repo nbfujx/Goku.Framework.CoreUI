@@ -16,6 +16,7 @@ import com.goku.coreui.sys.util.TreeSelectUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -84,8 +85,19 @@ public class MenuRestControllerImpl implements MenuRestController {
         return JSON.toJSONString (sysMenuService.getUserModuleMenus(moduleId,roleId));
     }
 
+    @RequestMapping("/getUserMenuForTree2")
+    @RequiresPermissions(value={"sys:menu:query"})
+    public String  getUserMenuForTree2(@RequestParam(value="moduleId", required=false, defaultValue="") String moduleId,
+                                      @RequestParam(value="userid", required=false, defaultValue="") String userid)
+    {
+        return JSON.toJSONString (sysMenuService.getUserModuleMenus2(moduleId,userid));
+    }
+
+
+
     @Override
     @RequestMapping("/save")
+    @RequiresRoles("admin_sys")
     @RequiresPermissions(value={"sys:menu:add","sys:menu:edit"},logical = Logical.OR)
     public String  save(@RequestBody SysMenu symenu)
     {
@@ -99,6 +111,7 @@ public class MenuRestControllerImpl implements MenuRestController {
 
     @Override
     @RequestMapping("/delete")
+    @RequiresRoles("admin_sys")
     @RequiresPermissions(value={"sys:menu:delete"})
     public String  delete(@RequestBody String menuId)
     {

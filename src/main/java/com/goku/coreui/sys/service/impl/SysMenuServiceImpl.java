@@ -123,4 +123,9 @@ public class SysMenuServiceImpl implements SysMenuService {
     public List<SysMenu> getUserModuleMenus(String moduleId, String id) {
         return sysMenuExtMapper.getUserModuleMenus(moduleId,id);
     }
+
+    @Override
+    public List<SysMenu> getUserModuleMenus2(String moduleId, String userid) {
+        return sysMenuExtMapper.getUserModuleMenus2(moduleId,userid);
+    }
 }

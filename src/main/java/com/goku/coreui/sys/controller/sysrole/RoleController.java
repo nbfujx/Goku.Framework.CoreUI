@@ -14,6 +14,6 @@ public interface RoleController {
     String  add(Model model);
     @LoggerInfo(Method = "/sys/role/editPage",Name = "权限修改")
     String  edit(String roleId, Model model);
-    @LoggerInfo(Method = "/sys/role/authPage",Name = "权限赋值")
+    @LoggerInfo(Method = "/sys/role/authPage",Name = "权限菜单赋值")
     String  auth(String roleId, Model model);
 }

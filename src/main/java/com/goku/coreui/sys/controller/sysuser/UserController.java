@@ -14,4 +14,8 @@ public interface UserController {
     String  add(Model model);
     @LoggerInfo(Method = "/sys/user/editPage",Name = "用户修改")
     String  edit(String UserId,Model model);
+    @LoggerInfo(Method = "/sys/user/menuAuthPage",Name = "用户菜单赋值")
+    String  menuAuth(String UserId, Model model);
+    @LoggerInfo(Method = "/sys/user/roleAuthPage",Name = "用户权限赋值")
+    String  roleAuth(String UserId, Model model);
 }

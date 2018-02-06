@@ -9,21 +9,21 @@
                 <div class="card-body">
                     <div class=" form-horizontal">
                         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-                            <legend>权限基本信息</legend>
+                            <legend>用户基本信息</legend>
                         </fieldset>
                         <div class="layui-form-item row">
-                            <label class="layui-form-label">权限代码</label>
+                            <label class="layui-form-label">用户名</label>
                             <div class="layui-input-block col-md-4">
-                                <input type="text" name="key" lay-verify="required" autocomplete="off" placeholder="请输入权限代码" class="layui-input" th:field="${sysRole.key}" readonly="true"></input>
-                                <input type="hidden" name="id" th:field="${sysRole.id}"></input>
+                                <input type="text" name="key" lay-verify="required" autocomplete="off" placeholder="请输入用户名" class="layui-input" th:field="${sysUser.username}" readonly="true"></input>
+                                <input type="hidden" name="id" th:field="${sysUser.id}"></input>
                             </div>
-                            <label class="layui-form-label">权限名称</label>
+                            <label class="layui-form-label">姓名</label>
                             <div class="layui-input-block col-md-4">
-                                <input type="text" name="name" lay-verify="required" autocomplete="off" placeholder="请输入权限名称" class="layui-input" th:field="${sysRole.name}" readonly="true"></input>
+                                <input type="text" name="name" lay-verify="required" autocomplete="off" placeholder="请输入姓名" class="layui-input" th:field="${sysUser.name}" readonly="true"></input>
                             </div>
                         </div>
                         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-                            <legend>权限菜单信息</legend>
+                            <legend>用户菜单信息</legend>
                         </fieldset>
                         <div class="row">
                             <div class="col-md-1">
@@ -57,7 +57,7 @@
     /*]]>*/
 
     /*<![CDATA[*/
-    var roleid=/*[[${sysRole.id}]]*/;//取值
+    var userid=/*[[${sysUser.id}]]*/;//取值
     /*]]>*/
 
     layui.config({
@@ -102,7 +102,7 @@
                         });
                         checkedtreegrid.build();
                         /*<![CDATA[*/
-                        getJSON("/api/sys/menu/getUserMenuForTree?moduleId="+checkedMudleId+"&roleId="+roleid)
+                        getJSON("/api/sys/menu/getUserMenuForTree2?moduleId="+checkedMudleId+"&userid="+userid)
                                 .catch( error => {
 
                                 }).then( value => {
@@ -142,7 +142,7 @@
                     });
                     checkedtreegrid.build();
                     /*<![CDATA[*/
-                    getJSON("/api/sys/menu/getUserMenuForTree?moduleId="+checkedMudleId+"&roleId="+roleid)
+                    getJSON("/api/sys/menu/getUserMenuForTree2?moduleId="+checkedMudleId+"&userid="+userid)
                             .catch( error => {
 
                             }).then( value => {
@@ -162,7 +162,7 @@
             debugger;
             var row =checkedtreegrid.selectRow();
             debugger;
-            postJSON("/api/sys/role/menuauth",{"sysMenus":row,"roleId":roleid,"moduleId":checkedMudleId})
+            postJSON("/api/sys/user/menuauth",{"sysMenus":row,"userid":userid,"moduleId":checkedMudleId})
                     .catch(error => {
 
                     })
@@ -194,7 +194,7 @@
                                             });
                                             checkedtreegrid.build();
                                             /*<![CDATA[*/
-                                            getJSON("/api/sys/menu/getUserMenuForTree?moduleId="+checkedMudleId+"&roleId="+roleid)
+                                            getJSON("/api/sys/menu/getUserMenuForTree2?moduleId="+checkedMudleId+"&userid="+userid)
                                                     .catch( error => {
 
                                                     }).then( value => {

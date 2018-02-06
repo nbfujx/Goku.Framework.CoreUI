@@ -14,4 +14,10 @@
        id, version, `key`, `name`, description, parent_id
     from sys_role
   </select>
+  <select id="getUserRoleForTree" parameterType="java.lang.String" resultMap="SysRoleMap">
+    select
+     a.id, a.version, a.key, a.name, a.description
+    from sys_role a,sys_user_role b
+    where a.id=b.role_id and user_id = #{userid,jdbcType=VARCHAR}
+  </select>
 </mapper>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.goku.coreui.sys.mapper.ext.SysUserRoleExtMapper">
+    <resultMap id="SysUserRoleMap" type="com.goku.coreui.sys.model.SysUserRole">
+        <id column="id" jdbcType="VARCHAR" property="id" />
+        <result column="user_id" jdbcType="VARCHAR" property="userId" />
+        <result column="role_id" jdbcType="VARCHAR" property="roleId" />
+    </resultMap>
+    <delete id="deleteUserRole" parameterType="java.lang.String">
+        delete from sys_user_role where  user_id=#{userid,jdbcType=VARCHAR}
+    </delete>
+</mapper>

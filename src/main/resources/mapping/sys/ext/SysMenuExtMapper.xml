@@ -65,5 +65,11 @@
         where md.id= #{ModuleId,jdbcType=VARCHAR}
         and sra.role_id=#{roleId,jdbcType=VARCHAR} ORDER  BY sort
     </select>
-
+    <select id="getUserModuleMenus2" parameterType="java.lang.String" resultMap="SysMenuMap">
+       select m.* from sys_menu m
+        left join sys_module md on m.module_id=md.id
+        left join sys_user_auth sua on m.id=sua.menu_id
+        where md.id= #{ModuleId,jdbcType=VARCHAR}
+        and sua.user_id=#{userid,jdbcType=VARCHAR} ORDER  BY sort
+    </select>
 </mapper>

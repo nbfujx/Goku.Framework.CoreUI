@@ -16,4 +16,5 @@ public interface SysMenuService {
     int deleteMenu(String MenuId);
     int saveMenu(SysMenu sysMenu);
     List<SysMenu> getUserModuleMenus(String moduleId, String id);
+    List<SysMenu> getUserModuleMenus2(String moduleId, String userid);
 }

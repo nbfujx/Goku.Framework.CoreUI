@@ -14,4 +14,5 @@ public interface SysRoleService {
     int deleteRole(String RoleId);
     int saveRole(SysRole sysRole);
     int menuAuth(List<SysMenu> sysMenus, String roleId,String moduleId);
+    List<SysRole> getUserRoleForTree(String userid);
 }

@@ -12,6 +12,7 @@ import com.goku.coreui.sys.util.BreadcrumbUtil;
 import com.goku.coreui.sys.util.TreeSelectUtil;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -80,9 +81,17 @@ public class RoleRestControllerImpl implements RoleRestController {
         return JSON.toJSONString (treeSelectUtil.RoleSelectTree(sysRoleService.getRoleForPaging()));
     }
 
+    @RequestMapping("/getUserRoleForTree")
+    @RequiresPermissions(value={"sys:role:query"})
+    public String  getUserRoleForTree(@RequestParam(value="userid", required=false, defaultValue="") String userid)
+    {
+        return JSON.toJSONString (sysRoleService.getUserRoleForTree(userid));
+    }
+
 
     @Override
     @RequestMapping("/save")
+    @RequiresRoles("admin_sys")
     @RequiresPermissions(value={"sys:role:add","sys:role:edit"},logical = Logical.OR)
     public String save(@RequestBody SysRole sysRole) {
         int result=sysRoleService.saveRole(sysRole);
@@ -95,6 +104,7 @@ public class RoleRestControllerImpl implements RoleRestController {
 
     @Override
     @RequestMapping("/delete")
+    @RequiresRoles("admin_sys")
     @RequiresPermissions(value={"sys:role:delete"})
     public String delete(@RequestBody String roleId) {
         roleId=roleId.replaceAll("\"","");
@@ -108,6 +118,7 @@ public class RoleRestControllerImpl implements RoleRestController {
 
     @Override
     @RequestMapping("/menuauth")
+    @RequiresRoles("admin_sys")
     @RequiresPermissions(value={"sys:role:auth"})
     public String menuauth(@RequestBody Map<String, Object> sys) {
         List<SysMenu> sysMenus = JSON.parseObject(String.valueOf(JSON.toJSON(sys.get("sysMenus"))), new TypeReference<List<SysMenu>>() {});
@@ -120,5 +131,4 @@ public class RoleRestControllerImpl implements RoleRestController {
             return JSON.toJSONString ("false");
         }
     }
-
 }

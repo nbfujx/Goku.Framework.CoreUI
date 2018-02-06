@@ -10,4 +10,5 @@ import java.util.List;
  */
 public interface SysRoleExtMapper extends SysRoleMapper {
     List<SysRole> getRoleForPaging();
+    List<SysRole> getUserRoleForTree(String userid);
 }

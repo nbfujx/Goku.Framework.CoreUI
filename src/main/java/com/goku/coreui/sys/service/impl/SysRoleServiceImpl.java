@@ -75,7 +75,7 @@ public class SysRoleServiceImpl implements SysRoleService {
     public int menuAuth(List<SysMenu> sysMenus,String roleId,String moduleId) {
         int deleteResult=0;
         int addResult=0;
-        deleteResult=sysRoleAuthExtMapper.deleteRoleAuthByModuleId(moduleId);
+        deleteResult=sysRoleAuthExtMapper.deleteRoleAuthByModuleId(roleId,moduleId);
         if(sysMenus!=null) {
             SysRoleAuth sra = null;
             for (SysMenu sr : sysMenus) {
@@ -93,5 +93,10 @@ public class SysRoleServiceImpl implements SysRoleService {
             return 1;
         }
         return 0;
+    }
+
+    @Override
+    public List<SysRole> getUserRoleForTree(String userid) {
+        return sysRoleExtMapper.getUserRoleForTree(userid);
     }
 }
