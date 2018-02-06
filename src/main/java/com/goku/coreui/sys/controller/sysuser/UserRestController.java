@@ -12,6 +12,6 @@ import java.util.Map;
 public interface UserRestController {
     @LoggerInfo(Method = "/api/sys/role/menuauth",Name = "用户菜单赋值")
     String menuauth(@RequestBody Map<String, Object> sys);
-    @LoggerInfo(Method = "/api/sys/role/menuauth",Name = "用户权限赋值")
+    @LoggerInfo(Method = "/api/sys/role/roleauth",Name = "用户权限赋值")
     String roleauth(@RequestBody Map<String, Object> sys);
 }
