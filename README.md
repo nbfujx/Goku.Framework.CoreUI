@@ -82,4 +82,4 @@ http://www.nbfujx.cn:8080/</br>
 
 
 # 其他 待续
-### [Goku.Framework.CoreUI.Vue 前后端分离实现](https://github.com/nbfujx/Goku.Framework.CoreUI.Vue) </br>
+### [Goku.Framework.CoreUI.Vue 前后端分离实现](https://gitee.com/nbfujx/Goku.Framework.CoreUI.Vue) </br>
